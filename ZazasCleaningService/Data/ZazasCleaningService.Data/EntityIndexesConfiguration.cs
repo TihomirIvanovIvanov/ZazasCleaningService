@@ -2,9 +2,8 @@
 {
     using System.Linq;
 
-    using ZazasCleaningService.Data.Common.Models;
-
     using Microsoft.EntityFrameworkCore;
+    using ZazasCleaningService.Data.Common.Models;
 
     internal static class EntityIndexesConfiguration
     {

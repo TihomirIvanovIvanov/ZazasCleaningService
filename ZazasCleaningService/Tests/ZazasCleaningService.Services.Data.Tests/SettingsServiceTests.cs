@@ -4,16 +4,13 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
+    using Moq;
+    using Xunit;
     using ZazasCleaningService.Data;
     using ZazasCleaningService.Data.Common.Repositories;
     using ZazasCleaningService.Data.Models;
     using ZazasCleaningService.Data.Repositories;
-
-    using Microsoft.EntityFrameworkCore;
-
-    using Moq;
-
-    using Xunit;
 
     public class SettingsServiceTests
     {

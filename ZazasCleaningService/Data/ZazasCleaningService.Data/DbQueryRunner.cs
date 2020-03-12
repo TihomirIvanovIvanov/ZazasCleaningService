@@ -3,9 +3,8 @@
     using System;
     using System.Threading.Tasks;
 
-    using ZazasCleaningService.Data.Common;
-
     using Microsoft.EntityFrameworkCore;
+    using ZazasCleaningService.Data.Common;
 
     public class DbQueryRunner : IDbQueryRunner
     {

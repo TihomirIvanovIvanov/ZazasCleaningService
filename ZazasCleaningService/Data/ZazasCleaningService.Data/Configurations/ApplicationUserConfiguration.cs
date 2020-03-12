@@ -1,8 +1,8 @@
 ﻿namespace ZazasCleaningService.Data.Configurations
 {
-    using ZazasCleaningService.Data.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using ZazasCleaningService.Data.Models;
 
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {

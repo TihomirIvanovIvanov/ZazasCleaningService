@@ -5,6 +5,11 @@
     using System.IO;
     using System.Threading.Tasks;
 
+    using CommandLine;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
     using ZazasCleaningService.Data;
     using ZazasCleaningService.Data.Common;
     using ZazasCleaningService.Data.Common.Repositories;
@@ -13,13 +18,6 @@
     using ZazasCleaningService.Data.Seeding;
     using ZazasCleaningService.Services.Data;
     using ZazasCleaningService.Services.Messaging;
-
-    using CommandLine;
-
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Logging;
 
     public static class Program
     {

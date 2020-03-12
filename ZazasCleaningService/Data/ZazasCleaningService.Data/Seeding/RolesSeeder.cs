@@ -4,11 +4,10 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using ZazasCleaningService.Common;
-    using ZazasCleaningService.Data.Models;
-
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
+    using ZazasCleaningService.Common;
+    using ZazasCleaningService.Data.Models;
 
     internal class RolesSeeder : ISeeder
     {

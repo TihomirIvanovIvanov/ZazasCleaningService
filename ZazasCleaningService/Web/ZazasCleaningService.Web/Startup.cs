@@ -2,6 +2,13 @@
 {
     using System.Reflection;
 
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using ZazasCleaningService.Data;
     using ZazasCleaningService.Data.Common;
     using ZazasCleaningService.Data.Common.Repositories;
@@ -12,14 +19,6 @@
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Messaging;
     using ZazasCleaningService.Web.ViewModels;
-
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
 
     public class Startup
     {
@@ -57,7 +56,7 @@
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             // Application services
-            services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IEmailSender>(x => new SendGridEmailSender("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"));
             services.AddTransient<ISettingsService, SettingsService>();
         }
 

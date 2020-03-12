@@ -1,9 +1,8 @@
 ﻿namespace ZazasCleaningService.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using ZazasCleaningService.Data.Models;
     using ZazasCleaningService.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

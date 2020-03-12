@@ -1,9 +1,8 @@
 ﻿namespace ZazasCleaningService.Web.Areas.Administration.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
     using ZazasCleaningService.Services.Data;
     using ZazasCleaningService.Web.ViewModels.Administration.Dashboard;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class DashboardController : AdministrationController
     {

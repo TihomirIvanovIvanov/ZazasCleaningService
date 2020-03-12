@@ -2,9 +2,8 @@
 {
     using System.Diagnostics;
 
-    using ZazasCleaningService.Web.ViewModels;
-
     using Microsoft.AspNetCore.Mvc;
+    using ZazasCleaningService.Web.ViewModels;
 
     public class HomeController : BaseController
     {
