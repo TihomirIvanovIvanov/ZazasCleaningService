@@ -2,7 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc;
 
-    public class ProductsController : BaseController
+    public class ServicesController : BaseController
     {
         public IActionResult All()
         {
