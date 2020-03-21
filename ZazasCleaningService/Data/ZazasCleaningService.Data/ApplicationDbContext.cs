@@ -25,6 +25,20 @@
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<Home> Homes { get; set; }
+
+        public DbSet<Kid> Kids { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<Product> Product { get; set; }
+
+        public DbSet<ProductType> ProductTypes { get; set; }
+
+        public DbSet<Receipt> Receipts { get; set; }
+
+        public DbSet<Room> Rooms { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
