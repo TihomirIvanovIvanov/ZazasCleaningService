@@ -15,9 +15,5 @@
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
-
-        public int ReceiptId { get; set; }
-
-        public virtual Receipt Receipt { get; set; }
     }
 }

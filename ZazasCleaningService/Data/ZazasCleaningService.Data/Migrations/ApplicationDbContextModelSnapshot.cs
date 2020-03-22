@@ -317,7 +317,7 @@ namespace ZazasCleaningService.Data.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("ReceiptId")
+                    b.Property<int?>("ReceiptId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -326,6 +326,8 @@ namespace ZazasCleaningService.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("ReceiptId");
 
                     b.HasIndex("UserId");
 
@@ -380,16 +382,10 @@ namespace ZazasCleaningService.Data.Migrations
                     b.Property<string>("IssuedOnPicture")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderId")
-                        .IsUnique();
 
                     b.HasIndex("UserId");
 
@@ -524,6 +520,10 @@ namespace ZazasCleaningService.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("ZazasCleaningService.Data.Models.Receipt", null)
+                        .WithMany("Orders")
+                        .HasForeignKey("ReceiptId");
+
                     b.HasOne("ZazasCleaningService.Data.Models.ApplicationUser", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId");
@@ -540,12 +540,6 @@ namespace ZazasCleaningService.Data.Migrations
 
             modelBuilder.Entity("ZazasCleaningService.Data.Models.Receipt", b =>
                 {
-                    b.HasOne("ZazasCleaningService.Data.Models.Order", "Order")
-                        .WithOne("Receipt")
-                        .HasForeignKey("ZazasCleaningService.Data.Models.Receipt", "OrderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("ZazasCleaningService.Data.Models.ApplicationUser", "User")
                         .WithMany("Receipts")
                         .HasForeignKey("UserId");

@@ -15,7 +15,6 @@
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
     using Microsoft.Extensions.Logging;
-    using ZazasCleaningService.Common;
     using ZazasCleaningService.Data.Models;
 
     [AllowAnonymous]
@@ -77,20 +76,12 @@
 
             if (this.ModelState.IsValid)
             {
-                var isUserExist = !this.userManager.Users.Any();
                 var user = new ApplicationUser { UserName = this.Input.Username, Email = this.Input.Email };
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
 
                 if (result.Succeeded)
                 {
-                    if (isUserExist)
-                    {
-                        await this.userManager.AddToRoleAsync(user, GlobalConstants.AdministratorRoleName);
-                    }
-
-                    await this.userManager.AddToRoleAsync(user, GlobalConstants.UserRoleName);
                     await this.signInManager.SignInAsync(user, isPersistent: false);
-
                     return this.LocalRedirect(returnUrl);
                 }
 
