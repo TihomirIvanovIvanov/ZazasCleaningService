@@ -4,6 +4,7 @@
 
 @if (!this.User.Identity.IsAuthenticated)
 {
+    <!-- page details -->
     <div class="callbacks_container">
         <ul class="rslides" id="slider3">
             <li>
@@ -61,8 +62,65 @@
     </div>
     <!-- //page details -->
 }
-else
+else if (this.User.Identity.IsAuthenticated)
 {
+    <!-- page details -->
+    <div class="callbacks_container">
+        <ul class="rslides" id="slider3">
+            <li>
+                <div class="slider-info banner-w3-1">
+                    <div class="w3l-overlay">
+                        <div class="banner-text text-center container">
+                            <h3 class="text-white mb-4 text-uppercase">
+                                Zaza's
+                                <span> cleaning services</span>
+                            </h3>
+                            <p class="movetxt text-white text-uppercase">
+                                We like when it's
+                                <span>clean around!</span> & We working hard to make your place
+                                <span>clean</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="slider-info banner-w3-2">
+                    <div class="w3l-overlay">
+                        <div class="banner-text text-center container">
+                            <h3 class="text-white mb-4 text-uppercase">
+                                Zaza's
+                                <span> cleaning services</span>
+                            </h3>
+                            <p class="movetxt text-white text-uppercase">
+                                We like when it's
+                                <span>clean around!</span> & We working hard to make your place
+                                <span>clean</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="slider-info banner-w3-3">
+                    <div class="w3l-overlay">
+                        <div class="banner-text text-center container">
+                            <h3 class="text-white mb-4 text-uppercase">
+                                Zaza's
+                                <span> cleaning services</span>
+                            </h3>
+                            <p class="movetxt text-white text-uppercase">
+                                We like when it's
+                                <span>clean around!</span> & We working hard to make your place
+                                <span>clean</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- //page details -->
     <!-- about -->
     <div class="about-w3ls-welcome py-5">
         <div class="container py-xl-5 py-lg-3">

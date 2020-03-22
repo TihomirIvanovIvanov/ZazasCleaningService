@@ -21,7 +21,7 @@
         public async Task<IActionResult> OnGet()
         {
             await this.signInManager.SignOutAsync();
-            return this.Redirect("/Identity/Account/Login");
+            return this.Redirect("/");
         }
     }
 }

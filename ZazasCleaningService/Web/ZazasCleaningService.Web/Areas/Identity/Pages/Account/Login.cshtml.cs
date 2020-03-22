@@ -43,11 +43,9 @@
         public class InputModel
         {
             [Required]
-            [EmailAddress]
-            public string Email { get; set; }
+            public string Username { get; set; }
 
             [Required]
-            [DataType(DataType.Password)]
             public string Password { get; set; }
 
             [Display(Name = "Remember me?")]
@@ -77,24 +75,12 @@
 
             if (this.ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await this.signInManager.PasswordSignInAsync(this.Input.Email, this.Input.Password, this.Input.RememberMe, lockoutOnFailure: false);
+                var result = await this.signInManager.PasswordSignInAsync(this.Input.Username, this.Input.Password, this.Input.RememberMe, lockoutOnFailure: false);
+
                 if (result.Succeeded)
                 {
                     this.logger.LogInformation("User logged in.");
                     return this.LocalRedirect(returnUrl);
-                }
-
-                if (result.RequiresTwoFactor)
-                {
-                    return this.RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = this.Input.RememberMe });
-                }
-
-                if (result.IsLockedOut)
-                {
-                    this.logger.LogWarning("User account locked out.");
-                    return this.RedirectToPage("./Lockout");
                 }
                 else
                 {
