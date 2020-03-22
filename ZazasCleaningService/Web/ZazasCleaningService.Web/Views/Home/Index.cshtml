@@ -1,4 +1,5 @@
-﻿@{
+﻿@using ZazasCleaningService.Common
+@{
     this.ViewData["Title"] = "Home Page";
 }
 
@@ -121,33 +122,36 @@ else if (this.User.Identity.IsAuthenticated)
         </ul>
     </div>
     <!-- //page details -->
-    <!-- about -->
-    <div class="about-w3ls-welcome py-5">
-        <div class="container py-xl-5 py-lg-3">
-            <h3 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">About Us</h3>
-            <div class="row w3ls-welcome-grids">
-                <div class="col-xl-4 w3l-welcome-left">
-                    <h4 class="mb-4 title-2-agiles">Welcome</h4>
-                    <h5>Zaza's clean company: Clean Homes, Clean Nature.</h5>
-                    <p class="mt-3">
-                        „Zaza's clean company“ is a company for professional ecological cleaning, created to assist the home and the office. Our services guarantee you more free time with the people you love, to do the things you love, instead of cleaning. We provide our clients with comprehensive cleaning, carried out with high quality technology and ecologically clean products, at reasonable prices and in efficient time. We guarantee you with safety, certainty and most importantly, satisfaction with the final result.
-                    </p>
-                </div>
-                <div class="col-xl-4 w3l-welcome-img my-xl-0 my-4 text-center">
-                    <img src="~/images/c1.png" alt="" class="img-fluid">
-                </div>
-                <div class="col-xl-4 w3l-welcome-left">
-                    <h4 class="mb-4 title-2-agiles">History of us</h4>
-                    <h5>Professional ecological cleaning of homes in Sofia</h5>
-                    <p class="mt-3">
-                        We can ensure you with the most professional, high-quality cleaning services in Sofia. Your home will be a more cosy, fresh and improved environment for living in. The ecological cleaning products we use will not put your health at risk while removing allergens, mites and unpleasant smells from your home. Choose our services and see the high-quality results for yourself.
-                    </p>
-                    <div class="w3l-button">
-                        <a href="/Single/Index" class="btn btn-sm animated-button victoria-two text-dark mt-4">Read More</a>
+    @if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+    {
+        <!-- about -->
+        <div class="about-w3ls-welcome py-5">
+            <div class="container py-xl-5 py-lg-3">
+                <h3 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">About Us</h3>
+                <div class="row w3ls-welcome-grids">
+                    <div class="col-xl-4 w3l-welcome-left">
+                        <h4 class="mb-4 title-2-agiles">Welcome</h4>
+                        <h5>Zaza's clean company: Clean Homes, Clean Nature.</h5>
+                        <p class="mt-3">
+                            „Zaza's clean company“ is a company for professional ecological cleaning, created to assist the home and the office. Our services guarantee you more free time with the people you love, to do the things you love, instead of cleaning. We provide our clients with comprehensive cleaning, carried out with high quality technology and ecologically clean products, at reasonable prices and in efficient time. We guarantee you with safety, certainty and most importantly, satisfaction with the final result.
+                        </p>
+                    </div>
+                    <div class="col-xl-4 w3l-welcome-img my-xl-0 my-4 text-center">
+                        <img src="~/images/c1.png" alt="" class="img-fluid">
+                    </div>
+                    <div class="col-xl-4 w3l-welcome-left">
+                        <h4 class="mb-4 title-2-agiles">History of us</h4>
+                        <h5>Professional ecological cleaning of homes in Sofia</h5>
+                        <p class="mt-3">
+                            We can ensure you with the most professional, high-quality cleaning services in Sofia. Your home will be a more cosy, fresh and improved environment for living in. The ecological cleaning products we use will not put your health at risk while removing allergens, mites and unpleasant smells from your home. Choose our services and see the high-quality results for yourself.
+                        </p>
+                        <div class="w3l-button">
+                            <a href="/Single/Index" class="btn btn-sm animated-button victoria-two text-dark mt-4">Read More</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- //about -->
+        <!-- //about -->
+    }
 }
