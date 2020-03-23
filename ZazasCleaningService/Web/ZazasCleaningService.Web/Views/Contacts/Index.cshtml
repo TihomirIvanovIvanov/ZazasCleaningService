@@ -1,4 +1,5 @@
-﻿@{
+﻿@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+@{
     ViewData["Title"] = "Index";
 }
 
@@ -25,7 +26,7 @@
         <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Contact Us</h2>
         <div class="row contact_wthreerow agileits-w3layouts pt-4">
             <div class="col-lg-7 w3l_contact_form">
-                <form action="#" method="post">
+                <form method="post">
                     <div class="form-group">
                         <input type="text" name="Name" class="form-control" placeholder="Name" required="">
                     </div>
@@ -38,7 +39,8 @@
                     <div class="form-group">
                         <textarea name="Message" class="form-control" placeholder="Message.."></textarea>
                     </div>
-                    <input type="submit" value="Send Message">
+                    <input type="hidden" id="RecaptchaValue" name="RecaptchaValue" />
+                    <button type="submit" class="btn btn-primary submit">Send Message</button>
                 </form>
             </div>
             <div class="col-lg-5 agileits_w3layouts_contact_gridl mt-lg-0 mt-5">
@@ -72,3 +74,15 @@
             style="border:0"></iframe>
 </div>
 <!-- //map -->
+
+@section Scripts
+{
+    <script src="https://www.google.com/recaptcha/api.js?render=@this.Configuration["GoogleReCaptcha:Key"]"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('@this.Configuration["GoogleReCaptcha:Key"]', { action: 'contact_form' }).then(function (token) {
+                document.getElementById("RecaptchaValue").value = token;
+            });
+        });
+    </script>
+}
