@@ -1,6 +1,8 @@
 ﻿namespace ZazasCleaningService.Data.Models
 {
-    public class Room : BaseModel<int>
+    using ZazasCleaningService.Data.Common.Models;
+
+    public class Room : BaseDeletableModel<int>
     {
         public string Name { get; set; }
 

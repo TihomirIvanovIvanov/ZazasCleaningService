@@ -2,7 +2,9 @@
 {
     using System;
 
-    public class Order : BaseModel<int>
+    using ZazasCleaningService.Data.Common.Models;
+
+    public class Order : BaseDeletableModel<int>
     {
         public DateTime IssuedOn { get; set; }
 

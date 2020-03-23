@@ -2,7 +2,9 @@
 {
     using System;
 
-    public class Kid : BaseModel<int>
+    using ZazasCleaningService.Data.Common.Models;
+
+    public class Kid : BaseDeletableModel<int>
     {
         public string Name { get; set; }
 

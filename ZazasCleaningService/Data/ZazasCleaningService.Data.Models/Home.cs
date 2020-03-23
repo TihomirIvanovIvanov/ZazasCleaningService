@@ -2,7 +2,9 @@
 {
     using System.Collections.Generic;
 
-    public class Home : BaseModel<int>
+    using ZazasCleaningService.Data.Common.Models;
+
+    public class Home : BaseDeletableModel<int>
     {
         public Home()
         {

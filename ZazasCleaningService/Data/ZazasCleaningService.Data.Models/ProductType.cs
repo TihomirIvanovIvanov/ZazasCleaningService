@@ -1,6 +1,8 @@
 ﻿namespace ZazasCleaningService.Data.Models
 {
-    public class ProductType : BaseModel<int>
+    using ZazasCleaningService.Data.Common.Models;
+
+    public class ProductType : BaseDeletableModel<int>
     {
         public string Name { get; set; }
     }

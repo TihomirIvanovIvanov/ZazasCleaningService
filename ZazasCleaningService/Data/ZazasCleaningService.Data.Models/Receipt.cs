@@ -1,6 +1,8 @@
 ﻿namespace ZazasCleaningService.Data.Models
 {
-    public class Receipt : BaseModel<int>
+    using ZazasCleaningService.Data.Common.Models;
+
+    public class Receipt : BaseDeletableModel<int>
     {
         public string IssuedOnPicture { get; set; }
 
