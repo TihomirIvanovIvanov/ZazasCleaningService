@@ -4,6 +4,6 @@
 
     public interface IProductsService
     {
-        Task<int> CreateProductType();
+        Task<int> CreateProductTypeAsync(string name);
     }
 }

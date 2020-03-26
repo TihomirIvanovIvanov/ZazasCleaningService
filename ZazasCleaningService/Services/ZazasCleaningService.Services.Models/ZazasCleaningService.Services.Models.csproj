@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -19,11 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Data\ZazasCleaningService.Data.Common\ZazasCleaningService.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\ZazasCleaningService.Data.Models\ZazasCleaningService.Data.Models.csproj" />
-    <ProjectReference Include="..\..\Data\ZazasCleaningService.Data\ZazasCleaningService.Data.csproj" />
     <ProjectReference Include="..\ZazasCleaningService.Services.Mapping\ZazasCleaningService.Services.Mapping.csproj" />
-    <ProjectReference Include="..\ZazasCleaningService.Services.Models\ZazasCleaningService.Services.Models.csproj" />
   </ItemGroup>
 
 </Project>

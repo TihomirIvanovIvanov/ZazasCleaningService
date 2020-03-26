@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class ProductTypeCreateInputModel
+    public class ProductTypesCreateInputModel
     {
         [Required]
         public string Name { get; set; }

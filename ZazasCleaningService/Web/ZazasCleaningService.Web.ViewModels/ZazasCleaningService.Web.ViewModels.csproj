@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\ZazasCleaningService.Data.Models\ZazasCleaningService.Data.Models.csproj" />
     <ProjectReference Include="..\..\Services\ZazasCleaningService.Services.Mapping\ZazasCleaningService.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\ZazasCleaningService.Services.Models\ZazasCleaningService.Services.Models.csproj" />
   </ItemGroup>
 
 </Project>

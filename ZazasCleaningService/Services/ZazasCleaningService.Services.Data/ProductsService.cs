@@ -3,17 +3,28 @@
     using System.Threading.Tasks;
 
     using ZazasCleaningService.Data;
+    using ZazasCleaningService.Data.Models;
 
     public class ProductsService : IProductsService
     {
+        private readonly ApplicationDbContext dbContext;
+
         public ProductsService(ApplicationDbContext dbContext)
         {
-
+            this.dbContext = dbContext;
         }
 
-        public Task<int> CreateProductType()
+        public async Task<int> CreateProductTypeAsync(string name)
         {
-            throw new System.NotImplementedException();
+            var productType = new ProductType
+            {
+                Name = name,
+            };
+
+            await this.dbContext.AddAsync(productType);
+            await this.dbContext.SaveChangesAsync();
+
+            return productType.Id;
         }
     }
 }
