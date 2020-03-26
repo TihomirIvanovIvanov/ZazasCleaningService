@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\ZazasCleaningService.Data.Common\ZazasCleaningService.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\ZazasCleaningService.Data.Models\ZazasCleaningService.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\ZazasCleaningService.Data\ZazasCleaningService.Data.csproj" />
     <ProjectReference Include="..\ZazasCleaningService.Services.Mapping\ZazasCleaningService.Services.Mapping.csproj" />
   </ItemGroup>
 
