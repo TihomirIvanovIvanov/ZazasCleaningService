@@ -47,10 +47,11 @@
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
 
-            // services.AddControllersWithViews(options =>
-            // {
-            //    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()); // CSRF
-            // });
+            services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()); // CSRF
+             });
+
             services.AddControllersWithViews();
             services.AddRazorPages();
 
