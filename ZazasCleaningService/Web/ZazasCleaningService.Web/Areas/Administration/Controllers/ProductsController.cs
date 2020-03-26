@@ -33,5 +33,10 @@
 
             return this.RedirectToAction(nameof(this.CreateType));
         }
+
+        public async Task<IActionResult> Create()
+        {
+            return this.View();
+        }
     }
 }

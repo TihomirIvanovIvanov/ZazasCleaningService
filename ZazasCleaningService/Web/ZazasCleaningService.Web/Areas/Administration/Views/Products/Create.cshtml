@@ -1,0 +1,79 @@
+﻿@model ZazasCleaningService.Web.ViewModels.Products.Create.ProductCreateInputModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<!-- banner 2 -->
+<div class="banner2-w3ls">
+
+</div>
+<!-- //banner 2 -->
+<!-- page details -->
+<div class="breadcrumb-agile">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/">Home</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Create Product</li>
+        </ol>
+    </nav>
+</div>
+<!-- //page details -->
+<!-- contact -->
+<div class="py-5">
+    <div class="container py-xl-5 py-lg-3">
+        <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Create Product</h2>
+        <div class="row contact_wthreerow agileits-w3layouts pt-4">
+            <div class="col-lg-7 w3l_contact_form">
+                <form method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name"
+                               type="text"
+                               name="Name"
+                               class="form-control"
+                               placeholder="Name"
+                               required="">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description"></label>
+                        <textarea asp-for="Description"
+                                  name="Description"
+                                  class="form-control"
+                                  placeholder="Description"
+                                  required=""></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Picture"></label>
+                        <input asp-for="Picture"
+                               type="file"
+                               name="Picture"
+                               class="form-control"
+                               placeholder="Picture"
+                               required="">
+                        <span asp-validation-for="Picture" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProductType">Product Type</label>
+                        <input asp-for="ProductType"
+                               type="text"
+                               name="ProductType"
+                               class="form-control"
+                               placeholder="Product Type"
+                               required="">
+                        <span asp-validation-for="ProductType" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary submit">Create Product</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //contact -->
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
