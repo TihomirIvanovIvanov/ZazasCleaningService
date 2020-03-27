@@ -20,6 +20,7 @@
     using ZazasCleaningService.Services.Data;
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Messaging;
+    using ZazasCleaningService.Services.Models;
     using ZazasCleaningService.Web.ViewModels;
 
     public class Startup
@@ -74,7 +75,9 @@
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
             CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            AutoMapperConfig.RegisterMappings(
+                typeof(ErrorViewModel).GetTypeInfo().Assembly,
+                typeof(ProductTypesServiceModel).GetTypeInfo().Assembly);
 
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())

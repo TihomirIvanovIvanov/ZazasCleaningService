@@ -1,8 +1,10 @@
 ﻿namespace ZazasCleaningService.Web.Areas.Administration.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
     using ZazasCleaningService.Services.Data;
     using ZazasCleaningService.Web.ViewModels.Products.Create;
 
@@ -36,6 +38,13 @@
 
         public async Task<IActionResult> Create()
         {
+            var allProductTypes = await this.productsService.GetAllProductTypes().ToListAsync();
+
+            this.ViewData["types"] = allProductTypes.Select(productTypes => new ProductCreateProductTypesViewModel
+            {
+                Name = productTypes.Name,
+            }).ToList();
+
             return this.View();
         }
     }
