@@ -3,6 +3,7 @@
     using System.Globalization;
     using System.Reflection;
 
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -41,6 +42,14 @@
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
+            var cloudinaryCredentials = new Account(
+                this.configuration["Cloudinary:CloudName"],
+                this.configuration["Cloudinary:ApiKey"],
+                this.configuration["Cloudinary:ApiSecret"]);
+
+            var cloudinary = new Cloudinary(cloudinaryCredentials);
+            services.AddSingleton(cloudinary);
+
             services.Configure<CookiePolicyOptions>(
                 options =>
                     {
@@ -51,7 +60,7 @@
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()); // CSRF
-             });
+            });
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -67,6 +76,7 @@
             services.AddTransient<IEmailSender>(x => new SendGridEmailSender("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"));
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IProductsService, ProductsService>();
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
