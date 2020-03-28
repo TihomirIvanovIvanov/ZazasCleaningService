@@ -1,5 +1,5 @@
 ﻿@using ZazasCleaningService.Web.ViewModels.Products.Create
-@model ZazasCleaningService.Web.ViewModels.Products.Create.ProductCreateInputModel
+@model ZazasCleaningService.Web.ViewModels.Products.Create.ProductsCreateInputModel
 @{
     ViewData["Title"] = "Create";
     var productTypes = (IEnumerable<ProductCreateProductTypesViewModel>)this.ViewData["types"];
@@ -29,7 +29,7 @@
         <div class="row contact_wthreerow agileits-w3layouts pt-4">
             <div class="col-lg-7 w3l_contact_form">
                 <form method="post">
-                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="Name"></label>
                         <input asp-for="Name"

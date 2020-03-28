@@ -23,6 +23,7 @@
     using ZazasCleaningService.Services.Messaging;
     using ZazasCleaningService.Services.Models;
     using ZazasCleaningService.Web.ViewModels;
+    using ZazasCleaningService.Web.ViewModels.Products.Create;
 
     public class Startup
     {
@@ -87,7 +88,9 @@
 
             AutoMapperConfig.RegisterMappings(
                 typeof(ErrorViewModel).GetTypeInfo().Assembly,
-                typeof(ProductTypesServiceModel).GetTypeInfo().Assembly);
+                typeof(ProductsCreateInputModel).GetTypeInfo().Assembly,
+                typeof(ProductTypesServiceModel).GetTypeInfo().Assembly,
+                typeof(ProductsServiceModel).GetTypeInfo().Assembly);
 
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())

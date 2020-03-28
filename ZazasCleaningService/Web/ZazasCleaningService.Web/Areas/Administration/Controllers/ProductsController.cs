@@ -6,15 +6,19 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using ZazasCleaningService.Services.Data;
+    using ZazasCleaningService.Services.Models;
     using ZazasCleaningService.Web.ViewModels.Products.Create;
 
     public class ProductsController : AdministrationController
     {
         private readonly IProductsService productsService;
 
-        public ProductsController(IProductsService productsService)
+        private readonly ICloudinaryService cloudinaryService;
+
+        public ProductsController(IProductsService productsService, ICloudinaryService cloudinaryService)
         {
             this.productsService = productsService;
+            this.cloudinaryService = cloudinaryService;
         }
 
         [HttpGet("/Administration/Products/Type/Create")]
@@ -46,6 +50,28 @@
             }).ToList();
 
             return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(ProductsCreateInputModel productsCreateInputModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                this.RedirectToAction(nameof(this.Create));
+            }
+
+            var pictureUrl = await this.cloudinaryService
+                .UploadPictureAsync(productsCreateInputModel.Picture, productsCreateInputModel.Name);
+
+            var productsServiceModel = new ProductsServiceModel
+            {
+                Description = productsCreateInputModel.Description,
+                Picture = pictureUrl,
+            };
+
+            await this.productsService.CreateProductAsync(productsServiceModel);
+
+            return this.Redirect("/");
         }
     }
 }

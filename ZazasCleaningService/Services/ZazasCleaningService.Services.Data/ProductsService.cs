@@ -1,8 +1,10 @@
 ﻿namespace ZazasCleaningService.Services.Data
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
     using ZazasCleaningService.Data;
     using ZazasCleaningService.Data.Models;
     using ZazasCleaningService.Services.Mapping;
@@ -15,6 +17,29 @@
         public ProductsService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task<int> CreateProductAsync(ProductsServiceModel productsServiceModel)
+        {
+            var productTypesNameFromDb = await this.dbContext.ProductTypes
+                .FirstOrDefaultAsync(producType => producType.Name == productsServiceModel.ProductType.Name);
+
+            if (productTypesNameFromDb == null)
+            {
+                throw new ArgumentNullException(nameof(productTypesNameFromDb));
+            }
+
+            var product = new Product
+            {
+                Description = productsServiceModel.Description,
+                Picture = productsServiceModel.Picture,
+                ProductType = productTypesNameFromDb,
+            };
+
+            await this.dbContext.Products.AddAsync(product);
+            await this.dbContext.SaveChangesAsync();
+
+            return product.Id;
         }
 
         public async Task<int> CreateProductTypeAsync(string name)
