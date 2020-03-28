@@ -12,5 +12,7 @@
         IQueryable<ProductTypesServiceModel> GetAllProductTypes();
 
         Task<int> CreateProductAsync(ProductsServiceModel productsServiceModel);
+
+        IQueryable<ProductsServiceModel> GetAllProducts();
     }
 }

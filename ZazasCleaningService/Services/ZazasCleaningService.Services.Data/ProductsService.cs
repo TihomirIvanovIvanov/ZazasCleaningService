@@ -55,6 +55,13 @@
             return productType.Id;
         }
 
+        public IQueryable<ProductsServiceModel> GetAllProducts()
+        {
+            var allProducts = this.dbContext.Products.To<ProductsServiceModel>();
+
+            return allProducts;
+        }
+
         public IQueryable<ProductTypesServiceModel> GetAllProductTypes()
         {
             var productTypes = this.dbContext.ProductTypes.To<ProductTypesServiceModel>();
