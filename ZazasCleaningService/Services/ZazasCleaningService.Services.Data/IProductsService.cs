@@ -14,5 +14,7 @@
         Task<int> CreateProductAsync(ProductsServiceModel productsServiceModel);
 
         IQueryable<ProductsServiceModel> GetAllProducts();
+
+        Task<ProductsServiceModel> GetById(int id);
     }
 }

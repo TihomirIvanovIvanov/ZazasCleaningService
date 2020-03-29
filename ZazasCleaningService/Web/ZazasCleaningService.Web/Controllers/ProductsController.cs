@@ -8,7 +8,9 @@
     using ZazasCleaningService.Services.Data;
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Web.ViewModels.Products.All;
+    using ZazasCleaningService.Web.ViewModels.Products.Details;
 
+    [Authorize]
     public class ProductsController : BaseController
     {
         private readonly IProductsService productsService;
@@ -18,13 +20,19 @@
             this.productsService = productsService;
         }
 
-        [Authorize]
         public async Task<IActionResult> All()
         {
             var allProducts = await this.productsService.GetAllProducts()
                 .To<ProductsAllViewModel>().ToListAsync();
 
             return this.View(allProducts);
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var productView = (await this.productsService.GetById(id)).To<ProductsDetailsViewModel>();
+
+            return this.View(productView);
         }
     }
 }

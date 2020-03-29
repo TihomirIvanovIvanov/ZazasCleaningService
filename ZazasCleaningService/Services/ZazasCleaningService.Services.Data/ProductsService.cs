@@ -68,5 +68,13 @@
 
             return productTypes;
         }
+
+        public async Task<ProductsServiceModel> GetById(int id)
+        {
+            var product = await this.dbContext.Products.To<ProductsServiceModel>()
+                .FirstOrDefaultAsync(product => product.Id == id);
+
+            return product;
+        }
     }
 }
