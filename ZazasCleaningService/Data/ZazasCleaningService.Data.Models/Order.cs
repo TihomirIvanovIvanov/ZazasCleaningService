@@ -14,12 +14,8 @@
 
         public virtual Product Product { get; set; }
 
-        public string UserId { get; set; }
+        public string IssuerId { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
-
-        public int ReceiptId { get; set; }
-
-        public virtual Receipt Receipt { get; set; }
+        public virtual ApplicationUser Issuer { get; set; }
     }
 }

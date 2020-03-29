@@ -9,6 +9,7 @@
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Web.ViewModels.Products.All;
     using ZazasCleaningService.Web.ViewModels.Products.Details;
+    using ZazasCleaningService.Web.ViewModels.Products.Order;
 
     [Authorize]
     public class ProductsController : BaseController
@@ -36,7 +37,7 @@
         }
 
         [HttpPost]
-        public IActionResult Order(int id)
+        public IActionResult Order(ProductsOrderInputModel productsOrderInputModel)
         {
             if (!this.ModelState.IsValid)
             {
