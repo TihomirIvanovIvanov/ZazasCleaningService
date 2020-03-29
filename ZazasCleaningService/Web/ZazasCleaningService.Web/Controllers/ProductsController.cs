@@ -34,5 +34,16 @@
 
             return this.View(productView);
         }
+
+        [HttpPost]
+        public IActionResult Order(int id)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction(nameof(this.Details));
+            }
+
+            return this.View();
+        }
     }
 }

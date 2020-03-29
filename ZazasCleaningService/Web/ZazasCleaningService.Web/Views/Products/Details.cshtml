@@ -1,4 +1,5 @@
-﻿@model ZazasCleaningService.Web.ViewModels.Products.Details.ProductsDetailsViewModel
+﻿@using ZazasCleaningService.Common
+@model ZazasCleaningService.Web.ViewModels.Products.Details.ProductsDetailsViewModel
 @{
     ViewData["Title"] = "Details";
 }
@@ -23,10 +24,32 @@
 <!-- offers -->
 <div class="offers-w3ls py-5">
     <div class="container py-xl-5 py-lg-3">
-        <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Details for @Model.Name</h2>
+        <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Product Details</h2>
         <div class="row">
             <div class="col-lg-6 offers-agiles-left">
                 <img src="@Model.Picture" alt="" class="img-fluid">
+                <div class="p-mask w-50 justify-content-around">
+                    <div class="w3l-button text-center">
+                        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                        {
+                            <a href="/Administration/Products/Edit/@Model.Id"
+                               class="btn btn-sm animated-button victoria-two text-dark mt-4">
+                                Edit
+                            </a>
+                            <a href="/Administration/Products/Delete/@Model.Id"
+                               class="btn btn-sm animated-button victoria-two text-dark mt-4">
+                                Delete
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/Products/Order/@Model.Id"
+                               class="btn btn-sm animated-button victoria-two text-dark mt-4">
+                                Order
+                            </a>
+                        }
+                    </div>
+                </div>
             </div>
             <div class="col-lg-6 offers-agiles-right mt-xl-4 mt-lg-0 mt-4">
                 <h4 class="mb-4 title-2-agiles">@Model.Name</h4>
