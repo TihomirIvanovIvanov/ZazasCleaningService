@@ -4,7 +4,7 @@
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Products;
 
-    public class OrdersServiceModel : IMapTo<Order>, IMapFrom<Order>
+    public class OrdersServiceModel : IMapFrom<Order>, IMapTo<Order>
     {
         public int Id { get; set; }
 
