@@ -1,13 +1,9 @@
 ﻿namespace ZazasCleaningService.Data.Models
 {
-    using System;
-
     using ZazasCleaningService.Data.Common.Models;
 
     public class Order : BaseDeletableModel<int>
     {
-        public DateTime IssuedOn { get; set; }
-
         public int Quantity { get; set; }
 
         public int ProductId { get; set; }

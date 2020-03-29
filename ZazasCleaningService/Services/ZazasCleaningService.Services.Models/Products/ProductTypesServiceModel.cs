@@ -1,4 +1,4 @@
-﻿namespace ZazasCleaningService.Services.Models
+﻿namespace ZazasCleaningService.Services.Models.Products
 {
     using ZazasCleaningService.Data.Models;
     using ZazasCleaningService.Services.Mapping;

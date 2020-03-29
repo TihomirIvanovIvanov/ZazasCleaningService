@@ -3,7 +3,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using ZazasCleaningService.Services.Models;
+    using ZazasCleaningService.Services.Models.Products;
 
     public interface IProductsService
     {

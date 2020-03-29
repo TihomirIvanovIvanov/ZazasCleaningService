@@ -1,7 +1,7 @@
 ﻿namespace ZazasCleaningService.Web.ViewModels.Products.Details
 {
     using ZazasCleaningService.Services.Mapping;
-    using ZazasCleaningService.Services.Models;
+    using ZazasCleaningService.Services.Models.Products;
 
     public class ProductsDetailsViewModel : IMapFrom<ProductsServiceModel>
     {

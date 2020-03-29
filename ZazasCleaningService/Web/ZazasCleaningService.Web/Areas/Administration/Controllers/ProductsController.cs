@@ -6,7 +6,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using ZazasCleaningService.Services.Data;
-    using ZazasCleaningService.Services.Models;
+    using ZazasCleaningService.Services.Models.Products;
     using ZazasCleaningService.Web.ViewModels.Products.Create;
 
     public class ProductsController : AdministrationController

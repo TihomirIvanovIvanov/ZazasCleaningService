@@ -5,7 +5,7 @@
     using AutoMapper;
     using Microsoft.AspNetCore.Http;
     using ZazasCleaningService.Services.Mapping;
-    using ZazasCleaningService.Services.Models;
+    using ZazasCleaningService.Services.Models.Products;
 
     public class ProductsCreateInputModel : IMapTo<ProductsServiceModel>, IHaveCustomMappings
     {

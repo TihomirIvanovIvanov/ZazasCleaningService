@@ -8,7 +8,7 @@
     using ZazasCleaningService.Data;
     using ZazasCleaningService.Data.Models;
     using ZazasCleaningService.Services.Mapping;
-    using ZazasCleaningService.Services.Models;
+    using ZazasCleaningService.Services.Models.Products;
 
     public class ProductsService : IProductsService
     {

@@ -21,7 +21,7 @@
     using ZazasCleaningService.Services.Data;
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Messaging;
-    using ZazasCleaningService.Services.Models;
+    using ZazasCleaningService.Services.Models.Products;
     using ZazasCleaningService.Web.ViewModels;
     using ZazasCleaningService.Web.ViewModels.Products.Create;
 
