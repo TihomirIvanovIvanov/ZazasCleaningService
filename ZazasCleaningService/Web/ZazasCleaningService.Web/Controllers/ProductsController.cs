@@ -40,28 +40,5 @@
 
             return this.View(productView);
         }
-
-        public async Task<IActionResult> Order(int id)
-        {
-            var productView = await this.productsService.GetById(id);
-
-            return this.View(productView);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Order(ProductsOrderInputModel productsOrderInputModel)
-        {
-            if (!this.ModelState.IsValid)
-            {
-                return this.RedirectToAction(nameof(this.Details));
-            }
-
-            var ordersServiceModel = productsOrderInputModel.To<OrdersServiceModel>();
-            ordersServiceModel.IssuerId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-            await this.ordersService.CreateOrder(ordersServiceModel);
-
-            return this.RedirectToAction(nameof(this.All));
-        }
     }
 }
