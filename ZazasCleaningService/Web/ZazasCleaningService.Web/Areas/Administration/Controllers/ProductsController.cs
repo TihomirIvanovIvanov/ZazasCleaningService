@@ -61,7 +61,6 @@
                 this.RedirectToAction(nameof(this.Create));
             }
 
-            // TODO: ne mapva IFormFile picture
             var pictureUrl = await this.cloudinaryService
                 .UploadPictureAsync(productsCreateInputModel.Picture, productsCreateInputModel.Name);
 

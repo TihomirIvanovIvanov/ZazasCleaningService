@@ -29,14 +29,9 @@
                 throw new ArgumentNullException(nameof(productTypesNameFromDb));
             }
 
-            var product = new Product
-            {
-                Description = productsServiceModel.Description,
-                Picture = productsServiceModel.Picture,
-                ProductType = productTypesNameFromDb,
-            };
+            var product = AutoMapperConfig.MapperInstance.Map<Product>(productsServiceModel);
+            product.ProductType = productTypesNameFromDb;
 
-            // TODO: ne syzdava product zaradi picture
             await this.dbContext.Products.AddAsync(product);
             await this.dbContext.SaveChangesAsync();
 
