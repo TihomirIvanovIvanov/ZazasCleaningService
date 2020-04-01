@@ -14,6 +14,10 @@
 
         public ProductsServiceModel Product { get; set; }
 
+        public int ProductTypeId { get; set; }
+
+        public ProductTypesServiceModel ProductType { get; set; }
+
         public string IssuerId { get; set; }
 
         public ApplicationUserServiceModel Issuer { get; set; }

@@ -29,7 +29,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Order(ProductsOrderInputModel productsOrderInputModel)
+        public async Task<IActionResult> Create(ProductsOrderInputModel productsOrderInputModel)
         {
             if (!this.ModelState.IsValid)
             {

@@ -13,6 +13,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200322163100_RenameProductDbSetToPlural.cs" />
     <Compile Remove="Migrations\20200322163100_RenameProductDbSetToPlural.Designer.cs" />
+    <Compile Remove="Migrations\20200401163400_add.cs" />
+    <Compile Remove="Migrations\20200401163400_add.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
