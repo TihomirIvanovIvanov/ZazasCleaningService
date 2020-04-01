@@ -23,7 +23,11 @@
 
         public void CreateMappings(IProfileExpression configuration)
         {
-
+            configuration
+                .CreateMap<ProductsServiceModel, ProductsEditInputModel>()
+                .ForMember(
+                    destination => destination.Picture,
+                    options => options.Ignore());
         }
     }
 }

@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using ZazasCleaningService.Services.Data;
+    using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Products;
     using ZazasCleaningService.Web.ViewModels.Products.Create;
 
@@ -76,7 +77,17 @@
 
         public async Task<IActionResult> Edit(int id)
         {
-            return this.View();
+            var productsEditInputModel = (await this.productsService.GetById(id)).To<ProductsEditInputModel>();
+
+            if (productsEditInputModel == null)
+            {
+                // TODO: Error handling
+                return this.RedirectToAction("/");
+            }
+
+            await this.Create();
+
+            return this.View(productsEditInputModel);
         }
     }
 }

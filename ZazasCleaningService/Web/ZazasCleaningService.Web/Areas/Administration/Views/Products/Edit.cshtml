@@ -2,6 +2,7 @@
 @model ZazasCleaningService.Web.ViewModels.Products.Create.ProductsEditInputModel
 @{
     ViewData["Title"] = "Edit";
+    var productTypes = (IEnumerable<ProductCreateProductTypesViewModel>)this.ViewData["types"];
 }
 
 <!-- banner 2 -->
@@ -38,22 +39,22 @@
                                required="">
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
-                    @*<div class="form-group">
-                            <select class="form-control text-primary" id="type" asp-for="ProductType">
-                                @foreach (var type in (IEnumerable<ProductCreateProductTypeViewModel>)this.ViewData["types"])
+                    <div class="form-group">
+                        <select asp-for="ProductType">
+                            @foreach (var type in productTypes)
+                            {
+                                @if (type.Name == Model.ProductType)
                                 {
-                                    @if (type.Name == Model.ProductType)
-                                    {
-                                        <option value="@type.Name" selected>@type.Name</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@type.Name">@type.Name</option>
-                                    }
+                                    <option value="@type.Name" selected>@type.Name</option>
                                 }
-                            </select>
-                            <span asp-validation-for="ProductType" class="text-danger"></span>
-                        </div>*@
+                                else
+                                {
+                                    <option value="@type.Name">@type.Name</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="ProductType" class="text-danger"></span>
+                    </div>
                     <div class="form-group">
                         <label asp-for="Picture"></label>
                         <input asp-for="Picture"
@@ -74,9 +75,13 @@
                                required="" />
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
-                    <button type="submit" class="btn btn-primary submit">Create Product</button>
+                    <button type="submit" class="btn btn-primary submit">Edit Product</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
