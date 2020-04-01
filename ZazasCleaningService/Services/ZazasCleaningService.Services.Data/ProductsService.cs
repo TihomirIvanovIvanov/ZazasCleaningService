@@ -36,6 +36,7 @@
                 ProductType = productTypesNameFromDb,
             };
 
+            // TODO: ne syzdava product zaradi picture
             await this.dbContext.Products.AddAsync(product);
             await this.dbContext.SaveChangesAsync();
 
@@ -53,6 +54,33 @@
             await this.dbContext.SaveChangesAsync();
 
             return productType.Id;
+        }
+
+        public async Task<int> Edit(int id, ProductsServiceModel productsServiceModel)
+        {
+            var productTypeNameFromDb = await this.dbContext.ProductTypes
+                .FirstOrDefaultAsync(productType => productType.Name == productsServiceModel.ProductType.Name);
+
+            if (productTypeNameFromDb == null)
+            {
+                throw new ArgumentNullException(nameof(productTypeNameFromDb));
+            }
+
+            var product = await this.dbContext.Products.FirstOrDefaultAsync(product => product.Id == id);
+
+            if (product == null)
+            {
+                throw new ArgumentNullException(nameof(product));
+            }
+
+            product.Name = productsServiceModel.Name;
+            product.Picture = productsServiceModel.Picture;
+            product.ProductType = productTypeNameFromDb;
+
+            this.dbContext.Products.Update(product);
+            await this.dbContext.SaveChangesAsync();
+
+            return product.Id;
         }
 
         public IQueryable<ProductsServiceModel> GetAllProducts()

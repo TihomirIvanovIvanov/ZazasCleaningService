@@ -22,6 +22,7 @@
         {
             byte[] destinationData;
             using var ms = new MemoryStream();
+            // TODO: Null exception
             await pictureFile.CopyToAsync(ms);
             destinationData = ms.ToArray();
 

@@ -16,5 +16,7 @@
         IQueryable<ProductsServiceModel> GetAllProducts();
 
         Task<ProductsServiceModel> GetById(int id);
+
+        Task<int> Edit(int id, ProductsServiceModel productsServiceModel);
     }
 }

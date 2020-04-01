@@ -15,7 +15,6 @@
         [Required]
         public string Description { get; set; }
 
-        [Required]
         public IFormFile Picture { get; set; }
 
         [Required]
@@ -28,6 +27,15 @@
                 .ForMember(
                     destination => destination.Picture,
                     options => options.Ignore());
+
+            configuration
+                .CreateMap<ProductsEditInputModel, ProductsServiceModel>()
+                .ForMember(
+                    destination => destination.ProductType,
+                    options => options.MapFrom(origin => new ProductTypesServiceModel
+                    {
+                        Name = origin.Name,
+                    }));
         }
     }
 }

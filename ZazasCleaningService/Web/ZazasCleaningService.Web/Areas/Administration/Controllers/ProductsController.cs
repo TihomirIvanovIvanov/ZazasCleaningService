@@ -61,14 +61,11 @@
                 this.RedirectToAction(nameof(this.Create));
             }
 
+            // TODO: ne mapva IFormFile picture
             var pictureUrl = await this.cloudinaryService
                 .UploadPictureAsync(productsCreateInputModel.Picture, productsCreateInputModel.Name);
 
-            var productsServiceModel = new ProductsServiceModel
-            {
-                Description = productsCreateInputModel.Description,
-                Picture = pictureUrl,
-            };
+            var productsServiceModel = AutoMapperConfig.MapperInstance.Map<ProductsServiceModel>(productsCreateInputModel);
 
             await this.productsService.CreateProductAsync(productsServiceModel);
 
@@ -88,6 +85,25 @@
             await this.Create();
 
             return this.View(productsEditInputModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, ProductsEditInputModel productsEditInputModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                await this.Create();
+                return this.View(productsEditInputModel);
+            }
+
+            var pictureUrl = await this.cloudinaryService
+                .UploadPictureAsync(productsEditInputModel.Picture, productsEditInputModel.Name);
+
+            var productsServiceModel = AutoMapperConfig.MapperInstance.Map<ProductsServiceModel>(productsEditInputModel);
+            productsServiceModel.Picture = pictureUrl;
+
+            await this.productsService.Edit(id, productsServiceModel);
+            return this.Redirect("/");
         }
     }
 }

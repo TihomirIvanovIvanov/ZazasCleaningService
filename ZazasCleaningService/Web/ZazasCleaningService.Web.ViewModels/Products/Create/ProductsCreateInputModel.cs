@@ -15,6 +15,7 @@
         [Required]
         public string Description { get; set; }
 
+        // TODO: nqma content disposition
         [Required]
         public IFormFile Picture { get; set; }
 

@@ -9,6 +9,7 @@
 
     public class ProductsOrderInputModel : IMapTo<OrdersServiceModel>, IHaveCustomMappings
     {
+        // TODO: toq mapping mi kuca mi se struva
         public int ProductId { get; set; }
 
         public int ProductTypeId { get; set; }
