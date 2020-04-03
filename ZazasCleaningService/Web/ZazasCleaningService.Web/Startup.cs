@@ -22,8 +22,10 @@
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Messaging;
     using ZazasCleaningService.Services.Models.Products;
+    using ZazasCleaningService.Services.Models.Services;
     using ZazasCleaningService.Web.ViewModels;
     using ZazasCleaningService.Web.ViewModels.Products.Create;
+    using ZazasCleaningService.Web.ViewModels.Services.Create;
 
     public class Startup
     {
@@ -91,7 +93,9 @@
                 typeof(ErrorViewModel).GetTypeInfo().Assembly,
                 typeof(ProductsCreateInputModel).GetTypeInfo().Assembly,
                 typeof(ProductTypesServiceModel).GetTypeInfo().Assembly,
-                typeof(ProductsServiceModel).GetTypeInfo().Assembly);
+                typeof(ProductsServiceModel).GetTypeInfo().Assembly,
+                typeof(ServicesCreateInputModel).GetTypeInfo().Assembly,
+                typeof(ServicesServiceModel).GetTypeInfo().Assembly);
 
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())

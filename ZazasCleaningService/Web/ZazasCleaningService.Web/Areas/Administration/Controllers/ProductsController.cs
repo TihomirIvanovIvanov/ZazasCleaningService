@@ -70,7 +70,7 @@
 
             await this.productsService.CreateProductAsync(productsServiceModel);
 
-            return this.Redirect(nameof(this.Create));
+            return this.RedirectToAction(nameof(this.Create));
         }
 
         public async Task<IActionResult> Edit(int id)
