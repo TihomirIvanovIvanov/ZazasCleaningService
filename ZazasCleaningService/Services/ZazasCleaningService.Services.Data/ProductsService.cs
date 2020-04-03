@@ -97,14 +97,14 @@
             return product.Id;
         }
 
-        public IQueryable<ProductsServiceModel> GetAllProducts()
+        public IQueryable<ProductsServiceModel> GetAllProductsAsync()
         {
             var allProducts = this.dbContext.Products.To<ProductsServiceModel>();
 
             return allProducts;
         }
 
-        public IQueryable<ProductTypesServiceModel> GetAllProductTypes()
+        public IQueryable<ProductTypesServiceModel> GetAllProductTypesAsync()
         {
             var productTypes = this.dbContext.ProductTypes.To<ProductTypesServiceModel>();
 

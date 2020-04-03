@@ -1,12 +1,28 @@
 ﻿namespace ZazasCleaningService.Web.Controllers
 {
+    using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using ZazasCleaningService.Services.Data;
+    using ZazasCleaningService.Services.Mapping;
+    using ZazasCleaningService.Web.ViewModels.Services.All;
 
     public class ServicesController : BaseController
     {
-        public IActionResult All()
+        private readonly IServicesService servicesService;
+
+        public ServicesController(IServicesService servicesService)
         {
-            return this.View();
+            this.servicesService = servicesService;
+        }
+
+        public async Task<IActionResult> All()
+        {
+            var allServices = await this.servicesService.GetAllServicesAsync()
+                .To<ServicesAllViewModel>().ToListAsync();
+
+            return this.View(allServices);
         }
     }
 }

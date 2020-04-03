@@ -20,27 +20,27 @@
     </nav>
 </div>
 <!-- //page details -->
-<!-- contact -->
+<!-- products -->
 <div class="py-5">
     <div class="container py-xl-5 py-lg-3">
         <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Products</h2>
-        @foreach (var products in Model)
-        {
-            <ul class="demo">
+        <ul class="demo">
+            @foreach (var product in Model)
+            {
                 <li>
                     <div class="gallery-grid1">
-                        <img src="@products.Picture" alt=" " class="w-50" />
-                        <div class="p-mask w-50">
-                            <h4>@products.Name</h4>
+                        <img src="@product.Picture" alt=" " class="img-fluid" />
+                        <div class="p-mask">
+                            <h4>@product.Name</h4>
                             <div class="w3l-button">
-                                <a href="/Products/Details/@products.Id" 
+                                <a href="/Products/Details/@product.Id"
                                    class="btn btn-sm animated-button victoria-two text-white mt-4">Details</a>
                             </div>
                         </div>
                     </div>
                 </li>
-            </ul>
-        }
+            }
+        </ul>
     </div>
 </div>
-<!-- //contact -->
+<!-- //products -->

@@ -25,6 +25,7 @@
             return this.View();
         }
 
+        [HttpPost]
         public async Task<IActionResult> Create(ServicesCreateInputModel servicesCreateInputModel)
         {
             if (!this.ModelState.IsValid)

@@ -19,100 +19,27 @@
     </nav>
 </div>
 <!-- page details -->
-<!-- gallery -->
+<!-- services -->
 <div class="py-5">
     <div class="container py-xl-5 py-lg-3">
         <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Services</h2>
         <ul class="demo">
-            <li>
-                <div class="gallery-grid1">
-                    <img src="~/images/all-house.png" alt=" " class="img-fluid" />
-                    <div class="p-mask">
-                        <h4>Cleaning Entire Home</h4>
-                        <div class="w3l-button">
-                            <a href="#" class="btn btn-sm animated-button victoria-two text-white mt-4">Order</a>
+            @foreach (var service in Model)
+            {
+                <li>
+                    <div class="gallery-grid1">
+                        <img src="@service.Picture" alt=" " class="img-fluid" />
+                        <div class="p-mask">
+                            <h4>@service.Name</h4>
+                            <div class="w3l-button">
+                                <a href="/Services/Details/@service.Id" 
+                                   class="btn btn-sm animated-button victoria-two text-white mt-4">Details</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </li>
-            <li>
-                <div class="gallery-grid1">
-                    <img src="~/images/living-room.jpeg" alt=" " class="img-fluid" />
-                    <div class="p-mask">
-                        <h4>Cleaning Living Room/s</h4>
-                        <div class="w3l-button">
-                            <a href="#" class="btn btn-sm animated-button victoria-two text-white mt-4">Order</a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="gallery-grid1">
-                    <img src="~/images/kitchen.jpeg" alt=" " class="img-fluid" />
-                    <div class="p-mask">
-                        <h4>Cleaning Kitchen</h4>
-                        <div class="w3l-button">
-                            <a href="#" class="btn btn-sm animated-button victoria-two text-white mt-4">Order</a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="gallery-grid1">
-                    <img src="~/images/bedrooms.jpeg" alt=" " class="img-fluid" />
-                    <div class="p-mask">
-                        <h4>Cleaning Bedroom/s</h4>
-                        <div class="w3l-button">
-                            <a href="#" class="btn btn-sm animated-button victoria-two text-white mt-4">Order</a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="gallery-grid1">
-                    <img src="~/images/kidrooms.jpeg" alt=" " class="img-fluid" />
-                    <div class="p-mask">
-                        <h4>Cleaning Kids Room/s</h4>
-                        <div class="w3l-button">
-                            <a href="#" class="btn btn-sm animated-button victoria-two text-white mt-4">Order</a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="gallery-grid1">
-                    <img src="~/images/kids-taking-care.jpg" alt=" " class="img-fluid" />
-                    <div class="p-mask">
-                        <h4>Baby Sitter</h4>
-                        <div class="w3l-button">
-                            <a href="#" class="btn btn-sm animated-button victoria-two text-white mt-4">Order</a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="gallery-grid1">
-                    <img src="~/images/wc&baths.jpeg" alt=" " class="img-fluid" />
-                    <div class="p-mask">
-                        <h4>Cleaning Toilet/Bathroom</h4>
-                        <div class="w3l-button">
-                            <a href="#" class="btn btn-sm animated-button victoria-two text-white mt-4">Order</a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="gallery-grid1">
-                    <img src="~/images/ironing.jpg" alt=" " class="img-fluid" />
-                    <div class="p-mask">
-                        <h4>Ironing</h4>
-                        <div class="w3l-button">
-                            <a href="#" class="btn btn-sm animated-button victoria-two text-white mt-4">Order</a>
-                        </div>
-                    </div>
-                </div>
-            </li>
+                </li>
+            }
         </ul>
     </div>
 </div>
-<!-- //gallery -->
+<!-- //services -->

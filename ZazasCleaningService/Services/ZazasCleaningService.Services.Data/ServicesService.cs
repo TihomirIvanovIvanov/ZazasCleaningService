@@ -1,5 +1,6 @@
 ﻿namespace ZazasCleaningService.Services.Data
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using ZazasCleaningService.Data;
@@ -24,6 +25,13 @@
             await this.dbContext.SaveChangesAsync();
 
             return service.Id;
+        }
+
+        public IQueryable<ServicesServiceModel> GetAllServicesAsync()
+        {
+            var allServices = this.dbContext.Services.To<ServicesServiceModel>();
+
+            return allServices;
         }
     }
 }
