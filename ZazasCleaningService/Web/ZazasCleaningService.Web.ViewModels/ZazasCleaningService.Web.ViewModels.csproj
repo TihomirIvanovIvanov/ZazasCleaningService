@@ -25,8 +25,4 @@
     <ProjectReference Include="..\..\Services\ZazasCleaningService.Services.Models\ZazasCleaningService.Services.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Products\Delete\" />
-  </ItemGroup>
-
 </Project>

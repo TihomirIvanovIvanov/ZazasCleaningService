@@ -19,7 +19,7 @@
         public IFormFile Picture { get; set; }
 
         [Required]
-        public string ProductType { get; set; }
+        public string ProductTypeName { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
@@ -35,7 +35,7 @@
                     destination => destination.ProductType,
                     options => options.MapFrom(origin => new ProductTypesServiceModel
                     {
-                        Name = origin.ProductType,
+                        Name = origin.ProductTypeName,
                     }));
         }
     }

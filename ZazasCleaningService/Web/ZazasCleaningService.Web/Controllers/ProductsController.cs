@@ -30,7 +30,7 @@
 
         public async Task<IActionResult> Details(int id)
         {
-            var productView = (await this.productsService.GetById(id)).To<ProductsDetailsViewModel>();
+            var productView = (await this.productsService.GetByIdAsync(id)).To<ProductsDetailsViewModel>();
 
             return this.View(productView);
         }

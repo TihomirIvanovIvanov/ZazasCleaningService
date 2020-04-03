@@ -9,6 +9,7 @@
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Products;
     using ZazasCleaningService.Web.ViewModels.Products.Create;
+    using ZazasCleaningService.Web.ViewModels.Products.Delete;
     using ZazasCleaningService.Web.ViewModels.Products.Edit;
 
     public class ProductsController : AdministrationController
@@ -74,7 +75,7 @@
 
         public async Task<IActionResult> Edit(int id)
         {
-            var productsEditInputModel = (await this.productsService.GetById(id)).To<ProductsEditInputModel>();
+            var productsEditInputModel = (await this.productsService.GetByIdAsync(id)).To<ProductsEditInputModel>();
 
             if (productsEditInputModel == null)
             {
@@ -102,13 +103,31 @@
             var productsServiceModel = AutoMapperConfig.MapperInstance.Map<ProductsServiceModel>(productsEditInputModel);
             productsServiceModel.Picture = pictureUrl;
 
-            await this.productsService.Edit(id, productsServiceModel);
+            await this.productsService.EditAsync(id, productsServiceModel);
             return this.Redirect("/Products/All");
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            return this.View();
+            var productsDeleteViewModel = (await this.productsService.GetByIdAsync(id)).To<ProductsDeleteViewModel>();
+
+            if (productsDeleteViewModel == null)
+            {
+                // TODO: Error handling
+                return this.RedirectToAction("/");
+            }
+
+            await this.Create();
+
+            return this.View(productsDeleteViewModel);
+        }
+
+        [HttpPost("/Administration/Products/Delete/{id}")]
+        public async Task<IActionResult> DeleteConfirm(int id)
+        {
+            await this.productsService.DeleteByIdAsync(id);
+
+            return this.Redirect("/Products/All");
         }
     }
 }

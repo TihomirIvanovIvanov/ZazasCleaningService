@@ -36,14 +36,17 @@
                                name="Name"
                                class="form-control"
                                placeholder="Name"
-                               required="">
+                               required="" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <select asp-for="ProductType">
+                        <div>
+                            <label asp-for="ProductTypeName">Product Type</label>
+                        </div>
+                        <select asp-for="ProductTypeName">
                             @foreach (var type in productTypes)
                             {
-                                @if (type.Name == Model.ProductType)
+                                @if (type.Name == Model.ProductTypeName)
                                 {
                                     <option value="@type.Name" selected>@type.Name</option>
                                 }
@@ -53,7 +56,7 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="ProductType" class="text-danger"></span>
+                        <span asp-validation-for="ProductTypeName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Picture"></label>
@@ -62,7 +65,7 @@
                                name="Picture"
                                class="form-control"
                                placeholder="Picture"
-                               required="">
+                               required="" />
                         <span asp-validation-for="Picture" class="text-danger"></span>
                     </div>
                     <div class="form-group">

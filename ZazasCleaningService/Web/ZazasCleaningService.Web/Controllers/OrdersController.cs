@@ -23,7 +23,7 @@
 
         public async Task<IActionResult> Create(int id)
         {
-            var productView = await this.productsService.GetById(id);
+            var productView = await this.productsService.GetByIdAsync(id);
 
             return this.View(productView);
         }

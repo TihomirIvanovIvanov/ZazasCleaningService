@@ -51,7 +51,25 @@
             return productType.Id;
         }
 
-        public async Task<int> Edit(int id, ProductsServiceModel productsServiceModel)
+        public async Task<bool> DeleteByIdAsync(int id)
+        {
+            var product = await this.dbContext.Products.FirstOrDefaultAsync(product => product.Id == id);
+
+            if (product == null)
+            {
+                throw new ArgumentNullException(nameof(product));
+            }
+
+            product.DeletedOn = DateTime.UtcNow;
+            product.IsDeleted = true;
+
+            this.dbContext.Products.Remove(product);
+            await this.dbContext.SaveChangesAsync();
+
+            return product.IsDeleted;
+        }
+
+        public async Task<int> EditAsync(int id, ProductsServiceModel productsServiceModel)
         {
             var productTypeNameFromDb = await this.dbContext.ProductTypes
                 .FirstOrDefaultAsync(productType => productType.Name == productsServiceModel.ProductType.Name);
@@ -93,7 +111,7 @@
             return productTypes;
         }
 
-        public async Task<ProductsServiceModel> GetById(int id)
+        public async Task<ProductsServiceModel> GetByIdAsync(int id)
         {
             var product = await this.dbContext.Products.To<ProductsServiceModel>()
                 .FirstOrDefaultAsync(product => product.Id == id);

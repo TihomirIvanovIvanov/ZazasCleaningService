@@ -1,5 +1,5 @@
 ﻿@using ZazasCleaningService.Web.ViewModels.Products.Create
-@model ZazasCleaningService.Web.ViewModels.Products.Edit.ProductsEditInputModel
+@model ZazasCleaningService.Web.ViewModels.Products.Delete.ProductsDeleteViewModel
 @{
     ViewData["Title"] = "Delete";
     var productTypes = (IEnumerable<ProductCreateProductTypesViewModel>)this.ViewData["types"];
@@ -24,7 +24,7 @@
 <!-- //page details -->
 <div class="py-5">
     <div class="container py-xl-5 py-lg-3">
-        <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Edit Product</h2>
+        <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Delete Product</h2>
         <div class="row contact_wthreerow agileits-w3layouts pt-4">
             <div class="col-lg-7 w3l_contact_form">
                 <form method="post" enctype="multipart/form-data">
@@ -34,16 +34,21 @@
                         <input asp-for="Name"
                                type="text"
                                name="Name"
+                               value="@Model.Name"
                                class="form-control"
                                placeholder="Name"
-                               required="">
+                               required="" 
+                               disabled />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <select asp-for="ProductType">
+                        <div>
+                            <label asp-for="ProductTypeName">Product Type</label>
+                        </div>
+                        <select asp-for="ProductTypeName" disabled>
                             @foreach (var type in productTypes)
                             {
-                                @if (type.Name == Model.ProductType)
+                                @if (type.Name == Model.ProductTypeName)
                                 {
                                     <option value="@type.Name" selected>@type.Name</option>
                                 }
@@ -53,16 +58,18 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="ProductType" class="text-danger"></span>
+                        <span asp-validation-for="ProductTypeName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Picture"></label>
                         <input asp-for="Picture"
                                type="file"
                                name="Picture"
+                               value="@Model.Picture"
                                class="form-control"
                                placeholder="Picture"
-                               required="">
+                               required=""
+                               disabled />
                         <span asp-validation-for="Picture" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -70,12 +77,14 @@
                         <input asp-for="Description"
                                type="text"
                                name="Description"
+                               value="@Model.Description"
                                class="form-control"
                                placeholder="Description"
-                               required="" />
+                               required="" 
+                               disabled />
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
-                    <button type="submit" class="btn btn-primary submit">Edit Product</button>
+                    <button type="submit" class="btn btn-primary submit">Delete Product</button>
                 </form>
             </div>
         </div>

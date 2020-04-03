@@ -15,8 +15,10 @@
 
         IQueryable<ProductsServiceModel> GetAllProducts();
 
-        Task<ProductsServiceModel> GetById(int id);
+        Task<ProductsServiceModel> GetByIdAsync(int id);
 
-        Task<int> Edit(int id, ProductsServiceModel productsServiceModel);
+        Task<int> EditAsync(int id, ProductsServiceModel productsServiceModel);
+
+        Task<bool> DeleteByIdAsync(int id);
     }
 }
