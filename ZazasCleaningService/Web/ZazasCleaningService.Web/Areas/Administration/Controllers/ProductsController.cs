@@ -9,6 +9,7 @@
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Products;
     using ZazasCleaningService.Web.ViewModels.Products.Create;
+    using ZazasCleaningService.Web.ViewModels.Products.Edit;
 
     public class ProductsController : AdministrationController
     {
@@ -102,7 +103,12 @@
             productsServiceModel.Picture = pictureUrl;
 
             await this.productsService.Edit(id, productsServiceModel);
-            return this.Redirect("/");
+            return this.Redirect("/Products/All");
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            return this.View();
         }
     }
 }

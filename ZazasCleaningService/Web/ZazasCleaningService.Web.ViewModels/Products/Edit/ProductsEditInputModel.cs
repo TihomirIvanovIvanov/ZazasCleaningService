@@ -1,4 +1,4 @@
-﻿namespace ZazasCleaningService.Web.ViewModels.Products.Create
+﻿namespace ZazasCleaningService.Web.ViewModels.Products.Edit
 {
     using System.ComponentModel.DataAnnotations;
 
