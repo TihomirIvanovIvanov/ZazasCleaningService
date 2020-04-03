@@ -13,5 +13,9 @@
         public string IssuerId { get; set; }
 
         public virtual ApplicationUser Issuer { get; set; }
+
+        public int ServiceId { get; set; }
+
+        public virtual Service Service { get; set; }
     }
 }

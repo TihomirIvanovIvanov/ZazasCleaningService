@@ -60,7 +60,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                this.RedirectToAction(nameof(this.Create));
+                return this.View(productsCreateInputModel);
             }
 
             var pictureUrl = await this.cloudinaryService
