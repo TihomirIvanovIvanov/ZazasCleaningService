@@ -15,6 +15,7 @@
         [Required]
         public string Description { get; set; }
 
+        [Required]
         public IFormFile Picture { get; set; }
 
         [Required]
@@ -34,7 +35,7 @@
                     destination => destination.ProductType,
                     options => options.MapFrom(origin => new ProductTypesServiceModel
                     {
-                        Name = origin.Name,
+                        Name = origin.ProductType,
                     }));
         }
     }

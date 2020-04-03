@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZazasCleaningService.Data;
 
-namespace ZazasCleaningService.Data.Migrations
+namespace AspNetCoreTemplate.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200322163317_RenameProductTableToPlural")]
-    partial class RenameProductTableToPlural
+    [Migration("20200403104257_AddDatabaseEntities")]
+    partial class AddDatabaseEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -258,16 +258,30 @@ namespace ZazasCleaningService.Data.Migrations
                     b.Property<int>("ApartmentNumber")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Floor")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("UserId");
 
@@ -284,8 +298,20 @@ namespace ZazasCleaningService.Data.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -297,6 +323,8 @@ namespace ZazasCleaningService.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("UserId");
 
@@ -310,7 +338,19 @@ namespace ZazasCleaningService.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("IssuedOn")
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("IssuerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ProductId")
@@ -319,17 +359,18 @@ namespace ZazasCleaningService.Data.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("ReceiptId")
+                    b.Property<int?>("ReceiptId")
                         .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("IssuerId");
+
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ReceiptId");
 
                     b.ToTable("Orders");
                 });
@@ -341,7 +382,22 @@ namespace ZazasCleaningService.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Picture")
@@ -351,6 +407,8 @@ namespace ZazasCleaningService.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("ProductTypeId");
 
@@ -364,10 +422,24 @@ namespace ZazasCleaningService.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("ProductTypes");
                 });
@@ -379,21 +451,29 @@ namespace ZazasCleaningService.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("IssuedOnPicture")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("RecipientId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId")
-                        .IsUnique();
+                    b.HasIndex("IsDeleted");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("RecipientId");
 
                     b.ToTable("Receipts");
                 });
@@ -405,11 +485,23 @@ namespace ZazasCleaningService.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("HomeId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -417,6 +509,8 @@ namespace ZazasCleaningService.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("HomeId");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("Rooms");
                 });
@@ -520,15 +614,19 @@ namespace ZazasCleaningService.Data.Migrations
 
             modelBuilder.Entity("ZazasCleaningService.Data.Models.Order", b =>
                 {
+                    b.HasOne("ZazasCleaningService.Data.Models.ApplicationUser", "Issuer")
+                        .WithMany("Orders")
+                        .HasForeignKey("IssuerId");
+
                     b.HasOne("ZazasCleaningService.Data.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("ZazasCleaningService.Data.Models.ApplicationUser", "User")
+                    b.HasOne("ZazasCleaningService.Data.Models.Receipt", null)
                         .WithMany("Orders")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("ReceiptId");
                 });
 
             modelBuilder.Entity("ZazasCleaningService.Data.Models.Product", b =>
@@ -542,15 +640,9 @@ namespace ZazasCleaningService.Data.Migrations
 
             modelBuilder.Entity("ZazasCleaningService.Data.Models.Receipt", b =>
                 {
-                    b.HasOne("ZazasCleaningService.Data.Models.Order", "Order")
-                        .WithOne("Receipt")
-                        .HasForeignKey("ZazasCleaningService.Data.Models.Receipt", "OrderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("ZazasCleaningService.Data.Models.ApplicationUser", "User")
+                    b.HasOne("ZazasCleaningService.Data.Models.ApplicationUser", "Recipient")
                         .WithMany("Receipts")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("RecipientId");
                 });
 
             modelBuilder.Entity("ZazasCleaningService.Data.Models.Room", b =>

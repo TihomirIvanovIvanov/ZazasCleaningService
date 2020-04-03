@@ -1,4 +1,4 @@
-﻿namespace ZazasCleaningService.Data.Migrations
+﻿namespace AspNetCoreTemplate.Data.Migrations
 {
     using System;
 

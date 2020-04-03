@@ -70,6 +70,7 @@
 
             product.Name = productsServiceModel.Name;
             product.Picture = productsServiceModel.Picture;
+            product.Description = productsServiceModel.Description;
             product.ProductType = productTypeNameFromDb;
 
             this.dbContext.Products.Update(product);
