@@ -10,6 +10,9 @@
     public class ProductsEditInputModel : IMapFrom<ProductsServiceModel>, IMapTo<ProductsServiceModel>, IHaveCustomMappings
     {
         [Required]
+        public int Id { get; set; }
+
+        [Required]
         public string Name { get; set; }
 
         [Required]

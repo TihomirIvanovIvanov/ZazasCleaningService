@@ -7,6 +7,7 @@
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Services;
     using ZazasCleaningService.Web.ViewModels.Services.Create;
+    using ZazasCleaningService.Web.ViewModels.Services.Edit;
 
     public class ServicesController : AdministrationController
     {
@@ -40,6 +41,18 @@
             await this.servicesService.CreateServiceAsync(servicesServiceModel);
 
             return this.RedirectToAction(nameof(this.Create));
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var servicesEditInputModel = (await this.servicesService.GetByIdAsync(id)).To<ServicesEditInputModel>();
+
+            if (servicesEditInputModel == null)
+            {
+                return this.RedirectToAction("/");
+            }
+
+            return this.View(servicesEditInputModel);
         }
     }
 }
