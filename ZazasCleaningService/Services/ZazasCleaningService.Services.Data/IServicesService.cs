@@ -10,5 +10,7 @@
         Task<int> CreateServiceAsync(ServicesServiceModel servicesServiceModel);
 
         IQueryable<ServicesServiceModel> GetAllServicesAsync();
+
+        Task<ServicesServiceModel> GetByIdAsync(int id);
     }
 }

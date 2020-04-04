@@ -1,5 +1,6 @@
 ﻿namespace ZazasCleaningService.Services.Data
 {
+    using Microsoft.EntityFrameworkCore;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -32,6 +33,14 @@
             var allServices = this.dbContext.Services.To<ServicesServiceModel>();
 
             return allServices;
+        }
+
+        public async Task<ServicesServiceModel> GetByIdAsync(int id)
+        {
+            var service = await this.dbContext.Services.To<ServicesServiceModel>()
+                .FirstOrDefaultAsync(service => service.Id == id);
+
+            return service;
         }
     }
 }
