@@ -49,10 +49,28 @@
 
             if (servicesEditInputModel == null)
             {
-                return this.RedirectToAction("/");
+                return this.Redirect("/");
             }
 
             return this.View(servicesEditInputModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, ServicesEditInputModel servicesEditInputModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(servicesEditInputModel);
+            }
+
+            var pictureUrl = await this.cloudinaryService
+                .UploadPictureAsync(servicesEditInputModel.Picture, servicesEditInputModel.Name);
+
+            var servicesServiceModel = AutoMapperConfig.MapperInstance.Map<ServicesServiceModel>(servicesEditInputModel);
+            servicesServiceModel.Picture = pictureUrl;
+
+            await this.servicesService.EditAsync(id, servicesServiceModel);
+            return this.Redirect("/Services/All");
         }
     }
 }

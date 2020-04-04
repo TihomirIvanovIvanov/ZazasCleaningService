@@ -1,9 +1,10 @@
 ﻿namespace ZazasCleaningService.Services.Data
 {
-    using Microsoft.EntityFrameworkCore;
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
     using ZazasCleaningService.Data;
     using ZazasCleaningService.Data.Models;
     using ZazasCleaningService.Services.Mapping;
@@ -23,6 +24,25 @@
             var service = AutoMapperConfig.MapperInstance.Map<Service>(servicesServiceModel);
 
             await this.dbContext.Services.AddAsync(service);
+            await this.dbContext.SaveChangesAsync();
+
+            return service.Id;
+        }
+
+        public async Task<int> EditAsync(int id, ServicesServiceModel servicesServiceModel)
+        {
+            var service = await this.dbContext.Services.FirstOrDefaultAsync(service => service.Id == id);
+
+            if (service == null)
+            {
+                throw new ArgumentNullException(nameof(service));
+            }
+
+            service.Name = servicesServiceModel.Name;
+            service.Picture = servicesServiceModel.Picture;
+            service.Description = servicesServiceModel.Description;
+
+            this.dbContext.Services.Update(service);
             await this.dbContext.SaveChangesAsync();
 
             return service.Id;

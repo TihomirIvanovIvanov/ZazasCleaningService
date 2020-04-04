@@ -80,7 +80,7 @@
             if (productsEditInputModel == null)
             {
                 // TODO: Error handling
-                return this.RedirectToAction("/");
+                return this.Redirect("/");
             }
 
             await this.Create();
@@ -114,7 +114,7 @@
             if (productsDeleteViewModel == null)
             {
                 // TODO: Error handling
-                return this.RedirectToAction("/");
+                return this.Redirect("/");
             }
 
             await this.Create();
