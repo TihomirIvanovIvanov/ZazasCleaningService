@@ -85,5 +85,13 @@
 
             return this.View(servicesDeleteViewModel);
         }
+
+        [HttpPost("/Administration/Services/Delete/{id}")]
+        public async Task<IActionResult> DeleteConfirm(int id)
+        {
+            await this.servicesService.DeleteByIdAsync(id);
+
+            return this.Redirect("/Services/All");
+        }
     }
 }

@@ -29,6 +29,24 @@
             return service.Id;
         }
 
+        public async Task<bool> DeleteByIdAsync(int id)
+        {
+            var service = await this.dbContext.Services.FirstOrDefaultAsync(service => service.Id == id);
+
+            if (service == null)
+            {
+                throw new ArgumentNullException(nameof(service));
+            }
+
+            service.DeletedOn = DateTime.UtcNow;
+            service.IsDeleted = true;
+
+            this.dbContext.Services.Remove(service);
+            await this.dbContext.SaveChangesAsync();
+
+            return service.IsDeleted;
+        }
+
         public async Task<int> EditAsync(int id, ServicesServiceModel servicesServiceModel)
         {
             var service = await this.dbContext.Services.FirstOrDefaultAsync(service => service.Id == id);
