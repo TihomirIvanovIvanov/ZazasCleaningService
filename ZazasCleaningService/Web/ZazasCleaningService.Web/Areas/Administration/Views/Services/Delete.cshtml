@@ -1,8 +1,6 @@
-﻿@using ZazasCleaningService.Web.ViewModels.Products.Create
-@model ZazasCleaningService.Web.ViewModels.Products.Delete.ProductsDeleteViewModel
+﻿@model ZazasCleaningService.Web.ViewModels.Services.Delete.ServicesDeleteViewModel
 @{
     ViewData["Title"] = "Delete";
-    var productTypes = (IEnumerable<ProductCreateProductTypesViewModel>)this.ViewData["types"];
 }
 
 <!-- banner 2 -->
@@ -15,7 +13,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/Products/Details/@Model.Id">Product Details</a>
+                <a href="/Services/Details/@Model.Id">Service Details</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">Delete</li>
         </ol>
@@ -40,25 +38,6 @@
                                required="" 
                                disabled />
                         <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <div>
-                            <label asp-for="ProductTypeName">Product Type</label>
-                        </div>
-                        <select asp-for="ProductTypeName" disabled>
-                            @foreach (var type in productTypes)
-                            {
-                                @if (type.Name == Model.ProductTypeName)
-                                {
-                                    <option value="@type.Name" selected>@type.Name</option>
-                                }
-                                else
-                                {
-                                    <option value="@type.Name">@type.Name</option>
-                                }
-                            }
-                        </select>
-                        <span asp-validation-for="ProductTypeName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Picture"></label>

@@ -7,6 +7,7 @@
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Services;
     using ZazasCleaningService.Web.ViewModels.Services.Create;
+    using ZazasCleaningService.Web.ViewModels.Services.Delete;
     using ZazasCleaningService.Web.ViewModels.Services.Edit;
 
     public class ServicesController : AdministrationController
@@ -71,6 +72,18 @@
 
             await this.servicesService.EditAsync(id, servicesServiceModel);
             return this.Redirect("/Services/All");
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var servicesDeleteViewModel = (await this.servicesService.GetByIdAsync(id)).To<ServicesDeleteViewModel>();
+
+            if (servicesDeleteViewModel == null)
+            {
+                return this.Redirect("/");
+            }
+
+            return this.View(servicesDeleteViewModel);
         }
     }
 }
