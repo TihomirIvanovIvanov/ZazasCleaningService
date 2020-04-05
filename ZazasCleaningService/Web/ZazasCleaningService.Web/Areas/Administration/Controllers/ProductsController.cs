@@ -67,6 +67,7 @@
                 .UploadPictureAsync(productsCreateInputModel.Picture, productsCreateInputModel.Name);
 
             var productsServiceModel = AutoMapperConfig.MapperInstance.Map<ProductsServiceModel>(productsCreateInputModel);
+            productsServiceModel.Picture = pictureUrl;
 
             await this.productsService.CreateProductAsync(productsServiceModel);
 
@@ -104,6 +105,7 @@
             productsServiceModel.Picture = pictureUrl;
 
             await this.productsService.EditAsync(id, productsServiceModel);
+
             return this.Redirect("/Products/All");
         }
 
