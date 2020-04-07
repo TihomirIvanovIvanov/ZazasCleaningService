@@ -71,7 +71,7 @@
 
             await this.productsService.CreateProductAsync(productsServiceModel);
 
-            return this.RedirectToAction(nameof(this.Create));
+            return this.Redirect("/Products/All");
         }
 
         public async Task<IActionResult> Edit(int id)

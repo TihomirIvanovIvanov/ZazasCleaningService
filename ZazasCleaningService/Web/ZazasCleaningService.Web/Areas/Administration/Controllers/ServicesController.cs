@@ -43,7 +43,7 @@
 
             await this.servicesService.CreateServiceAsync(servicesServiceModel);
 
-            return this.RedirectToAction(nameof(this.Create));
+            return this.Redirect("/Services/All");
         }
 
         public async Task<IActionResult> Edit(int id)

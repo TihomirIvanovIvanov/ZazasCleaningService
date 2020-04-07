@@ -31,7 +31,6 @@
         [HttpPost]
         public async Task<IActionResult> Create(ProductsOrderInputModel productsOrderInputModel)
         {
-            // TODO: tuk ne vliza izob6to
             if (!this.ModelState.IsValid)
             {
                 return this.RedirectToAction(nameof(this.Create));
@@ -42,7 +41,7 @@
 
             await this.ordersService.CreateOrder(ordersServiceModel);
 
-            return this.RedirectToAction("/");
+            return this.Redirect("/");
         }
     }
 }

@@ -20,14 +20,15 @@
     </nav>
 </div>
 <!-- //page details -->
-<!-- contact -->
-<div class="contact py-5">
+<div class="py-5">
     <div class="container py-xl-5 py-lg-3">
         <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">
-        Order product @Model.Name</h2>
+            Order product - @Model.Name
+        </h2>
         <div class="row contact_wthreerow agileits-w3layouts pt-4">
             <div class="col-lg-7 w3l_contact_form">
                 <form method="post">
+                    <input type="hidden" value="@Model.Id" name="ProductId" />
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label for="quantity">Quantity</label>
@@ -36,7 +37,7 @@
                                name="quantity"
                                class="form-control"
                                placeholder="Quantity"
-                               required="">
+                               required="" />
                     </div>
                     <button type="submit" class="btn btn-primary submit">Order</button>
                 </form>
@@ -44,4 +45,3 @@
         </div>
     </div>
 </div>
-<!-- //contact -->
