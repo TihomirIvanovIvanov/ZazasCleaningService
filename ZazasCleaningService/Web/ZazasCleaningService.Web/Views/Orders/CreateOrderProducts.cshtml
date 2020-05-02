@@ -1,4 +1,4 @@
-﻿@model ZazasCleaningService.Services.Models.Services.ServicesServiceModel
+﻿@model ZazasCleaningService.Web.ViewModels.Products.Order.ProductsOrderInputModel
 @{
     ViewData["Title"] = "Create";
 }
@@ -13,7 +13,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/Services/Details/@Model.Id">Name</a>
+                <a href="/Products/Details/@Model.ProductId">@Model.Name</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">Order</li>
         </ol>
@@ -23,12 +23,12 @@
 <div class="py-5">
     <div class="container py-xl-5 py-lg-3">
         <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">
-            Order service - Name
+            Order @Model.Name
         </h2>
         <div class="row contact_wthreerow agileits-w3layouts pt-4">
             <div class="col-lg-7 w3l_contact_form">
                 <form method="post">
-                    <input type="hidden" value="@Model.Id" name="ProductId" />
+                    <input type="hidden" value="@Model.ProductId" name="ProductId" />
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label for="quantity">Quantity</label>
@@ -37,16 +37,6 @@
                                name="quantity"
                                class="form-control"
                                placeholder="Quantity"
-                               required="" />
-                        <span asp-validation-for="@Model.Id" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="from">From</label>
-                        <input for="from"
-                               type="text"
-                               name="from"
-                               class="form-control"
-                               placeholder="From"
                                required="" />
                     </div>
                     <button type="submit" class="btn btn-primary submit">Order</button>

@@ -1,0 +1,76 @@
+﻿@model ZazasCleaningService.Web.ViewModels.Products.Order.ServicesOrderInputModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<!-- banner 2 -->
+<div class="banner2-w3ls">
+
+</div>
+<!-- //banner 2 -->
+<!-- page details -->
+<div class="breadcrumb-agile">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/Services/Details/@Model.ServiceId">@Model.Name</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Order</li>
+        </ol>
+    </nav>
+</div>
+<!-- //page details -->
+<div class="py-5">
+    <div class="container py-xl-5 py-lg-3">
+        <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">
+            Order @Model.Name
+        </h2>
+        <div class="row contact_wthreerow agileits-w3layouts pt-4">
+            <div class="col-lg-7 w3l_contact_form">
+                <form method="post">
+                    <input type="hidden" value="@Model.ServiceId" name="ServicesId" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="From">From</label>
+                        <input asp-for="From"
+                               type="text"
+                               name="from"
+                               id="from"
+                               class="form-control"
+                               placeholder="From"
+                               required="" />
+                        <span asp-validation-for="From" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="To">To</label>
+                        <input asp-for="To"
+                               type="text"
+                               name="to"
+                               id="to"
+                               class="form-control"
+                               placeholder="To"
+                               required="" />
+                        <span asp-validation-for="To" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary submit">Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = () => {
+        $('#from').datetimepicker({
+            format: 'd.m.Y H:i',
+            lang: 'en'
+        });
+    };
+
+    window.onload = () => {
+        $('#to').datetimepicker({
+            format: 'd.m.Y H:i',
+            lang: 'en'
+        });
+    };
+</script>
