@@ -39,7 +39,7 @@
             var ordersServiceModel = productsOrderInputModel.To<OrdersServiceModel>();
             ordersServiceModel.IssuerId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            await this.ordersService.CreateOrder(ordersServiceModel);
+            await this.ordersService.CreateOrderAsync(ordersServiceModel);
 
             return this.Redirect("/");
         }

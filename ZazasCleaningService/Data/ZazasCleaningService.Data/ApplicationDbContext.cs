@@ -25,19 +25,15 @@
 
         public DbSet<Setting> Settings { get; set; }
 
-        public DbSet<Home> Homes { get; set; }
+        public DbSet<ProductOrder> ProductOrders { get; set; }
 
-        public DbSet<Kid> Kids { get; set; }
-
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<ServiceOrder> ServiceOrders { get; set; }
 
         public DbSet<Product> Products { get; set; }
 
         public DbSet<ProductType> ProductTypes { get; set; }
 
         public DbSet<Receipt> Receipts { get; set; }
-
-        public DbSet<Room> Rooms { get; set; }
 
         public DbSet<Service> Services { get; set; }
 

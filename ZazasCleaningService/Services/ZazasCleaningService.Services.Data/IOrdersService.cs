@@ -6,6 +6,14 @@
 
     public interface IOrdersService
     {
-        Task<int> CreateOrder(OrdersServiceModel ordersServiceModel);
+        // TODO: Complete thesesteps
+        // 1. Add service models
+        // 2. Add binding models
+        // 3. Add view models and methods for extracting (GetAllServiceOrders() / GetAllProductOrders) (dont forget lazy)
+        Task<int> CreateProductOrderAsync();
+
+        Task<int> CreateServiceOrderAsync();
+
+        Task<int> CreateOrderAsync(OrdersServiceModel ordersServiceModel);
     }
 }

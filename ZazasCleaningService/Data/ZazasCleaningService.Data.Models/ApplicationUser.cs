@@ -16,9 +16,8 @@ namespace ZazasCleaningService.Data.Models
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
 
-            this.Orders = new HashSet<Order>();
-            this.Homes = new HashSet<Home>();
-            this.Kids = new HashSet<Kid>();
+            this.ProductOrders = new HashSet<ProductOrder>();
+            this.ServiceOrders = new HashSet<ServiceOrder>();
             this.Receipts = new HashSet<Receipt>();
         }
 
@@ -38,11 +37,9 @@ namespace ZazasCleaningService.Data.Models
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<ProductOrder> ProductOrders { get; set; }
 
-        public virtual ICollection<Home> Homes { get; set; }
-
-        public virtual ICollection<Kid> Kids { get; set; }
+        public virtual ICollection<ServiceOrder> ServiceOrders { get; set; }
 
         public virtual ICollection<Receipt> Receipts { get; set; }
     }

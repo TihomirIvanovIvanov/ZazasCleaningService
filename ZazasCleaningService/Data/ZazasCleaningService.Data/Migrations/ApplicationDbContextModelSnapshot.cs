@@ -243,141 +243,6 @@ namespace AspNetCoreTemplate.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("ZazasCleaningService.Data.Models.Home", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ApartmentNumber")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Floor")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Homes");
-                });
-
-            modelBuilder.Entity("ZazasCleaningService.Data.Models.Kid", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("TimeForTakingCare")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Kids");
-                });
-
-            modelBuilder.Entity("ZazasCleaningService.Data.Models.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("IssuerId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ReceiptId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("IssuerId");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("ReceiptId");
-
-                    b.HasIndex("ServiceId");
-
-                    b.ToTable("Orders");
-                });
-
             modelBuilder.Entity("ZazasCleaningService.Data.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -416,6 +281,37 @@ namespace AspNetCoreTemplate.Data.Migrations
                     b.HasIndex("ProductTypeId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("ZazasCleaningService.Data.Models.ProductOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IssuerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IssuerId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductOrders");
                 });
 
             modelBuilder.Entity("ZazasCleaningService.Data.Models.ProductType", b =>
@@ -481,43 +377,6 @@ namespace AspNetCoreTemplate.Data.Migrations
                     b.ToTable("Receipts");
                 });
 
-            modelBuilder.Entity("ZazasCleaningService.Data.Models.Room", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("HomeId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HomeId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("Rooms");
-                });
-
             modelBuilder.Entity("ZazasCleaningService.Data.Models.Service", b =>
                 {
                     b.Property<int>("Id")
@@ -551,6 +410,34 @@ namespace AspNetCoreTemplate.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Services");
+                });
+
+            modelBuilder.Entity("ZazasCleaningService.Data.Models.ServiceOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IssuerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IssuerId");
+
+                    b.HasIndex("ServiceId");
+
+                    b.ToTable("ServiceOrders");
                 });
 
             modelBuilder.Entity("ZazasCleaningService.Data.Models.Setting", b =>
@@ -636,48 +523,24 @@ namespace AspNetCoreTemplate.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ZazasCleaningService.Data.Models.Home", b =>
-                {
-                    b.HasOne("ZazasCleaningService.Data.Models.ApplicationUser", "User")
-                        .WithMany("Homes")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("ZazasCleaningService.Data.Models.Kid", b =>
-                {
-                    b.HasOne("ZazasCleaningService.Data.Models.ApplicationUser", "User")
-                        .WithMany("Kids")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("ZazasCleaningService.Data.Models.Order", b =>
-                {
-                    b.HasOne("ZazasCleaningService.Data.Models.ApplicationUser", "Issuer")
-                        .WithMany("Orders")
-                        .HasForeignKey("IssuerId");
-
-                    b.HasOne("ZazasCleaningService.Data.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("ZazasCleaningService.Data.Models.Receipt", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("ReceiptId");
-
-                    b.HasOne("ZazasCleaningService.Data.Models.Service", "Service")
-                        .WithMany()
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ZazasCleaningService.Data.Models.Product", b =>
                 {
                     b.HasOne("ZazasCleaningService.Data.Models.ProductType", "ProductType")
                         .WithMany()
                         .HasForeignKey("ProductTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ZazasCleaningService.Data.Models.ProductOrder", b =>
+                {
+                    b.HasOne("ZazasCleaningService.Data.Models.ApplicationUser", "Issuer")
+                        .WithMany("ProductOrders")
+                        .HasForeignKey("IssuerId");
+
+                    b.HasOne("ZazasCleaningService.Data.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -689,11 +552,15 @@ namespace AspNetCoreTemplate.Data.Migrations
                         .HasForeignKey("RecipientId");
                 });
 
-            modelBuilder.Entity("ZazasCleaningService.Data.Models.Room", b =>
+            modelBuilder.Entity("ZazasCleaningService.Data.Models.ServiceOrder", b =>
                 {
-                    b.HasOne("ZazasCleaningService.Data.Models.Home", "Home")
-                        .WithMany("Rooms")
-                        .HasForeignKey("HomeId")
+                    b.HasOne("ZazasCleaningService.Data.Models.ApplicationUser", "Issuer")
+                        .WithMany("ServiceOrders")
+                        .HasForeignKey("IssuerId");
+
+                    b.HasOne("ZazasCleaningService.Data.Models.Service", "Service")
+                        .WithMany()
+                        .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

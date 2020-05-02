@@ -22,8 +22,7 @@
 
         public async Task<IActionResult> All()
         {
-            var allProducts = await this.productsService.GetAllProductsAsync()
-                .To<ProductsAllViewModel>().ToListAsync();
+            var allProducts = await this.productsService.GetAllProductsAsync<ProductsAllViewModel>().ToListAsync();
 
             return this.View(allProducts);
         }
