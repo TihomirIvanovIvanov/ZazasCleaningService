@@ -17,13 +17,19 @@
 
         private readonly IProductsService productsService;
 
-        public OrdersController(IOrdersService ordersService, IProductsService productsService)
+        private readonly IServicesService servicesService;
+
+        public OrdersController(
+            IOrdersService ordersService,
+            IProductsService productsService,
+            IServicesService servicesService)
         {
             this.ordersService = ordersService;
             this.productsService = productsService;
+            this.servicesService = servicesService;
         }
 
-        public async Task<IActionResult> Create(int id)
+        public async Task<IActionResult> CreateProducts(int id)
         {
             var productView = await this.productsService.GetByIdAsync(id);
 
@@ -31,11 +37,11 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ProductsOrderInputModel productsOrderInputModel)
+        public async Task<IActionResult> CreateProducts(ProductsOrderInputModel productsOrderInputModel)
         {
             if (!this.ModelState.IsValid)
             {
-                return this.RedirectToAction(nameof(this.Create));
+                return this.RedirectToAction(nameof(this.CreateProducts));
             }
 
             var ordersServiceModel = productsOrderInputModel.To<OrderProductsServiceModel>();
@@ -44,6 +50,13 @@
             await this.ordersService.CreateProductOrderAsync(ordersServiceModel);
 
             return this.Redirect("/");
+        }
+
+        public async Task<IActionResult> CreateServices(int id)
+        {
+            var productView = await this.servicesService.GetByIdAsync(id);
+
+            return this.View(productView);
         }
     }
 }

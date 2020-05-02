@@ -9,6 +9,8 @@
 
     public class ApplicationUserServiceModel : IdentityUser, IMapFrom<ApplicationUser>
     {
-        public List<OrderProductsServiceModel> Orders { get; set; }
+        public List<OrderProductsServiceModel> OrderProducts { get; set; }
+
+        public List<OrderServicesServiceModel> OrderServices { get; set; }
     }
 }
