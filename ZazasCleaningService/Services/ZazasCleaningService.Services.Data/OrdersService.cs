@@ -3,6 +3,8 @@
     using System.Threading.Tasks;
 
     using ZazasCleaningService.Data;
+    using ZazasCleaningService.Data.Models;
+    using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Orders;
 
     public class OrdersService : IOrdersService
@@ -14,19 +16,16 @@
             this.dbContext = dbContext;
         }
 
-        public async Task<int> CreateOrderAsync(OrdersServiceModel ordersServiceModel)
+        public async Task<int> CreateProductOrderAsync(OrderProductsServiceModel orderProductsServiceModel)
         {
-            throw new System.NotImplementedException();
-        }
+            var orderProducts = orderProductsServiceModel.To<ProductOrder>();
 
-        public async Task<int> CreateProductOrderAsync()
-        {
-            throw new System.NotImplementedException();
-        }
+            /// TODO: Map other data
 
-        public async Task<int> CreateServiceOrderAsync()
-        {
-            throw new System.NotImplementedException();
+            await this.dbContext.ProductOrders.AddAsync(orderProducts);
+            await this.dbContext.SaveChangesAsync();
+
+            return orderProducts.Id;
         }
     }
 }
