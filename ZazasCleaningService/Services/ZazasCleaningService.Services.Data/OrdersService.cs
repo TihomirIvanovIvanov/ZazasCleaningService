@@ -20,12 +20,20 @@
         {
             var orderProducts = orderProductsServiceModel.To<ProductOrder>();
 
-            /// TODO: Map other data
-
             await this.dbContext.ProductOrders.AddAsync(orderProducts);
             await this.dbContext.SaveChangesAsync();
 
             return orderProducts.Id;
+        }
+
+        public async Task<int> CreateServiceOrderAsync(OrderServicesServiceModel orderServicesServiceModel)
+        {
+            var orderServices = orderServicesServiceModel.To<ServiceOrder>();
+
+            await this.dbContext.ServiceOrders.AddAsync(orderServices);
+            await this.dbContext.SaveChangesAsync();
+
+            return orderServices.Id;
         }
     }
 }

@@ -45,10 +45,10 @@
                 return this.RedirectToAction(nameof(this.CreateOrderProducts));
             }
 
-            var ordersServiceModel = productsOrderInputModel.To<OrderProductsServiceModel>();
-            ordersServiceModel.IssuerId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var orderProductsServiceModel = productsOrderInputModel.To<OrderProductsServiceModel>();
+            orderProductsServiceModel.IssuerId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            await this.ordersService.CreateProductOrderAsync(ordersServiceModel);
+            await this.ordersService.CreateProductOrderAsync(orderProductsServiceModel);
 
             return this.Redirect("/");
         }
@@ -59,6 +59,22 @@
                 .To<ServicesOrderInputModel>();
 
             return this.View(productView);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateOrderServices(ServicesOrderInputModel servicesOrderInputModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction(nameof(this.CreateOrderServices));
+            }
+
+            var orderServicesServiceModel = servicesOrderInputModel.To<OrderServicesServiceModel>();
+            orderServicesServiceModel.IssuerId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            await this.ordersService.CreateServiceOrderAsync(orderServicesServiceModel);
+
+            return this.Redirect("/");
         }
     }
 }

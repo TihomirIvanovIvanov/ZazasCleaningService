@@ -12,6 +12,6 @@
         // 3. Add view models and methods for extracting (GetAllServiceOrders() / GetAllProductOrders) (dont forget lazy)
         Task<int> CreateProductOrderAsync(OrderProductsServiceModel orderProductsServiceModel);
 
-        //Task<int> CreateServiceOrderAsync();
+        Task<int> CreateServiceOrderAsync(OrderServicesServiceModel orderServicesServiceModel);
     }
 }
