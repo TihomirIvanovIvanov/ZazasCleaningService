@@ -58,11 +58,14 @@
             var productView = (await this.servicesService.GetByIdAsync(id))
                 .To<ServicesOrderInputModel>();
 
+            this.ViewData["serviceId"] = productView.ServiceId;
+            this.ViewData["name"] = productView.Name;
+
             return this.View(productView);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateOrderServices(ServicesOrderInputModel servicesOrderInputModel)
+        public async Task<IActionResult> CreateOrderServices(int id, ServicesOrderInputModel servicesOrderInputModel)
         {
             if (!this.ModelState.IsValid)
             {
@@ -75,6 +78,11 @@
             await this.ordersService.CreateServiceOrderAsync(orderServicesServiceModel);
 
             return this.Redirect("/");
+        }
+
+        public async Task<IActionResult> All()
+        {
+            return this.View();
         }
     }
 }

@@ -13,7 +13,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/Services/Details/@Model.ServiceId">@Model.Name</a>
+                <a href="/Services/Details/@this.ViewData["serviceId"]">@this.ViewData["name"]</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">Order</li>
         </ol>
@@ -23,7 +23,7 @@
 <div class="py-5">
     <div class="container py-xl-5 py-lg-3">
         <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">
-            Order @Model.Name
+            Order @this.ViewData["name"]
         </h2>
         <div class="row contact_wthreerow agileits-w3layouts pt-4">
             <div class="col-lg-7 w3l_contact_form">
@@ -63,13 +63,13 @@
     window.onload = () => {
         $('#from').datetimepicker({
             format: 'd.m.Y H:i',
+            startDate: '+1971/05/01',
             lang: 'en'
         });
-    };
 
-    window.onload = () => {
         $('#to').datetimepicker({
             format: 'd.m.Y H:i',
+            startDate: '+1971/05/01',
             lang: 'en'
         });
     };
