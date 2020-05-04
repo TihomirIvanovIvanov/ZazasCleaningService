@@ -1,7 +1,8 @@
-﻿@model List<ZazasCleaningService.Web.ViewModels.AllProductServiceOrdersViewModel>
+﻿@using ZazasCleaningService.Web.ViewModels.Products.Order
+@model List<ZazasCleaningService.Web.ViewModels.Products.Order.AllProductsOrdersViewModel>
 @{
     ViewData["Title"] = "All";
-    var productsData = (IEnumerable<AllProductServiceOrdersViewModel>)this.ViewData["productsData"];
+    var productsData = (IEnumerable<AllProductsOrdersViewModel>)ViewData["productsData"];
 }
 
 <div class="banner2-w3ls">
@@ -22,7 +23,7 @@
 <!-- //page details -->
 <div class="offers-w3ls py-5">
     <div class="container py-xl-5 py-lg-3">
-        <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Products and services orders</h2>
+        <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Products orders</h2>
         <div class="row">
             <div class="col-lg-6 offers-agiles-left">
                 <img src="~/images/veggie&fruitGIF.gif" alt="" class="img-fluid">
@@ -37,19 +38,6 @@
                         <a class="nav-link" href="/Orders/Products/@product.ProductOrderId">@product.ProductName</a>
                     </h5>
                 }
-            </div>
-        </div>
-        <div class="row my-5">
-            <div class="col-lg-6 offers-agiles-right mt-xl-4 mb-lg-0 mb-4">
-                <h4 class="mb-4 title-2-agiles">
-                    My Services Orders
-                </h4>
-                <h5>
-                    <a class="nav-link" href="/Orders/Services/id">Name Of the service by id</a>
-                </h5>
-            </div>
-            <div class="col-lg-6 offers-agiles-left">
-                <img src="~/images/4.jpg" alt="" class="img-fluid">
             </div>
         </div>
     </div>

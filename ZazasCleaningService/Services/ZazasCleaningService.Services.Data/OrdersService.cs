@@ -43,5 +43,14 @@
 
             return productOrders;
         }
+
+        public IQueryable<OrderServicesServiceModel> GetAllServiceOrdersAsync()
+        {
+            var serviceOrders = this.dbContext.ServiceOrders
+                .OrderBy(service => service.CreatedOn)
+                .To<OrderServicesServiceModel>();
+
+            return serviceOrders;
+        }
     }
 }

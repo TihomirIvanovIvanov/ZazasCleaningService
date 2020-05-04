@@ -10,7 +10,6 @@
     using ZazasCleaningService.Services.Data;
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Orders;
-    using ZazasCleaningService.Web.ViewModels;
     using ZazasCleaningService.Web.ViewModels.Products.Order;
     using ZazasCleaningService.Web.ViewModels.Services.Order;
 
@@ -84,18 +83,32 @@
             return this.Redirect("/");
         }
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> Products()
         {
             var productsOrder = await this.ordersService.GetAllProductOrdersAsync()
-                   .To<AllProductServiceOrdersViewModel>().ToListAsync();
+                   .To<AllProductsOrdersViewModel>().ToListAsync();
 
-            this.ViewData["productsData"] = productsOrder.Select(productOrder => new AllProductServiceOrdersViewModel
+            this.ViewData["productsData"] = productsOrder.Select(productOrder => new AllProductsOrdersViewModel
             {
                 ProductOrderId = productOrder.ProductOrderId,
                 ProductName = productOrder.ProductName,
             }).ToList();
 
-            return this.View(productsOrder);
+            return this.View();
+        }
+
+        public async Task<IActionResult> Services()
+        {
+            var servicesOrder = await this.ordersService.GetAllServiceOrdersAsync()
+                   .To<AllServicesOrdersViewModel>().ToListAsync();
+
+            this.ViewData["servicesData"] = servicesOrder.Select(serviceOrder => new AllServicesOrdersViewModel
+            {
+                ServiceOrderId = serviceOrder.ServiceOrderId,
+                ServiceName = serviceOrder.ServiceName,
+            }).ToList();
+
+            return this.View();
         }
     }
 }

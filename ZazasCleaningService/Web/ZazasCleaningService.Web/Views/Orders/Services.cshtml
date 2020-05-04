@@ -1,0 +1,44 @@
+﻿@using ZazasCleaningService.Web.ViewModels.Services.Order
+@model List<ZazasCleaningService.Web.ViewModels.Services.Order.AllServicesOrdersViewModel>
+@{
+    ViewData["Title"] = "All";
+    var servicesData = (IEnumerable<AllServicesOrdersViewModel>)ViewData["servicesData"];
+}
+
+<div class="banner2-w3ls">
+
+</div>
+<!-- //banner 2 -->
+<!-- page details -->
+<div class="breadcrumb-agile">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/">Home</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">My Orders</li>
+        </ol>
+    </nav>
+</div>
+<!-- //page details -->
+<div class="offers-w3ls py-5">
+    <div class="container py-xl-5 py-lg-3">
+        <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Services orders</h2>
+        <div class="row">
+            <div class="col-lg-6 offers-agiles-left">
+                <img src="~/images/veggie&fruitGIF.gif" alt="" class="img-fluid">
+            </div>
+            <div class="col-lg-6 offers-agiles-right mt-xl-4 mt-lg-0 mt-4">
+                <h4 class="mb-4 title-2-agiles">
+                    My Services Orders
+                </h4>
+                @foreach (var service in servicesData)
+                {
+                    <h5>
+                        <a class="nav-link" href="/Orders/Services/@service.ServiceOrderId">@service.ServiceName</a>
+                    </h5>
+                }
+            </div>
+        </div>
+    </div>
+</div>

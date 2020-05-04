@@ -16,5 +16,7 @@
         Task<int> CreateServiceOrderAsync(OrderServicesServiceModel orderServicesServiceModel);
 
         IQueryable<OrderProductsServiceModel> GetAllProductOrdersAsync();
+
+        IQueryable<OrderServicesServiceModel> GetAllServiceOrdersAsync();
     }
 }
