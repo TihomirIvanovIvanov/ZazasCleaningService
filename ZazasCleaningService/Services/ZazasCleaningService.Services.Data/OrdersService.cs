@@ -1,5 +1,6 @@
 ﻿namespace ZazasCleaningService.Services.Data
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using ZazasCleaningService.Data;
@@ -34,6 +35,13 @@
             await this.dbContext.SaveChangesAsync();
 
             return orderServices.Id;
+        }
+
+        public IQueryable<OrderProductsServiceModel> GetAllProductOrdersAsync()
+        {
+            var productOrders = this.dbContext.ProductOrders.To<OrderProductsServiceModel>();
+
+            return productOrders;
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿@{
-    ViewData["Title"] = "Index";
+﻿@model List<ZazasCleaningService.Web.ViewModels.AllProductServiceOrdersViewModel>
+@{
+    ViewData["Title"] = "All";
+    var productsData = (IEnumerable<AllProductServiceOrdersViewModel>)this.ViewData["productsData"];
 }
 
 <div class="banner2-w3ls">
@@ -29,9 +31,12 @@
                 <h4 class="mb-4 title-2-agiles">
                     My Products Orders
                 </h4>
-                <h5 class="mb-5 title-2-agiles">
-                    <a class="nav-link" href="/Orders/Products/id">Name Of the product by id</a>
-                </h5>
+                @foreach (var product in productsData)
+                {
+                    <h5>
+                        <a class="nav-link" href="/Orders/Products/@product.ProductOrderId">@product.ProductName</a>
+                    </h5>
+                }
             </div>
         </div>
         <div class="row my-5">
@@ -39,7 +44,7 @@
                 <h4 class="mb-4 title-2-agiles">
                     My Services Orders
                 </h4>
-                <h5 class="mb-5 title-2-agiles">
+                <h5>
                     <a class="nav-link" href="/Orders/Services/id">Name Of the service by id</a>
                 </h5>
             </div>

@@ -1,13 +1,16 @@
 ﻿namespace ZazasCleaningService.Web.Controllers
 {
+    using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
     using ZazasCleaningService.Services.Data;
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Orders;
+    using ZazasCleaningService.Web.ViewModels;
     using ZazasCleaningService.Web.ViewModels.Products.Order;
     using ZazasCleaningService.Web.ViewModels.Services.Order;
 
@@ -83,7 +86,16 @@
 
         public async Task<IActionResult> All()
         {
-            return this.View();
+            var productsOrder = await this.ordersService.GetAllProductOrdersAsync()
+                   .To<AllProductServiceOrdersViewModel>().ToListAsync();
+
+            this.ViewData["productsData"] = productsOrder.Select(productOrder => new AllProductServiceOrdersViewModel
+            {
+                ProductOrderId = productOrder.ProductOrderId,
+                ProductName = productOrder.ProductName,
+            }).ToList();
+
+            return this.View(productsOrder);
         }
     }
 }

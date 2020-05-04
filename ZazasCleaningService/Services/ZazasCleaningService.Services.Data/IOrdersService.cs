@@ -1,5 +1,6 @@
 ﻿namespace ZazasCleaningService.Services.Data
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using ZazasCleaningService.Services.Models.Orders;
@@ -13,5 +14,7 @@
         Task<int> CreateProductOrderAsync(OrderProductsServiceModel orderProductsServiceModel);
 
         Task<int> CreateServiceOrderAsync(OrderServicesServiceModel orderServicesServiceModel);
+
+        IQueryable<OrderProductsServiceModel> GetAllProductOrdersAsync();
     }
 }
