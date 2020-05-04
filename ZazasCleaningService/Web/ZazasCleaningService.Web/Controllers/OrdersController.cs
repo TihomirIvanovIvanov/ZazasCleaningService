@@ -9,6 +9,7 @@
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Orders;
     using ZazasCleaningService.Web.ViewModels.Products.Order;
+    using ZazasCleaningService.Web.ViewModels.Services.Order;
 
     [Authorize]
     public class OrdersController : BaseController

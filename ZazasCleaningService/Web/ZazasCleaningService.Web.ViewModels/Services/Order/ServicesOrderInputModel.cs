@@ -1,4 +1,4 @@
-﻿namespace ZazasCleaningService.Web.ViewModels.Products.Order
+﻿namespace ZazasCleaningService.Web.ViewModels.Services.Order
 {
     using System;
     using System.ComponentModel.DataAnnotations;
