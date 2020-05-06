@@ -38,12 +38,21 @@
                 throw new ArgumentNullException(nameof(service));
             }
 
+            // TODO: Did i need GetServiceOrderByProductId into orderService?
+            var serviceOrder = this.dbContext.ServiceOrders
+                .FirstOrDefault(s => s.ServiceId == service.Id);
+
+            if (serviceOrder == null)
+            {
+                throw new ArgumentNullException(nameof(serviceOrder));
+            }
+
+            this.dbContext.ServiceOrders.Remove(serviceOrder);
+
             service.DeletedOn = DateTime.UtcNow;
             service.IsDeleted = true;
 
-            this.dbContext.Services.Remove(service);
             await this.dbContext.SaveChangesAsync();
-
             return service.IsDeleted;
         }
 

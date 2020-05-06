@@ -60,12 +60,21 @@
                 throw new ArgumentNullException(nameof(product));
             }
 
+            // TODO: Did i need GetProductOrderByProductId into orderService?
+            var productOrder = this.dbContext.ProductOrders
+                .FirstOrDefault(p => p.ProductId == product.Id);
+
+            if (productOrder == null)
+            {
+                throw new ArgumentNullException(nameof(productOrder));
+            }
+
+            this.dbContext.ProductOrders.Remove(productOrder);
+
             product.DeletedOn = DateTime.UtcNow;
             product.IsDeleted = true;
 
-            this.dbContext.Products.Remove(product);
             await this.dbContext.SaveChangesAsync();
-
             return product.IsDeleted;
         }
 
