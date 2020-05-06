@@ -37,6 +37,9 @@
             var productView = (await this.productsService.GetByIdAsync(id))
                 .To<ProductsOrderInputModel>();
 
+            this.ViewData["productId"] = productView.ProductId;
+            this.ViewData["name"] = productView.Name;
+
             return this.View(productView);
         }
 
@@ -58,13 +61,13 @@
 
         public async Task<IActionResult> CreateOrderServices(int id)
         {
-            var productView = (await this.servicesService.GetByIdAsync(id))
+            var serviceView = (await this.servicesService.GetByIdAsync(id))
                 .To<ServicesOrderInputModel>();
 
-            this.ViewData["serviceId"] = productView.ServiceId;
-            this.ViewData["name"] = productView.Name;
+            this.ViewData["serviceId"] = serviceView.ServiceId;
+            this.ViewData["name"] = serviceView.Name;
 
-            return this.View(productView);
+            return this.View(serviceView);
         }
 
         [HttpPost]
