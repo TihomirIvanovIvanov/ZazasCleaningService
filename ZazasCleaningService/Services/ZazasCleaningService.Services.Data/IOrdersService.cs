@@ -20,5 +20,7 @@
         IQueryable<OrderServicesServiceModel> GetAllServiceOrdersAsync();
 
         Task<OrderProductsServiceModel> GetProductOrdersByIdAsync(int id);
+
+        Task<OrderServicesServiceModel> GetServiceOrdersByIdAsync(int id);
     }
 }

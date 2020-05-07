@@ -121,5 +121,13 @@
 
             return this.View();
         }
+
+        public async Task<IActionResult> ServiceOrdersDetails(int id)
+        {
+            var serviceOrdersDetailsView = (await this.ordersService.GetServiceOrdersByIdAsync(id))
+                .To<ServiceOrdersDetailsViewModel>();
+
+            return this.View(serviceOrdersDetailsView);
+        }
     }
 }

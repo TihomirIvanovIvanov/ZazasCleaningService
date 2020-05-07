@@ -1,9 +1,9 @@
 ﻿namespace ZazasCleaningService.Services.Data
 {
-    using Microsoft.EntityFrameworkCore;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
     using ZazasCleaningService.Data;
     using ZazasCleaningService.Data.Models;
     using ZazasCleaningService.Services.Mapping;
@@ -60,6 +60,14 @@
                 .FirstOrDefaultAsync(productOrder => productOrder.Id == id);
 
             return productOrderById;
+        }
+
+        public async Task<OrderServicesServiceModel> GetServiceOrdersByIdAsync(int id)
+        {
+            var serviceOrderById = await this.dbContext.ServiceOrders.To<OrderServicesServiceModel>()
+                .FirstOrDefaultAsync(serviceOrder => serviceOrder.Id == id);
+
+            return serviceOrderById;
         }
     }
 }
