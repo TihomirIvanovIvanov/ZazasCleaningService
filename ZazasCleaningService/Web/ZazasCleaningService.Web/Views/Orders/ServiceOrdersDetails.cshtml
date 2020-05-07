@@ -29,8 +29,8 @@
             </div>
             <div class="col-lg-6 offers-agiles-right mt-xl-4 mt-lg-0 mt-4">
                 <h4 class="mb-4 title-2-agiles">@Model.Name</h4>
-                <h4 class="mb-4 title-2-agiles">Begin: <span>@Model.From</span></h4>
-                <h4 class="mb-4 title-2-agiles">End: <span>@Model.To</span></h4>
+                <h4 class="mb-4 title-2-agiles">Start: <span>@Model.From.ToString("MM/dd/yyyy HH:mm")</span></h4>
+                <h4 class="mb-4 title-2-agiles">Stop: <span>@Model.To.ToString("MM/dd/yyyy HH:mm")</span></h4>
                 <p class="mt-4">@Model.Description</p>
             </div>
         </div>
