@@ -1,7 +1,7 @@
 ﻿@using ZazasCleaningService.Web.ViewModels.Products.Order
 @model List<ZazasCleaningService.Web.ViewModels.Products.Order.AllProductsOrdersViewModel>
 @{
-    ViewData["Title"] = "All";
+    ViewData["Title"] = "AllProductsOrders";
     var productsData = (IEnumerable<AllProductsOrdersViewModel>)ViewData["productsData"];
 }
 
@@ -35,7 +35,7 @@
                 @foreach (var product in productsData)
                 {
                     <h5>
-                        <a class="nav-link" href="/Orders/Products/@product.ProductOrderId">@product.ProductName</a>
+                        <a class="nav-link" href="/Orders/ProductOrdersDetails/@product.ProductOrderId">@product.ProductName</a>
                     </h5>
                 }
             </div>

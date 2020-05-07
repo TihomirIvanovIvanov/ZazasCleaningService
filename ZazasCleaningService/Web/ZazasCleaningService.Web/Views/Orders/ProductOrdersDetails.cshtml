@@ -1,0 +1,39 @@
+﻿@model ZazasCleaningService.Web.ViewModels.Products.Order.ProductOrdersDetailsViewModel
+@{
+    ViewData["Title"] = "ProductOrdersDetails";
+}
+
+<!-- banner 2 -->
+<div class="banner2-w3ls">
+
+</div>
+<!-- //banner 2 -->
+<!-- page details -->
+<div class="breadcrumb-agile">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/Orders/AllProductsOrders">Products Orders</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Details</li>
+        </ol>
+    </nav>
+</div>
+<!-- //page details -->
+<div class="offers-w3ls py-5">
+    <div class="container py-xl-5 py-lg-3">
+        <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Product Order Details</h2>
+        <div class="row">
+            <div class="col-lg-6 offers-agiles-left">
+                <img src="@Model.Picture" alt="" class="img-fluid">
+            </div>
+            <div class="col-lg-6 offers-agiles-right mt-xl-4 mt-lg-0 mt-4">
+                <h4 class="mb-4 title-2-agiles">@Model.Name - <span>x@(Model.Quantity)</span></h4>
+                <p class="mt-4">@Model.Description</p>
+                @*<div class="fa-3x">
+                    <i class="fas fa-sync fa-spin"></i>
+                </div>*@
+            </div>
+        </div>
+    </div>
+</div>

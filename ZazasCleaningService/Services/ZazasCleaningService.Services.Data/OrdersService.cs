@@ -1,5 +1,6 @@
 ﻿namespace ZazasCleaningService.Services.Data
 {
+    using Microsoft.EntityFrameworkCore;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -51,6 +52,14 @@
                 .To<OrderServicesServiceModel>();
 
             return serviceOrders;
+        }
+
+        public async Task<OrderProductsServiceModel> GetProductOrdersByIdAsync(int id)
+        {
+            var productOrderById = await this.dbContext.ProductOrders.To<OrderProductsServiceModel>()
+                .FirstOrDefaultAsync(productOrder => productOrder.Id == id);
+
+            return productOrderById;
         }
     }
 }

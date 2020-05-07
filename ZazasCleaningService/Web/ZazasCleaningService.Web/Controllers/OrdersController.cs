@@ -86,7 +86,7 @@
             return this.Redirect("/");
         }
 
-        public async Task<IActionResult> Products()
+        public async Task<IActionResult> AllProductsOrders()
         {
             var productsOrder = await this.ordersService.GetAllProductOrdersAsync()
                    .To<AllProductsOrdersViewModel>().ToListAsync();
@@ -100,7 +100,15 @@
             return this.View();
         }
 
-        public async Task<IActionResult> Services()
+        public async Task<IActionResult> ProductOrdersDetails(int id)
+        {
+            var productOrdersDetailsView = (await this.ordersService.GetProductOrdersByIdAsync(id))
+                .To<ProductOrdersDetailsViewModel>();
+
+            return this.View(productOrdersDetailsView);
+        }
+
+        public async Task<IActionResult> AllServicesOrders()
         {
             var servicesOrder = await this.ordersService.GetAllServiceOrdersAsync()
                    .To<AllServicesOrdersViewModel>().ToListAsync();
