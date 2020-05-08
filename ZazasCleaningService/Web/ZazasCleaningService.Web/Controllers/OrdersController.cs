@@ -56,7 +56,7 @@
 
             await this.ordersService.CreateProductOrderAsync(orderProductsServiceModel);
 
-            return this.Redirect("/");
+            return this.RedirectToAction(nameof(this.AllProductsOrders));
         }
 
         public async Task<IActionResult> CreateOrderServices(int id)
@@ -83,7 +83,7 @@
 
             await this.ordersService.CreateServiceOrderAsync(orderServicesServiceModel);
 
-            return this.Redirect("/");
+            return this.RedirectToAction(nameof(this.AllServicesOrders));
         }
 
         public async Task<IActionResult> AllProductsOrders()

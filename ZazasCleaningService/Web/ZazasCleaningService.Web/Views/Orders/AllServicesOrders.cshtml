@@ -32,6 +32,11 @@
                 <h4 class="mb-4 title-2-agiles">
                     My Services Orders
                 </h4>
+                @if (servicesData.Count() == 0)
+                {
+                    <h4 class="text-center text-primary">You have no ordered services in your cart.</h4>
+                    <hr class="hr-2 bg-primary">
+                }
                 @foreach (var service in servicesData)
                 {
                     <h5>

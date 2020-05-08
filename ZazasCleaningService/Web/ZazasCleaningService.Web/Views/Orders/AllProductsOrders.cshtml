@@ -32,11 +32,19 @@
                 <h4 class="mb-4 title-2-agiles">
                     My Products Orders
                 </h4>
-                @foreach (var product in productsData)
+                @if (productsData.Count() == 0)
                 {
-                    <h5>
-                        <a class="nav-link" href="/Orders/ProductOrdersDetails/@product.ProductOrderId">@product.ProductName</a>
-                    </h5>
+                    <h4 class="text-center text-primary">You have no ordered products in your cart.</h4>
+                    <hr class="hr-2 bg-primary">
+                }
+                else
+                {
+                    @foreach (var product in productsData)
+                    {
+                        <h5>
+                            <a class="nav-link" href="/Orders/ProductOrdersDetails/@product.ProductOrderId">@product.ProductName</a>
+                        </h5>
+                    }
                 }
             </div>
         </div>
