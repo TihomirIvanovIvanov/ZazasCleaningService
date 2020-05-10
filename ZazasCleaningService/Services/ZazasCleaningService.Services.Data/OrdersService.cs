@@ -22,6 +22,9 @@
         {
             var orderProducts = orderProductsServiceModel.To<ProductOrder>();
 
+            orderProducts.Status = await this.dbContext.OrderStatuses
+                .FirstOrDefaultAsync(orderStatus => orderStatus.Name == "Active");
+
             await this.dbContext.ProductOrders.AddAsync(orderProducts);
             await this.dbContext.SaveChangesAsync();
 

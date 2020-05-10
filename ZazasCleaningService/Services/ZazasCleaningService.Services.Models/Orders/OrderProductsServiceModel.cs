@@ -21,5 +21,9 @@
         public string IssuerId { get; set; }
 
         public ApplicationUserServiceModel Issuer { get; set; }
+
+        public int StatusId { get; set; }
+
+        public OrderStatusServiceModel Status { get; set; }
     }
 }

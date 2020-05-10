@@ -1,6 +1,7 @@
 ﻿namespace ZazasCleaningService.Web
 {
     using System.Globalization;
+    using System.Linq;
     using System.Reflection;
 
     using CloudinaryDotNet;
@@ -109,6 +110,21 @@
                 }
 
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+
+                if (!dbContext.OrderStatuses.Any())
+                {
+                    dbContext.OrderStatuses.Add(new OrderStatus
+                    {
+                        Name = "Active",
+                    });
+
+                    dbContext.OrderStatuses.Add(new OrderStatus
+                    {
+                        Name = "Completed",
+                    });
+
+                    dbContext.SaveChanges();
+                }
             }
 
             if (env.IsDevelopment())
