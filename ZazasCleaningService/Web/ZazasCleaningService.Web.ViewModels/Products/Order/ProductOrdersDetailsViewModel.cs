@@ -1,35 +1,21 @@
 ﻿namespace ZazasCleaningService.Web.ViewModels.Products.Order
 {
-    using AutoMapper;
 
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Orders;
 
-    public class ProductOrdersDetailsViewModel : IMapFrom<OrderProductsServiceModel>, IHaveCustomMappings
+    public class ProductOrdersDetailsViewModel : IMapFrom<OrderProductsServiceModel>
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string ProductName { get; set; }
 
-        public string Picture { get; set; }
+        public string ProductPicture { get; set; }
 
         public int Quantity { get; set; }
 
-        public string Description { get; set; }
+        public string ProductDescription { get; set; }
 
-        public void CreateMappings(IProfileExpression configuration)
-        {
-            configuration
-                .CreateMap<OrderProductsServiceModel, ProductOrdersDetailsViewModel>()
-                .ForMember(
-                    destionation => destionation.Name,
-                    options => options.MapFrom(origin => origin.Product.Name))
-                .ForMember(
-                    destionation => destionation.Picture,
-                    options => options.MapFrom(origin => origin.Product.Picture))
-                .ForMember(
-                    destionation => destionation.Description,
-                    options => options.MapFrom(origin => origin.Product.Description));
-        }
+        public string StatusName { get; set; }
     }
 }
