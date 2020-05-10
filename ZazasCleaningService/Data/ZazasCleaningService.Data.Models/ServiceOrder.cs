@@ -11,5 +11,9 @@
         public int ServiceId { get; set; }
 
         public Service Service { get; set; }
+
+        public int StatusId { get; set; }
+
+        public OrderStatus Status { get; set; }
     }
 }
