@@ -1,4 +1,4 @@
-﻿@model List<ZazasCleaningService.Web.ViewModels.Products.Order.Cart.ProductOrdersCartViewModel>
+﻿@model List<ZazasCleaningService.Web.ViewModels.Services.Order.Cart.ServiceOrdersCartViewModel>
 @{
     ViewData["Title"] = "ProductsCart";
 }
@@ -15,7 +15,7 @@
             <li class="breadcrumb-item">
                 <a href="/">Home</a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Products Orders</li>
+            <li class="breadcrumb-item active" aria-current="page">Services Orders</li>
         </ol>
     </nav>
 </div>
@@ -29,14 +29,15 @@ else
 {
     <div class="py-5">
         <div class="container py-xl-5 py-lg-3">
-            <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Products</h2>
+            <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Services</h2>
             <div id="orders" class="text-primary">
                 <div class="order-info row mt-4">
                     <h3 class="col-md-1 text-left">#</h3>
                     <h3 class="col-md-3 text-left">Image</h3>
-                    <h3 class="col-md-3 text-left">Product</h3>
-                    <h3 class="col-md-3 text-left">Description</h3>
-                    <h3 class="col-md-2 text-left">Quantity</h3>
+                    <h3 class="col-md-2 text-left">Service</h3>
+                    <h3 class="col-md-2 text-left">Description</h3>
+                    <h3 class="col-md-2 text-left">From</h3>
+                    <h3 class="col-md-2 text-left">To</h3>
                 </div>
                 <hr class="hr-2 bg-primary">
                 @for (int i = 0; i < Model.Count; i++)
@@ -44,11 +45,12 @@ else
                     <div class="order row">
                         <h5 class="col-md-1 text-left">@(i + 1)</h5>
                         <div class="col-md-3">
-                            <img class="img-thumbnail product-cart-image" src="@Model[i].ProductPicture" />
+                            <img class="img-thumbnail product-cart-image" src="@Model[i].ServicePicture" />
                         </div>
-                        <h5 class="col-md-3 text-left">@Model[i].ProductName</h5>
-                        <h5 class="col-md-3 text-left">@Model[i].ProductDescription</h5>
-                        <h5 class="col-md-2 text-left">x@(Model[i].Quantity)</h5>
+                        <h5 class="col-md-2 text-left">@Model[i].ServiceName</h5>
+                        <h5 class="col-md-2 text-left">@Model[i].ServiceDescription</h5>
+                        <h5 class="col-md-2 text-left">@Model[i].From.ToString("MM/dd/yyyy HH:mm")</h5>
+                        <h5 class="col-md-2 text-left">@Model[i].To.ToString("MM/dd/yyyy HH:mm")</h5>
                     </div>
                     @if (i != Model.Count)
                     {

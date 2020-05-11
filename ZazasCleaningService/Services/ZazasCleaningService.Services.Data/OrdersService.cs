@@ -57,6 +57,7 @@
         public IQueryable<OrderServicesServiceModel> GetAllServiceOrdersAsync()
         {
             var serviceOrders = this.dbContext.ServiceOrders
+                .Where(productOrders => productOrders.Status.Name == "Active")
                 .OrderBy(service => service.CreatedOn)
                 .To<OrderServicesServiceModel>();
 
