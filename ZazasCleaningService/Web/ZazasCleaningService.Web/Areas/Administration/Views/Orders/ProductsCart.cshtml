@@ -22,14 +22,25 @@
 <!-- //page details -->
 @if (Model.Count == 0)
 {
-    <h2 class="text-center text-primary">You have no orders in your cart.</h2>
-    <hr class="hr-2 bg-primary">
+    <div class="offers-w3ls py-5">
+        <div class="container py-xl-5 py-lg-3">
+            <div class="row">
+                <div class="col-lg-6 offers-agiles-right mt-xl-4 mt-lg-0 mt-4">
+                    <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">
+                        My Products Orders
+                    </h2>
+                    <h4 class="text-center text-primary">You have no ordered products in your cart.</h4>
+                    <hr class="hr-2 bg-primary">
+                </div>
+            </div>
+        </div>
+    </div>
 }
 else
 {
     <div class="py-5">
         <div class="container py-xl-5 py-lg-3">
-            <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Products</h2>
+            <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">My Products Orders</h2>
             <div id="orders" class="text-primary">
                 <div class="order-info row mt-4">
                     <h3 class="col-md-1 text-left">#</h3>

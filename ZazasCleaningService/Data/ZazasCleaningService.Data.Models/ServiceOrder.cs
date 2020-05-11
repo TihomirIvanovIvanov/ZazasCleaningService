@@ -10,10 +10,10 @@
 
         public int ServiceId { get; set; }
 
-        public Service Service { get; set; }
+        public virtual Service Service { get; set; }
 
         public int StatusId { get; set; }
 
-        public OrderStatus Status { get; set; }
+        public virtual OrderStatus Status { get; set; }
     }
 }

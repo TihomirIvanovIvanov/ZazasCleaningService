@@ -18,7 +18,7 @@ namespace ZazasCleaningService.Data.Models
 
             this.ProductOrders = new HashSet<ProductOrder>();
             this.ServiceOrders = new HashSet<ServiceOrder>();
-            this.Receipts = new HashSet<Receipt>();
+            this.ProductReceipts = new HashSet<ProductReceipt>();
         }
 
         // Audit info
@@ -41,6 +41,6 @@ namespace ZazasCleaningService.Data.Models
 
         public virtual ICollection<ServiceOrder> ServiceOrders { get; set; }
 
-        public virtual ICollection<Receipt> Receipts { get; set; }
+        public virtual ICollection<ProductReceipt> ProductReceipts { get; set; }
     }
 }

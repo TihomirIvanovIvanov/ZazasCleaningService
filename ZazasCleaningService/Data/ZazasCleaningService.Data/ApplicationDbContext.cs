@@ -33,11 +33,11 @@
 
         public DbSet<ProductType> ProductTypes { get; set; }
 
-        public DbSet<Receipt> Receipts { get; set; }
-
         public DbSet<Service> Services { get; set; }
 
         public DbSet<OrderStatus> OrderStatuses { get; set; }
+
+        public DbSet<ProductReceipt> ProductReceipts { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
