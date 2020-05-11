@@ -42,17 +42,11 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto text-center">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/">
-                                    Home
-                                    <span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/Products/All">Products</a>
-                            </li>
                             @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                             {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Products/All">Products</a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/Administration/Products/Create">Create Product</a>
                                 </li>
@@ -60,30 +54,51 @@
                                     <a class="nav-link" href="/Administration/Products/Type/Create">Create Product Type</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" href="/Services/All">Services</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="/Administration/Services/Create">Create Service</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Administration/Orders/ProductsCart">Product Orders</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Administration/Orders/ServicesCart">Service Orders</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Identity/Account/Logout">Logout</a>
+                                </li>
                             }
-                            <li class="nav-item">
-                                <a class="nav-link" href="/Services/All">Services</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/Orders/AllProductsOrders">Product Orders</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/Orders/AllServicesOrders">Service Orders</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/Offers/Index">Our Offers</a>
-                            </li>
-                            @if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                            else
                             {
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/">
+                                        Home
+                                        <span class="sr-only">(current)</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Products/All">Products</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Services/All">Services</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Orders/AllProductsOrders">Product Orders</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Orders/AllServicesOrders">Service Orders</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Offers/Index">Our Offers</a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/Contacts/Index">Contact Us</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Identity/Account/Logout">Logout</a>
+                                </li>
                             }
-                            <li class="nav-item">
-                                <a class="nav-link" href="/Identity/Account/Logout">Logout</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
