@@ -39,6 +39,8 @@
 
         public DbSet<ProductReceipt> ProductReceipts { get; set; }
 
+        public DbSet<ServiceReceipt> ServiceReceipts { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

@@ -11,5 +11,7 @@
         Task<ReceiptProductsServiceModel> GetProductByReceiptIdAsync(int id);
 
         Task<int> SetIssuedOnPictureToReceiptAsync(ReceiptProductsServiceModel receiptProductsServiceModel);
+
+        Task<int> CreateServiceReceiptAsync(string recipientId);
     }
 }

@@ -39,7 +39,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Complete()
+        public async Task<IActionResult> CompleteProducts()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
@@ -83,6 +83,16 @@
                 .ToListAsync();
 
             return this.View(serviceCartViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CompleteServices()
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var receiptId = await this.receiptsService.CreateServiceReceiptAsync(userId);
+
+            return this.Redirect($"/Administration/Orders/CompleteServiceCart/{receiptId}");
         }
     }
 }

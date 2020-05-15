@@ -44,6 +44,11 @@
             return productReceipt.Id;
         }
 
+        public Task<int> CreateServiceReceiptAsync(string recipientId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<ReceiptProductsServiceModel> GetProductByReceiptIdAsync(int id)
         {
             var productReceipt = await this.dbContext.ProductReceipts.To<ReceiptProductsServiceModel>()
