@@ -10,8 +10,12 @@
 
         Task<ReceiptProductsServiceModel> GetProductByReceiptIdAsync(int id);
 
-        Task<int> SetIssuedOnPictureToReceiptAsync(ReceiptProductsServiceModel receiptProductsServiceModel);
+        Task<int> SetIssuedOnPictureToProductReceiptsAsync(ReceiptProductsServiceModel receiptProductsServiceModel);
 
         Task<int> CreateServiceReceiptAsync(string recipientId);
+
+        Task<ReceiptServicesServiceModel> GetServiceByReceiptIdAsync(int id);
+
+        Task<int> SetIssuedOnPictureToServiceReceiptsAsync(ReceiptServicesServiceModel receiptServicesServiceModel);
     }
 }

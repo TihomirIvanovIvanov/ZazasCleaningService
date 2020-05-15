@@ -1,8 +1,6 @@
 ﻿namespace ZazasCleaningService.Services.Data
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
@@ -73,22 +71,48 @@
             return productReceipt;
         }
 
-        public async Task<int> SetIssuedOnPictureToReceiptAsync(ReceiptProductsServiceModel receiptProductsServiceModel)
+        public async Task<ReceiptServicesServiceModel> GetServiceByReceiptIdAsync(int id)
+        {
+            var serviceReceipt = await this.dbContext.ServiceReceipts.To<ReceiptServicesServiceModel>()
+                .FirstOrDefaultAsync(receipt => receipt.Id == id);
+
+            return serviceReceipt;
+        }
+
+        public async Task<int> SetIssuedOnPictureToProductReceiptsAsync(ReceiptProductsServiceModel serviceModel)
         {
             var productReceipt = await this.dbContext.ProductReceipts
-                .FirstOrDefaultAsync(productReceipt => productReceipt.Id == receiptProductsServiceModel.Id);
+                .FirstOrDefaultAsync(productReceipt => productReceipt.Id == serviceModel.Id);
 
             if (productReceipt == null)
             {
                 throw new ArgumentNullException(nameof(productReceipt));
             }
 
-            productReceipt.IssuedOnPicture = receiptProductsServiceModel.IssuedOnPicture;
+            productReceipt.IssuedOnPicture = serviceModel.IssuedOnPicture;
 
             this.dbContext.ProductReceipts.Update(productReceipt);
             await this.dbContext.SaveChangesAsync();
 
             return productReceipt.Id;
+        }
+
+        public async Task<int> SetIssuedOnPictureToServiceReceiptsAsync(ReceiptServicesServiceModel serviceModel)
+        {
+            var serviceReceipt = await this.dbContext.ServiceReceipts
+                .FirstOrDefaultAsync(serviceReceipt => serviceReceipt.Id == serviceModel.Id);
+
+            if (serviceReceipt == null)
+            {
+                throw new ArgumentNullException(nameof(serviceReceipt));
+            }
+
+            serviceReceipt.IssuedOnPicture = serviceModel.IssuedOnPicture;
+
+            this.dbContext.ServiceReceipts.Update(serviceReceipt);
+            await this.dbContext.SaveChangesAsync();
+
+            return serviceReceipt.Id;
         }
     }
 }

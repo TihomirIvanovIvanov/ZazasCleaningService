@@ -50,10 +50,10 @@
 
         public async Task<IActionResult> CompleteProductCart(int id)
         {
-            var view = (await this.receiptsService.GetProductByReceiptIdAsync(id))
+            var completeProductCartView = (await this.receiptsService.GetProductByReceiptIdAsync(id))
                 .To<ProductOrdersCartInputModel>();
 
-            return this.View(view);
+            return this.View(completeProductCartView);
         }
 
         [HttpPost]
@@ -71,7 +71,8 @@
                 AutoMapperConfig.MapperInstance.Map<ReceiptProductsServiceModel>(productOrdersCartInputModel);
             receiptProductsServiceModel.IssuedOnPicture = pictureUrl;
 
-            var productReceiptId = await this.receiptsService.SetIssuedOnPictureToReceiptAsync(receiptProductsServiceModel);
+            var productReceiptId = await this.receiptsService
+                .SetIssuedOnPictureToProductReceiptsAsync(receiptProductsServiceModel);
 
             return this.Redirect($"/Receipt/ProductDetails/{productReceiptId}");
         }
@@ -93,6 +94,35 @@
             var receiptId = await this.receiptsService.CreateServiceReceiptAsync(userId);
 
             return this.Redirect($"/Administration/Orders/CompleteServiceCart/{receiptId}");
+        }
+
+        public async Task<IActionResult> CompleteServiceCart(int id)
+        {
+            var completeServiceCartView = (await this.receiptsService.GetServiceByReceiptIdAsync(id))
+                .To<ServiceOrdersCartInputModel>();
+
+            return this.View(completeServiceCartView);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CompleteServiceCart(ServiceOrdersCartInputModel serviceOrdersCartInputModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(serviceOrdersCartInputModel);
+            }
+
+            var pictureUrl = await this.cloudinaryService
+                .UploadPictureAsync(serviceOrdersCartInputModel.IssuedOnPicture, "issuedOnPictureName");
+
+            var receiptServicesServiceModel =
+                AutoMapperConfig.MapperInstance.Map<ReceiptServicesServiceModel>(serviceOrdersCartInputModel);
+            receiptServicesServiceModel.IssuedOnPicture = pictureUrl;
+
+            var serviceReceiptId = await this.receiptsService
+                .SetIssuedOnPictureToServiceReceiptsAsync(receiptServicesServiceModel);
+
+            return this.Redirect($"/Receipt/ServiceDetails/{serviceReceiptId}");
         }
     }
 }
