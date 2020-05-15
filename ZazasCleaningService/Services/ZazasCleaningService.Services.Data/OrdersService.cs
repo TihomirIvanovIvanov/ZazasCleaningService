@@ -18,6 +18,21 @@
             this.dbContext = dbContext;
         }
 
+        public async Task<int> CompleteProductOrdersAsync(int productOrderId)
+        {
+            var productOrderFromDb = await this.dbContext.ProductOrders
+                .FirstOrDefaultAsync(order => order.Id == productOrderId);
+
+            // TODO: Validate that the requisted order is existent and with status "Active"
+            productOrderFromDb.Status = await this.dbContext.OrderStatuses
+                .FirstOrDefaultAsync(status => status.Name == "Completed");
+
+            this.dbContext.ProductOrders.Update(productOrderFromDb);
+            await this.dbContext.SaveChangesAsync();
+
+            return productOrderFromDb.Id;
+        }
+
         public async Task<int> CreateProductOrderAsync(OrderProductsServiceModel orderProductsServiceModel)
         {
             var orderProducts = orderProductsServiceModel.To<ProductOrder>();
@@ -78,6 +93,13 @@
                 .FirstOrDefaultAsync(serviceOrder => serviceOrder.Id == id);
 
             return serviceOrderById;
+        }
+
+        public async Task SetProductOrdersToReceiptAsync(ProductReceipt productReceipt)
+        {
+            productReceipt.ProductOrders = await this.dbContext.ProductOrders
+                .Where(order => order.Status.Name == "Active")
+                .ToListAsync();
         }
     }
 }

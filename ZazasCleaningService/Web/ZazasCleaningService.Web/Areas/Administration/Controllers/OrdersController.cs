@@ -1,11 +1,13 @@
 ﻿namespace ZazasCleaningService.Web.Areas.Administration.Controllers
 {
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using ZazasCleaningService.Services.Data;
     using ZazasCleaningService.Services.Mapping;
+    using ZazasCleaningService.Services.Models.Receipts;
     using ZazasCleaningService.Web.ViewModels.Products.Order.Cart;
     using ZazasCleaningService.Web.ViewModels.Services.Order.Cart;
 
@@ -13,9 +15,18 @@
     {
         private readonly IOrdersService ordersService;
 
-        public OrdersController(IOrdersService ordersService)
+        private readonly IReceiptsService receiptsService;
+
+        private readonly ICloudinaryService cloudinaryService;
+
+        public OrdersController(
+            IOrdersService ordersService,
+            IReceiptsService receiptsService,
+            ICloudinaryService cloudinaryService)
         {
             this.ordersService = ordersService;
+            this.receiptsService = receiptsService;
+            this.cloudinaryService = cloudinaryService;
         }
 
         public async Task<IActionResult> ProductsCart()
@@ -28,9 +39,41 @@
         }
 
         [HttpPost]
-        public IActionResult ProductsCartComplete()
+        public async Task<IActionResult> Complete()
         {
-            return this.View();
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var receiptId = await this.receiptsService.CreateProductReceiptAsync(userId);
+
+            return this.Redirect($"/Administration/Orders/CompleteProductCart/{receiptId}");
+        }
+
+        public async Task<IActionResult> CompleteProductCart(int id)
+        {
+            var view = (await this.receiptsService.GetProductByReceiptIdAsync(id))
+                .To<ProductOrdersCartInputModel>();
+
+            return this.View(view);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CompleteProductCart(ProductOrdersCartInputModel productOrdersCartInputModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(productOrdersCartInputModel);
+            }
+
+            var pictureUrl = await this.cloudinaryService
+                .UploadPictureAsync(productOrdersCartInputModel.IssuedOnPicture, "issuedOnPictureName");
+
+            var receiptProductsServiceModel =
+                AutoMapperConfig.MapperInstance.Map<ReceiptProductsServiceModel>(productOrdersCartInputModel);
+            receiptProductsServiceModel.IssuedOnPicture = pictureUrl;
+
+            var productReceiptId = await this.receiptsService.SetIssuedOnPictureToReceiptAsync(receiptProductsServiceModel);
+
+            return this.Redirect($"/Receipt/ProductDetails/{productReceiptId}");
         }
 
         public async Task<IActionResult> ServicesCart()

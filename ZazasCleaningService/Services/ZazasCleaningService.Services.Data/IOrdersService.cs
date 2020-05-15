@@ -3,7 +3,9 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using ZazasCleaningService.Data.Models;
     using ZazasCleaningService.Services.Models.Orders;
+    using ZazasCleaningService.Services.Models.Receipts;
 
     public interface IOrdersService
     {
@@ -22,5 +24,9 @@
         Task<OrderProductsServiceModel> GetProductOrdersByIdAsync(int id);
 
         Task<OrderServicesServiceModel> GetServiceOrdersByIdAsync(int id);
+
+        Task SetProductOrdersToReceiptAsync(ProductReceipt productReceipt);
+
+        Task<int> CompleteProductOrdersAsync(int productOrderId);
     }
 }
