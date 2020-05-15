@@ -20,25 +20,44 @@
     </nav>
 </div>
 <!-- //page details -->
-<div class="py-5">
-    <div class="container py-xl-5 py-lg-3">
-        <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Products</h2>
-        <ul class="demo">
-            @foreach (var product in Model)
-            {
-                <li>
-                    <div class="gallery-grid1">
-                        <img src="@product.Picture" alt=" " class="img-fluid" />
-                        <div class="p-mask">
-                            <h4>@product.Name</h4>
-                            <div class="w3l-button">
-                                <a href="/Products/Details/@product.Id"
-                                   class="btn btn-sm animated-button victoria-two text-white mt-4">Details</a>
+@if (Model.Count == 0)
+{
+    <div class="offers-w3ls py-5">
+        <div class="container py-xl-5 py-lg-3">
+            <div class="row">
+                <div class="col-lg-6 offers-agiles-right mt-xl-4 mt-lg-0 mt-4">
+                    <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">
+                        Products
+                    </h2>
+                    <h4 class="text-center text-primary">You have no products.</h4>
+                    <hr class="hr-2 bg-primary">
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="py-5">
+        <div class="container py-xl-5 py-lg-3">
+            <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Products</h2>
+            <ul class="demo">
+                @foreach (var product in Model)
+                {
+                    <li>
+                        <div class="gallery-grid1">
+                            <img src="@product.Picture" alt=" " class="img-fluid" />
+                            <div class="p-mask">
+                                <h4>@product.Name</h4>
+                                <div class="w3l-button">
+                                    <a href="/Products/Details/@product.Id"
+                                       class="btn btn-sm animated-button victoria-two text-white mt-4">Details</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-            }
-        </ul>
+                    </li>
+                }
+            </ul>
+        </div>
     </div>
-</div>
+}
