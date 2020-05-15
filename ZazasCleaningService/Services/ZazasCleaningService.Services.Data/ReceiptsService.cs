@@ -44,9 +44,25 @@
             return productReceipt.Id;
         }
 
-        public Task<int> CreateServiceReceiptAsync(string recipientId)
+        public async Task<int> CreateServiceReceiptAsync(string recipientId)
         {
-            throw new NotImplementedException();
+            var serviceReceipt = new ServiceReceipt
+            {
+                IssuedOnPicture = null,
+                RecipientId = recipientId,
+            };
+
+            await this.ordersService.SetServiceOrdersToReceiptAsync(serviceReceipt);
+
+            foreach (var serviceOrder in serviceReceipt.ServiceOrders)
+            {
+                await this.ordersService.CompleteServiceOrdersAsync(serviceOrder.Id);
+            }
+
+            this.dbContext.ServiceReceipts.Add(serviceReceipt);
+            await this.dbContext.SaveChangesAsync();
+
+            return serviceReceipt.Id;
         }
 
         public async Task<ReceiptProductsServiceModel> GetProductByReceiptIdAsync(int id)

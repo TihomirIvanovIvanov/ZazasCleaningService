@@ -33,6 +33,21 @@
             return productOrderFromDb.Id;
         }
 
+        public async Task<int> CompleteServiceOrdersAsync(int serviceOrderId)
+        {
+            var serviceOrderFromDb = await this.dbContext.ServiceOrders
+                .FirstOrDefaultAsync(order => order.Id == serviceOrderId);
+
+            // TODO: Validate that the requisted order is existent and with status "Active"
+            serviceOrderFromDb.Status = await this.dbContext.OrderStatuses
+                .FirstOrDefaultAsync(status => status.Name == "Completed");
+
+            this.dbContext.ServiceOrders.Update(serviceOrderFromDb);
+            await this.dbContext.SaveChangesAsync();
+
+            return serviceOrderFromDb.Id;
+        }
+
         public async Task<int> CreateProductOrderAsync(OrderProductsServiceModel orderProductsServiceModel)
         {
             var orderProducts = orderProductsServiceModel.To<ProductOrder>();
@@ -98,6 +113,13 @@
         public async Task SetProductOrdersToReceiptAsync(ProductReceipt productReceipt)
         {
             productReceipt.ProductOrders = await this.dbContext.ProductOrders
+                .Where(order => order.Status.Name == "Active")
+                .ToListAsync();
+        }
+
+        public async Task SetServiceOrdersToReceiptAsync(ServiceReceipt serviceReceipt)
+        {
+            serviceReceipt.ServiceOrders = await this.dbContext.ServiceOrders
                 .Where(order => order.Status.Name == "Active")
                 .ToListAsync();
         }
