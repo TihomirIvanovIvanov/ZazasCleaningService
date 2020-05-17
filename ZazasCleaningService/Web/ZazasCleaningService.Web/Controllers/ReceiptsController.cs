@@ -10,6 +10,7 @@
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Web.ViewModels.Receipts.Details;
     using ZazasCleaningService.Web.ViewModels.Receipts;
+    using ZazasCleaningService.Services.Models.Receipts;
 
     [Authorize]
     public class ReceiptsController : BaseController
@@ -38,10 +39,10 @@
 
         public async Task<IActionResult> ProductDetails(int id)
         {
-            var receiptProductsServiceModel = (await this.receiptsService.GetProductByReceiptIdAsync(id))
+            var productReceiptDetailsView = (await this.receiptsService.GetProductByReceiptIdAsync(id))
                 .To<ProductReceiptDetailsViewModel>();
 
-            return this.View(receiptProductsServiceModel);
+            return this.View(productReceiptDetailsView);
         }
 
         public async Task<IActionResult> ServiceReceipts()
@@ -54,6 +55,14 @@
                 .ToListAsync();
 
             return this.View(serviceReceiptsViews);
+        }
+
+        public async Task<IActionResult> ServiceDetails(int id)
+        {
+            var serviceReceiptDetailsView = (await this.receiptsService.GetServiceByReceiptIdAsync(id))
+                .To<ServiceReceiptDetailsViewModel>();
+
+            return this.View(serviceReceiptDetailsView);
         }
     }
 }
