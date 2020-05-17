@@ -9,7 +9,7 @@
     using ZazasCleaningService.Services.Data;
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Web.ViewModels.Receipts.Details;
-    using ZazasCleaningService.Web.ViewModels.Receipts.Profile;
+    using ZazasCleaningService.Web.ViewModels.Receipts;
 
     [Authorize]
     public class ReceiptsController : BaseController
@@ -24,16 +24,16 @@
             this.ordersService = ordersService;
         }
 
-        public async Task<IActionResult> ProductsProfile()
+        public async Task<IActionResult> ProductReceipts()
         {
             var recipientId = await this.ordersService.GetRecipientIdForOrdersAsync();
 
-            var receiptsViewModel = await this.receiptsService
+            var productReceiptsViews = await this.receiptsService
                 .GetAllProductReceiptsByRecipientId(recipientId)
-                .Select(receipt => receipt.To<ProductReceiptsProfileViewModel>())
+                .Select(receipt => receipt.To<ProductReceiptsViewModel>())
                 .ToListAsync();
 
-            return this.View(receiptsViewModel);
+            return this.View(productReceiptsViews);
         }
 
         public async Task<IActionResult> ProductDetails(int id)
@@ -42,6 +42,18 @@
                 .To<ProductReceiptDetailsViewModel>();
 
             return this.View(receiptProductsServiceModel);
+        }
+
+        public async Task<IActionResult> ServiceReceipts()
+        {
+            var recipientId = await this.ordersService.GetRecipientIdForOrdersAsync();
+
+            var serviceReceiptsViews = await this.receiptsService
+                .GetAllServiceReceiptsByRecipientId(recipientId)
+                .Select(receipt => receipt.To<ServiceReceiptsViewModel>())
+                .ToListAsync();
+
+            return this.View(serviceReceiptsViews);
         }
     }
 }
