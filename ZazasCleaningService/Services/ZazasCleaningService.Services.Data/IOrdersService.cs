@@ -31,5 +31,7 @@
         Task SetServiceOrdersToReceiptAsync(ServiceReceipt serviceReceipt);
 
         Task<int> CompleteServiceOrdersAsync(int serviceOrderId);
+
+        Task<string> GetRecipientIdForOrdersAsync();
     }
 }

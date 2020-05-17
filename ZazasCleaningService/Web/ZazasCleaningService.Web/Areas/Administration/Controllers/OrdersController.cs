@@ -41,9 +41,9 @@
         [HttpPost]
         public async Task<IActionResult> CompleteProducts()
         {
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var recipientId = await this.ordersService.GetRecipientIdForOrdersAsync();
 
-            var receiptId = await this.receiptsService.CreateProductReceiptAsync(userId);
+            var receiptId = await this.receiptsService.CreateProductReceiptAsync(recipientId);
 
             return this.Redirect($"/Administration/Orders/CompleteProductCart/{receiptId}");
         }
@@ -74,7 +74,7 @@
             var productReceiptId = await this.receiptsService
                 .SetIssuedOnPictureToProductReceiptsAsync(receiptProductsServiceModel);
 
-            return this.Redirect($"/Receipt/ProductDetails/{productReceiptId}");
+            return this.Redirect($"/Receipts/ProductDetails/{productReceiptId}");
         }
 
         public async Task<IActionResult> ServicesCart()
@@ -89,9 +89,9 @@
         [HttpPost]
         public async Task<IActionResult> CompleteServices()
         {
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var recipientId = await this.ordersService.GetRecipientIdForOrdersAsync();
 
-            var receiptId = await this.receiptsService.CreateServiceReceiptAsync(userId);
+            var receiptId = await this.receiptsService.CreateServiceReceiptAsync(recipientId);
 
             return this.Redirect($"/Administration/Orders/CompleteServiceCart/{receiptId}");
         }
@@ -122,7 +122,7 @@
             var serviceReceiptId = await this.receiptsService
                 .SetIssuedOnPictureToServiceReceiptsAsync(receiptServicesServiceModel);
 
-            return this.Redirect($"/Receipt/ServiceDetails/{serviceReceiptId}");
+            return this.Redirect($"/Receipts/ServiceDetails/{serviceReceiptId}");
         }
     }
 }

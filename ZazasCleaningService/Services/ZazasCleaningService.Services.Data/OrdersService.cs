@@ -94,6 +94,15 @@
             return serviceOrders;
         }
 
+        public async Task<string> GetRecipientIdForOrdersAsync()
+        {
+            var issuerId = await this.dbContext.ProductOrders
+                .Select(p => p.IssuerId)
+                .FirstOrDefaultAsync();
+
+            return issuerId;
+        }
+
         public async Task<OrderProductsServiceModel> GetProductOrdersByIdAsync(int id)
         {
             var productOrderById = await this.dbContext.ProductOrders.To<OrderProductsServiceModel>()
