@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ZazasCleaningService.Web.ViewModels.Receipts.Profile.ProductReceiptsProfileViewModel>
+@{
+    ViewData["Title"] = "ProductProfile";
+}
+
+<!-- banner 2 -->
+<div class="banner2-w3ls">
+
+</div>
+<!-- //banner 2 -->
+<!-- page details -->
+<div class="breadcrumb-agile">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/">Home</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">My Receipts</li>
+        </ol>
+    </nav>
+</div>
+<!-- //page details -->
+<h1 class="text-center text-primary">My Product Receipts</h1>
+<hr class="hr-2 bg-primary w-50">
+<table class="table table-hover">
+    <thead>
+        <tr class="row text-primary text-center font-weight-bold">
+            <th class="col-md-4 h3">Id</th>
+            <th class="col-md-2 h3">Issued On</th>
+            <th class="col-md-1 h3">Products</th>
+            <th class="col-md-3 h3">Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var receipt in Model)
+        {
+            <tr class="row text-primary text-center font-weight-bold">
+                <td class="col-md-4 h5">@receipt.Id</td>
+                <td class="col-md-2 h5">@receipt.CreatedOn.ToString("MM/dd/yyyy HH:mm")</td>
+                <td class="col-md-1 h5">@receipt.Products</td>
+                <td class="col-md-3">
+                    <a href="/Receipts/ProductDetails/@receipt.Id" class="btn btn-primary font-weight-bold">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

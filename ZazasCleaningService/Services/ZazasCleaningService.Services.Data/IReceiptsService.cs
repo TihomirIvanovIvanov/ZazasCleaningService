@@ -1,5 +1,6 @@
 ﻿namespace ZazasCleaningService.Services.Data
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using ZazasCleaningService.Services.Models.Receipts;
@@ -17,5 +18,7 @@
         Task<ReceiptServicesServiceModel> GetServiceByReceiptIdAsync(int id);
 
         Task<int> SetIssuedOnPictureToServiceReceiptsAsync(ReceiptServicesServiceModel receiptServicesServiceModel);
+
+        IQueryable<ReceiptProductsServiceModel> GetAllProductReceiptsByRecipientId(string recipientId);
     }
 }

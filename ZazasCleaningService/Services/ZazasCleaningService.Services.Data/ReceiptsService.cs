@@ -1,6 +1,7 @@
 ﻿namespace ZazasCleaningService.Services.Data
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
@@ -61,6 +62,15 @@
             await this.dbContext.SaveChangesAsync();
 
             return serviceReceipt.Id;
+        }
+
+        public IQueryable<ReceiptProductsServiceModel> GetAllProductReceiptsByRecipientId(string recipientId)
+        {
+            var receipts = this.dbContext.ProductReceipts
+                .Where(receipt => receipt.RecipientId == recipientId)
+                .To<ReceiptProductsServiceModel>();
+
+            return receipts;
         }
 
         public async Task<ReceiptProductsServiceModel> GetProductByReceiptIdAsync(int id)

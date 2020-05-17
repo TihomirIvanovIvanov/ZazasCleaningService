@@ -1,5 +1,6 @@
 ﻿namespace ZazasCleaningService.Services.Models.Receipts
 {
+    using System;
     using System.Collections.Generic;
 
     using ZazasCleaningService.Data.Models;
@@ -11,6 +12,8 @@
         public int Id { get; set; }
 
         public string IssuedOnPicture { get; set; }
+
+        public DateTime CreatedOn { get; set; }
 
         public List<OrderProductsServiceModel> OrderProducts { get; set; }
 
