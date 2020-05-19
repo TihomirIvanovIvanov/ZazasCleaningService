@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using ZazasCleaningService.Common;
     using ZazasCleaningService.Data.Models;
 
     public class StatusesSeeder : ISeeder
@@ -14,12 +15,12 @@
             {
                 dbContext.OrderStatuses.Add(new OrderStatus
                 {
-                    Name = "Active",
+                    Name = GlobalConstants.StatusActive,
                 });
 
                 dbContext.OrderStatuses.Add(new OrderStatus
                 {
-                    Name = "Completed",
+                    Name = GlobalConstants.StatusCompleted,
                 });
 
                 await dbContext.SaveChangesAsync();

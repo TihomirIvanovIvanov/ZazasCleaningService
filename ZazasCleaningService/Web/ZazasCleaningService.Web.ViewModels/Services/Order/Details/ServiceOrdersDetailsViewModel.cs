@@ -1,4 +1,4 @@
-﻿namespace ZazasCleaningService.Web.ViewModels.Services.Order
+﻿namespace ZazasCleaningService.Web.ViewModels.Services.Order.Details
 {
     using System;
 

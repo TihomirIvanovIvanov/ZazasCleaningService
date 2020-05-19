@@ -11,7 +11,9 @@
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Orders;
     using ZazasCleaningService.Web.ViewModels.Products.Order;
+    using ZazasCleaningService.Web.ViewModels.Products.Order.Details;
     using ZazasCleaningService.Web.ViewModels.Services.Order;
+    using ZazasCleaningService.Web.ViewModels.Services.Order.Details;
 
     [Authorize]
     public class OrdersController : BaseController

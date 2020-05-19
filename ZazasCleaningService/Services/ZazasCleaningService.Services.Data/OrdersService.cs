@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
+    using ZazasCleaningService.Common;
     using ZazasCleaningService.Data;
     using ZazasCleaningService.Data.Models;
     using ZazasCleaningService.Services.Mapping;
@@ -25,7 +26,7 @@
 
             // TODO: Validate that the requisted order is existent and with status "Active"
             productOrderFromDb.Status = await this.dbContext.OrderStatuses
-                .FirstOrDefaultAsync(status => status.Name == "Completed");
+                .FirstOrDefaultAsync(status => status.Name == GlobalConstants.StatusCompleted);
 
             this.dbContext.ProductOrders.Update(productOrderFromDb);
             await this.dbContext.SaveChangesAsync();
@@ -40,7 +41,7 @@
 
             // TODO: Validate that the requisted order is existent and with status "Active"
             serviceOrderFromDb.Status = await this.dbContext.OrderStatuses
-                .FirstOrDefaultAsync(status => status.Name == "Completed");
+                .FirstOrDefaultAsync(status => status.Name == GlobalConstants.StatusCompleted);
 
             this.dbContext.ServiceOrders.Update(serviceOrderFromDb);
             await this.dbContext.SaveChangesAsync();
@@ -53,7 +54,7 @@
             var orderProducts = orderProductsServiceModel.To<ProductOrder>();
 
             orderProducts.Status = await this.dbContext.OrderStatuses
-                .FirstOrDefaultAsync(orderStatus => orderStatus.Name == "Active");
+                .FirstOrDefaultAsync(orderStatus => orderStatus.Name == GlobalConstants.StatusActive);
 
             await this.dbContext.ProductOrders.AddAsync(orderProducts);
             await this.dbContext.SaveChangesAsync();
@@ -66,7 +67,7 @@
             var orderServices = orderServicesServiceModel.To<ServiceOrder>();
 
             orderServices.Status = await this.dbContext.OrderStatuses
-                .FirstOrDefaultAsync(orderStatus => orderStatus.Name == "Active");
+                .FirstOrDefaultAsync(orderStatus => orderStatus.Name == GlobalConstants.StatusActive);
 
             await this.dbContext.ServiceOrders.AddAsync(orderServices);
             await this.dbContext.SaveChangesAsync();
@@ -77,7 +78,7 @@
         public IQueryable<OrderProductsServiceModel> GetAllProductOrdersAsync()
         {
             var productOrders = this.dbContext.ProductOrders
-                .Where(productOrders => productOrders.Status.Name == "Active")
+                .Where(productOrders => productOrders.Status.Name == GlobalConstants.StatusActive)
                 .OrderBy(productOrders => productOrders.CreatedOn)
                 .To<OrderProductsServiceModel>();
 
@@ -87,7 +88,7 @@
         public IQueryable<OrderServicesServiceModel> GetAllServiceOrdersAsync()
         {
             var serviceOrders = this.dbContext.ServiceOrders
-                .Where(productOrders => productOrders.Status.Name == "Active")
+                .Where(productOrders => productOrders.Status.Name == GlobalConstants.StatusActive)
                 .OrderBy(service => service.CreatedOn)
                 .To<OrderServicesServiceModel>();
 
@@ -122,14 +123,14 @@
         public async Task SetProductOrdersToReceiptAsync(ProductReceipt productReceipt)
         {
             productReceipt.ProductOrders = await this.dbContext.ProductOrders
-                .Where(order => order.Status.Name == "Active")
+                .Where(order => order.Status.Name == GlobalConstants.StatusActive)
                 .ToListAsync();
         }
 
         public async Task SetServiceOrdersToReceiptAsync(ServiceReceipt serviceReceipt)
         {
             serviceReceipt.ServiceOrders = await this.dbContext.ServiceOrders
-                .Where(order => order.Status.Name == "Active")
+                .Where(order => order.Status.Name == GlobalConstants.StatusActive)
                 .ToListAsync();
         }
     }

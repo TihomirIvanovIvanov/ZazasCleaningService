@@ -1,4 +1,4 @@
-﻿namespace ZazasCleaningService.Web.ViewModels.Products.Order
+﻿namespace ZazasCleaningService.Web.ViewModels.Products.Order.Details
 {
 
     using ZazasCleaningService.Services.Mapping;
