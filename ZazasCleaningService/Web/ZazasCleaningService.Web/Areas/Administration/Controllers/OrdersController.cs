@@ -1,6 +1,5 @@
 ﻿namespace ZazasCleaningService.Web.Areas.Administration.Controllers
 {
-    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;

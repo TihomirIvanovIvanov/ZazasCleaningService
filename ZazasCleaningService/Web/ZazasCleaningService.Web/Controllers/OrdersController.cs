@@ -32,6 +32,7 @@
             this.servicesService = servicesService;
         }
 
+        [HttpGet("/Orders/Create/CreateOrderProducts/{id}")]
         public async Task<IActionResult> CreateOrderProducts(int id)
         {
             var productView = (await this.productsService.GetByIdAsync(id))
@@ -40,10 +41,10 @@
             this.ViewData["productId"] = productView.ProductId;
             this.ViewData["name"] = productView.Name;
 
-            return this.View(productView);
+            return this.View("Create/CreateOrderProducts", productView);
         }
 
-        [HttpPost]
+        [HttpPost("/Orders/Create/CreateOrderProducts/{id}")]
         public async Task<IActionResult> CreateOrderProducts(ProductsOrderInputModel productsOrderInputModel)
         {
             if (!this.ModelState.IsValid)
@@ -59,6 +60,7 @@
             return this.RedirectToAction(nameof(this.AllProductsOrders));
         }
 
+        [HttpGet("/Orders/Create/CreateOrderServices/{id}")]
         public async Task<IActionResult> CreateOrderServices(int id)
         {
             var serviceView = (await this.servicesService.GetByIdAsync(id))
@@ -67,10 +69,10 @@
             this.ViewData["serviceId"] = serviceView.ServiceId;
             this.ViewData["name"] = serviceView.Name;
 
-            return this.View(serviceView);
+            return this.View("Create/CreateOrderServices", serviceView);
         }
 
-        [HttpPost]
+        [HttpPost("/Orders/Create/CreateOrderServices/{id}")]
         public async Task<IActionResult> CreateOrderServices(int id, ServicesOrderInputModel servicesOrderInputModel)
         {
             if (!this.ModelState.IsValid)
@@ -86,6 +88,7 @@
             return this.RedirectToAction(nameof(this.AllServicesOrders));
         }
 
+        [HttpGet("/Orders/All/AllProductsOrders")]
         public async Task<IActionResult> AllProductsOrders()
         {
             var productsOrder = await this.ordersService.GetAllProductOrdersAsync()
@@ -97,17 +100,19 @@
                 ProductName = productOrder.ProductName,
             }).ToList();
 
-            return this.View();
+            return this.View("All/AllProductsOrders");
         }
 
+        [HttpGet("/Orders/Details/ProductOrdersDetails/{id}")]
         public async Task<IActionResult> ProductOrdersDetails(int id)
         {
             var productOrdersDetailsView = (await this.ordersService.GetProductOrdersByIdAsync(id))
                 .To<ProductOrdersDetailsViewModel>();
 
-            return this.View(productOrdersDetailsView);
+            return this.View("Details/ProductOrdersDetails", productOrdersDetailsView);
         }
 
+        [HttpGet("/Orders/All/AllServicesOrders")]
         public async Task<IActionResult> AllServicesOrders()
         {
             var servicesOrder = await this.ordersService.GetAllServiceOrdersAsync()
@@ -119,15 +124,16 @@
                 ServiceName = serviceOrder.ServiceName,
             }).ToList();
 
-            return this.View();
+            return this.View("All/AllServicesOrders");
         }
 
+        [HttpGet("/Orders/Details/ServiceOrdersDetails/{id}")]
         public async Task<IActionResult> ServiceOrdersDetails(int id)
         {
             var serviceOrdersDetailsView = (await this.ordersService.GetServiceOrdersByIdAsync(id))
                 .To<ServiceOrdersDetailsViewModel>();
 
-            return this.View(serviceOrdersDetailsView);
+            return this.View("Details/ServiceOrdersDetails", serviceOrdersDetailsView);
         }
     }
 }
