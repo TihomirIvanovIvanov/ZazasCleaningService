@@ -21,7 +21,6 @@
     <None Include="wwwroot\js\bootstrap.js" />
     <None Include="wwwroot\js\cleaning.js" />
     <None Include="wwwroot\js\easing.js" />
-    <None Include="wwwroot\js\jquery-2.2.3.min.js" />
     <None Include="wwwroot\js\jquery.picEyes.js" />
     <None Include="wwwroot\js\move-top.js" />
     <None Include="wwwroot\js\progresscircle.js" />
@@ -38,7 +37,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.435" />
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.0.96" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.2" />

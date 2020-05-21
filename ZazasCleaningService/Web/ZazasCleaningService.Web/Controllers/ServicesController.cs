@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using ZazasCleaningService.Services.Data;
@@ -9,6 +10,7 @@
     using ZazasCleaningService.Web.ViewModels.Services.All;
     using ZazasCleaningService.Web.ViewModels.Services.Details;
 
+    [Authorize]
     public class ServicesController : BaseController
     {
         private readonly IServicesService servicesService;

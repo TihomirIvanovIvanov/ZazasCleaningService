@@ -64,6 +64,10 @@
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()); // CSRF
             });
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-CSRF-TOKEN";
+            });
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -83,6 +87,7 @@
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<IServicesService, ServicesService>();
             services.AddTransient<IReceiptsService, ReceiptsService>();
+            services.AddTransient<IVotesService, VotesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
