@@ -33,6 +33,12 @@
 
             var count = this.productsService.GetCountProducts();
             var productsPerPage = (int)Math.Ceiling((double)count / ItemsPerPage);
+
+            if (productsPerPage == 0)
+            {
+                productsPerPage = 1;
+            }
+
             allProductsView.Select(product => product.PagesCount == productsPerPage && product.CurrentPage == page);
 
             return this.View(await allProductsView.ToListAsync());

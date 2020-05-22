@@ -32,6 +32,12 @@
 
             var count = this.servicesService.GetCountServices();
             var servicesPerPage = (int)Math.Ceiling((double)count / ItemsPerPage);
+
+            if (servicesPerPage == 0)
+            {
+                servicesPerPage = 1;
+            }
+
             allServicesView.Select(service => service.PagesCount == servicesPerPage && service.CurrentPage == page);
 
             return this.View(await allServicesView.ToListAsync());
