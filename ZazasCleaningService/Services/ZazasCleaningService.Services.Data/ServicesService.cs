@@ -75,11 +75,18 @@
             return service.Id;
         }
 
-        public IQueryable<ServicesServiceModel> GetAllServicesAsync()
+        public IQueryable<ServicesServiceModel> GetAllServicesAsync(int? take = null, int skip = 0)
         {
-            var allServices = this.dbContext.Services.To<ServicesServiceModel>();
+            var allServices = this.dbContext.Services
+                .OrderByDescending(service => service.CreatedOn)
+                .Skip(skip);
 
-            return allServices;
+            if (take.HasValue)
+            {
+                allServices = allServices.Take(take.Value);
+            }
+
+            return allServices.To<ServicesServiceModel>();
         }
 
         public async Task<ServicesServiceModel> GetByIdAsync(int id)
@@ -88,6 +95,13 @@
                 .FirstOrDefaultAsync(service => service.Id == id);
 
             return service;
+        }
+
+        public int GetCountServices()
+        {
+            var services = this.dbContext.Services.Count();
+
+            return services;
         }
     }
 }

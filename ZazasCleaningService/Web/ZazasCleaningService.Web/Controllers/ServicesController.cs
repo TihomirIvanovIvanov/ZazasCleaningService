@@ -1,5 +1,7 @@
 ﻿namespace ZazasCleaningService.Web.Controllers
 {
+    using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -13,6 +15,8 @@
     [Authorize]
     public class ServicesController : BaseController
     {
+        private const int ItemsPerPage = 4;
+
         private readonly IServicesService servicesService;
 
         public ServicesController(IServicesService servicesService)
@@ -20,12 +24,17 @@
             this.servicesService = servicesService;
         }
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int page = 1)
         {
-            var allServices = await this.servicesService.GetAllServicesAsync()
-                .To<ServicesAllViewModel>().ToListAsync();
+            var allServicesView = this.servicesService
+                .GetAllServicesAsync(ItemsPerPage, (page - 1) * ItemsPerPage)
+                .To<ServicesAllViewModel>();
 
-            return this.View(allServices);
+            var count = this.servicesService.GetCountServices();
+            var servicesPerPage = (int)Math.Ceiling((double)count / ItemsPerPage);
+            allServicesView.Select(service => service.PagesCount == servicesPerPage && service.CurrentPage == page);
+
+            return this.View(await allServicesView.ToListAsync());
         }
 
         public async Task<IActionResult> Details(int id)

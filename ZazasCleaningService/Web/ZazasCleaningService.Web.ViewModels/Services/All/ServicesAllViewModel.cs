@@ -10,5 +10,9 @@
         public string Name { get; set; }
 
         public string Picture { get; set; }
+
+        public int PagesCount { get; set; }
+
+        public int CurrentPage { get; set; }
     }
 }
