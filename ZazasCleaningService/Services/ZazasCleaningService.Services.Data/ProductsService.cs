@@ -106,11 +106,18 @@
             return product.Id;
         }
 
-        public IQueryable<T> GetAllProductsAsync<T>()
+        public IQueryable<ProductsServiceModel> GetAllProductsAsync(int? take = null, int skip = 0)
         {
-            var allProducts = this.dbContext.Products.To<ProductsServiceModel>();
+            var allProducts = this.dbContext.Products
+                .OrderByDescending(product => product.CreatedOn)
+                .Skip(skip);
 
-            return allProducts.To<T>();
+            if (take.HasValue)
+            {
+                allProducts = allProducts.Take(take.Value);
+            }
+
+            return allProducts.To<ProductsServiceModel>();
         }
 
         public IQueryable<ProductTypesServiceModel> GetAllProductTypesAsync()
@@ -126,6 +133,13 @@
                 .FirstOrDefaultAsync(product => product.Id == id);
 
             return product;
+        }
+
+        public int GetCountProducts()
+        {
+            var products = this.dbContext.Products.Count();
+
+            return products;
         }
     }
 }

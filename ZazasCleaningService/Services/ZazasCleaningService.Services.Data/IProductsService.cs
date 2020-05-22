@@ -13,7 +13,9 @@
 
         Task<int> CreateProductAsync(ProductsServiceModel productsServiceModel);
 
-        IQueryable<T> GetAllProductsAsync<T>();
+        IQueryable<ProductsServiceModel> GetAllProductsAsync(int? take = null, int skip = 0);
+
+        int GetCountProducts();
 
         Task<ProductsServiceModel> GetByIdAsync(int id);
 
