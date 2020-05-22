@@ -9,7 +9,6 @@
     using Microsoft.EntityFrameworkCore;
     using ZazasCleaningService.Services.Data;
     using ZazasCleaningService.Services.Mapping;
-    using ZazasCleaningService.Services.Models.Products;
     using ZazasCleaningService.Web.ViewModels.Products.All;
     using ZazasCleaningService.Web.ViewModels.Products.Details;
 

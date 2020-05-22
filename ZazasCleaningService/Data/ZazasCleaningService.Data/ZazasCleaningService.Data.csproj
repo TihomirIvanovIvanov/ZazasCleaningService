@@ -17,6 +17,8 @@
     <Compile Remove="Migrations\20200401163400_add.Designer.cs" />
     <Compile Remove="Migrations\20200502135603_NewMigration.cs" />
     <Compile Remove="Migrations\20200502135603_NewMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200522125558_AddCommentsToUser.cs" />
+    <Compile Remove="Migrations\20200522125558_AddCommentsToUser.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

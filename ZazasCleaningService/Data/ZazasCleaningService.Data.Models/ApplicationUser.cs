@@ -19,6 +19,7 @@ namespace ZazasCleaningService.Data.Models
             this.ProductOrders = new HashSet<ProductOrder>();
             this.ServiceOrders = new HashSet<ServiceOrder>();
             this.ProductReceipts = new HashSet<ProductReceipt>();
+            this.Comments = new HashSet<Comment>();
         }
 
         // Audit info
@@ -42,5 +43,7 @@ namespace ZazasCleaningService.Data.Models
         public virtual ICollection<ServiceOrder> ServiceOrders { get; set; }
 
         public virtual ICollection<ProductReceipt> ProductReceipts { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

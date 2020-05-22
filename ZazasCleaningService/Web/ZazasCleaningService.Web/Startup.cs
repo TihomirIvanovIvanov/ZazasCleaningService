@@ -1,6 +1,5 @@
 ﻿namespace ZazasCleaningService.Web
 {
-    using System.Linq;
     using System.Reflection;
 
     using CloudinaryDotNet;
@@ -88,6 +87,7 @@
             services.AddTransient<IServicesService, ServicesService>();
             services.AddTransient<IReceiptsService, ReceiptsService>();
             services.AddTransient<IVotesService, VotesService>();
+            services.AddTransient<ICommentsService, CommentsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
