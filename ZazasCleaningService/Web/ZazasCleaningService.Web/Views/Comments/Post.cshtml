@@ -1,6 +1,8 @@
-﻿@model ZazasCleaningService.Web.ViewModels.Comments.CreateCommentsInputModel
+﻿@using ZazasCleaningService.Web.ViewModels.Comments
+@model List<CommentsViewModel>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Posts";
+    //var comments = (IEnumerable<CommentParentsViewModel>)this.ViewData["comments"];
 }
 
 <!-- banner 2 -->
@@ -36,43 +38,67 @@
                         <div class="comment-top">
                             <h3>Comments</h3>
                             <hr />
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-0">Joseph Goh</h5>
-                                    <p>
-                                        FIRST comment content
-                                    </p>
-                                    <div class="media mt-3">
-                                        <a class="d-flex pr-3" href="#">
-                                        </a>
-                                        <div class="media-body">
-                                            <h5 class="mt-0">Richard Spark</h5>
-                                            <p>
-                                                FIRST comment REPLY content
-                                            </p>
-                                            <hr />
+                            @*@foreach (var comment in Model.ToList())
+                            {
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h5 class="mt-0">@comment.Parents.Select(p => p.UserUserName)</h5>
+                                        <div class="sub-meta">
+                                            <span>
+                                                <i class="far fa-clock">
+                                                    @comment.Parents.Select(p => p.CreatedOn.ToString("MM/dd/yyyy HH:mm"))
+                                                </i>
+                                            </span>
+                                        </div>
+                                        <p>@comment.Parents.Select(p => p.Content)</p>
+                                        <div class="media mt-3">
+                                            <a class="d-flex pr-3" href="#">
+                                            </a>
+                                            <div class="media-body">
+                                                <h5 class="mt-0">@comment.Parents.Select(p => p.UserUserName)</h5>
+                                                <div class="sub-meta">
+                                                    <span>
+                                                        <i class="far fa-clock">
+                                                            @comment.Parents.Select(p => p.CreatedOn.ToString("MM/dd/yyyy HH:mm"))
+                                                        </i>
+                                                    </span>
+                                                </div>
+                                                <p>@comment.Parents.Select(p => p.Content)</p>
+                                                <hr />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            }*@
                         </div>
-                        <div class="comment-top">
-                            <h4>Leave a Comment</h4>
-                            <div class="comment-bottom">
-                                <form method="post">
-                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    <div class="form-group">
-                                        <textarea asp-for="Content"
-                                                  name="Content"
-                                                  class="form-control"
-                                                  placeholder="Message..."
-                                                  required=""></textarea>
-                                        <span asp-validation-for="Content" class="text-danger"></span>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary submit">Comment</button>
-                                </form>
+                        <button type="button" 
+                                class="btn btn-primary submit float-right" 
+                                onclick="showAddCommentForm(0)">
+                                Comment
+                        </button>
+                    </div>
+                    <hr />
+                    <div>
+                        <form asp-controller="Comments"
+                              asp-action="Create"
+                              method="post"
+                              id="AddCommentForm"
+                              style="display: none">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" name="Id" value="0@*@Model.Select(c => (int)c.Id)*@" />
+                            <input type="hidden" name="ParentId" value="0" />
+                            <div>
+                                <label for="Content"></label>
+                                <textarea name="Content" 
+                                          id="Content" 
+                                          class="form-control" 
+                                          placeholder="Message..."></textarea>
                             </div>
-                        </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary submit float-right">Add Comment</button>
+                                <hr />
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -80,6 +106,11 @@
     </div>
 </div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+@section Scripts { 
+    <script>
+        function showAddCommentForm(parentId) {
+            $("AddCommentForm input[name='ParentId']").val(parentId);
+            $("#AddCommentForm").toggle();
+        }
+    </script>
 }

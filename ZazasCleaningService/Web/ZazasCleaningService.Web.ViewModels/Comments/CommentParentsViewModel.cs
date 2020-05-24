@@ -1,15 +1,20 @@
 ﻿namespace ZazasCleaningService.Web.ViewModels.Comments
 {
-    using System.ComponentModel.DataAnnotations;
+    using System;
 
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Comments;
 
-    public class CreateCommentsInputModel : IMapTo<CommentsServiceModel>, IMapFrom<CommentsServiceModel>
+    public class CommentParentsViewModel : IMapFrom<CommentsServiceModel>
     {
         public int Id { get; set; }
 
-        [Required]
+        public int? ParentId { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
         public string Content { get; set; }
+
+        public string UserUserName { get; set; }
     }
 }

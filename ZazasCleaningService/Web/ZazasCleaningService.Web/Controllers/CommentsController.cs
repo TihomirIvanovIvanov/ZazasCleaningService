@@ -1,9 +1,11 @@
 ﻿namespace ZazasCleaningService.Web.Controllers
 {
+    using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
     using ZazasCleaningService.Services.Data;
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Comments;
@@ -18,13 +20,17 @@
             this.commentsService = commentsService;
         }
 
-        public IActionResult Post()
+        public async Task<IActionResult> Post()
         {
-            return this.View();
+            var commentsViewModel = await this.commentsService.GetAllCommentsAsync()
+                .To<CommentsViewModel>()
+                .ToListAsync();
+
+            return this.View(commentsViewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(CreateCommentsInputModel createCommentsInputModel)
+        public async Task<IActionResult> Create(CreateCommentsInputModel createCommentsInputModel)
         {
             if (!this.ModelState.IsValid)
             {

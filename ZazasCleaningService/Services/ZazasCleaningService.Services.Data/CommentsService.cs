@@ -1,5 +1,6 @@
 ﻿namespace ZazasCleaningService.Services.Data
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using ZazasCleaningService.Data;
@@ -25,6 +26,13 @@
             await this.dbContext.SaveChangesAsync();
 
             return comments.Id;
+        }
+
+        public IQueryable<CommentsServiceModel> GetAllCommentsAsync()
+        {
+            var comments = this.dbContext.Comments.To<CommentsServiceModel>();
+
+            return comments;
         }
     }
 }

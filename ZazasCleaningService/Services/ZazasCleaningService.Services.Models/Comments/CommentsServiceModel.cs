@@ -1,5 +1,7 @@
 ﻿namespace ZazasCleaningService.Services.Models.Comments
 {
+    using System;
+
     using ZazasCleaningService.Data.Models;
     using ZazasCleaningService.Services.Mapping;
 
@@ -8,6 +10,8 @@
         public int Id { get; set; }
 
         public string Content { get; set; }
+
+        public DateTime CreatedOn { get; set; }
 
         public int? ParentId { get; set; }
 
