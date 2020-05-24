@@ -73,6 +73,14 @@
 
             services.AddSingleton(this.configuration);
 
+            // Authentification
+            services.AddAuthentication()
+            .AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
+                facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
+            });
+
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
