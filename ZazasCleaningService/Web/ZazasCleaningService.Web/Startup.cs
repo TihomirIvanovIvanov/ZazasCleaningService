@@ -84,6 +84,11 @@
             {
                 googleOptions.ClientId = this.configuration["Authentication:Google:ClientId"];
                 googleOptions.ClientSecret = this.configuration["Authentication:Google:ClientSecret"];
+            })
+            .AddMicrosoftAccount(microsoftOptions =>
+            {
+                microsoftOptions.ClientId = this.configuration["Authentication:Microsoft:AppId"];
+                microsoftOptions.ClientSecret = this.configuration["Authentication:Microsoft:AppSecret"];
             });
 
             // Data repositories
