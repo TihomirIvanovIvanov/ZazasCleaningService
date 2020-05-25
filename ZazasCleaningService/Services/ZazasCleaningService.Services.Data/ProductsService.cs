@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
+    using ZazasCleaningService.Common;
     using ZazasCleaningService.Data;
     using ZazasCleaningService.Data.Models;
     using ZazasCleaningService.Services.Mapping;
@@ -21,13 +22,7 @@
 
         public async Task<int> CreateProductAsync(ProductsServiceModel productsServiceModel)
         {
-            var productTypesNameFromDb = await this.dbContext.ProductTypes
-                .FirstOrDefaultAsync(producType => producType.Name == productsServiceModel.ProductType.Name);
-
-            if (productTypesNameFromDb == null)
-            {
-                throw new ArgumentNullException(nameof(productTypesNameFromDb));
-            }
+            var productTypesNameFromDb = await this.GetProductTypeByName(productsServiceModel);
 
             var product = AutoMapperConfig.MapperInstance.Map<Product>(productsServiceModel);
             product.ProductType = productTypesNameFromDb;
@@ -53,12 +48,7 @@
 
         public async Task<bool> DeleteByIdAsync(int id)
         {
-            var product = await this.dbContext.Products.FirstOrDefaultAsync(product => product.Id == id);
-
-            if (product == null)
-            {
-                throw new ArgumentNullException(nameof(product));
-            }
+            var product = (await this.GetByIdAsync(id)).To<Product>();
 
             // TODO: Did i need GetProductOrderByProductId into orderService?
             var productOrder = this.dbContext.ProductOrders
@@ -80,20 +70,9 @@
 
         public async Task<int> EditAsync(int id, ProductsServiceModel productsServiceModel)
         {
-            var productTypeNameFromDb = await this.dbContext.ProductTypes
-                .FirstOrDefaultAsync(productType => productType.Name == productsServiceModel.ProductType.Name);
-
-            if (productTypeNameFromDb == null)
-            {
-                throw new ArgumentNullException(nameof(productTypeNameFromDb));
-            }
-
-            var product = await this.dbContext.Products.FirstOrDefaultAsync(product => product.Id == id);
-
-            if (product == null)
-            {
-                throw new ArgumentNullException(nameof(product));
-            }
+            // TODO: да връщам ли директно продукт на GetByIdAsync както при GetProductTypeByName
+            var productTypeNameFromDb = await this.GetProductTypeByName(productsServiceModel);
+            var product = (await this.GetByIdAsync(id)).To<Product>();
 
             product.Name = productsServiceModel.Name;
             product.Picture = productsServiceModel.Picture;
@@ -112,6 +91,11 @@
                 .OrderByDescending(product => product.CreatedOn)
                 .Skip(skip);
 
+            if (allProducts == null)
+            {
+                throw new ArgumentNullException(nameof(allProducts));
+            }
+
             if (take.HasValue)
             {
                 allProducts = allProducts.Take(take.Value);
@@ -124,6 +108,11 @@
         {
             var productTypes = this.dbContext.ProductTypes.To<ProductTypesServiceModel>();
 
+            if (productTypes == null)
+            {
+                throw new ArgumentNullException(nameof(productTypes));
+            }
+
             return productTypes;
         }
 
@@ -132,6 +121,11 @@
             var product = await this.dbContext.Products.To<ProductsServiceModel>()
                 .FirstOrDefaultAsync(product => product.Id == id);
 
+            if (product == null)
+            {
+                throw new ArgumentNullException(nameof(product));
+            }
+
             return product;
         }
 
@@ -139,7 +133,25 @@
         {
             var products = this.dbContext.Products.Count();
 
+            if (products == 0)
+            {
+                throw new ArgumentNullException(nameof(products));
+            }
+
             return products;
+        }
+
+        private async Task<ProductType> GetProductTypeByName(ProductsServiceModel productsServiceModel)
+        {
+            var productTypeNameFromDb = await this.dbContext.ProductTypes
+             .FirstOrDefaultAsync(productType => productType.Name == productsServiceModel.ProductType.Name);
+
+            if (productTypeNameFromDb == null)
+            {
+                throw new ArgumentNullException(nameof(productTypeNameFromDb));
+            }
+
+            return productTypeNameFromDb;
         }
     }
 }
