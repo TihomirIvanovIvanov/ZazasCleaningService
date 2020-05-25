@@ -48,7 +48,7 @@
 
         public async Task<IActionResult> Edit(int id)
         {
-            var servicesEditInputModel = (await this.servicesService.GetByIdAsync(id)).To<ServicesEditInputModel>();
+            var servicesEditInputModel = (await this.servicesService.GetServiceByIdAsync(id)).To<ServicesEditInputModel>();
 
             if (servicesEditInputModel == null)
             {
@@ -79,7 +79,7 @@
 
         public async Task<IActionResult> Delete(int id)
         {
-            var servicesDeleteViewModel = (await this.servicesService.GetByIdAsync(id)).To<ServicesDeleteViewModel>();
+            var servicesDeleteViewModel = (await this.servicesService.GetServiceByIdAsync(id)).To<ServicesDeleteViewModel>();
 
             if (servicesDeleteViewModel == null)
             {

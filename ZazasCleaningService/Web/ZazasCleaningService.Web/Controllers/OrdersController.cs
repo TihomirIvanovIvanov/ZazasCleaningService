@@ -37,7 +37,7 @@
         [HttpGet("/Orders/Create/CreateOrderProducts/{id}")]
         public async Task<IActionResult> CreateOrderProducts(int id)
         {
-            var productView = (await this.productsService.GetByIdAsync(id))
+            var productView = (await this.productsService.GetProductByIdAsync(id))
                 .To<ProductsOrderInputModel>();
 
             this.ViewData["productId"] = productView.ProductId;
@@ -65,7 +65,7 @@
         [HttpGet("/Orders/Create/CreateOrderServices/{id}")]
         public async Task<IActionResult> CreateOrderServices(int id)
         {
-            var serviceView = (await this.servicesService.GetByIdAsync(id))
+            var serviceView = (await this.servicesService.GetServiceByIdAsync(id))
                 .To<ServicesOrderInputModel>();
 
             this.ViewData["serviceId"] = serviceView.ServiceId;

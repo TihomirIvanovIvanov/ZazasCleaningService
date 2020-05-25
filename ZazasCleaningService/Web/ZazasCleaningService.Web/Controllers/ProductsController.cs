@@ -45,7 +45,7 @@
 
         public async Task<IActionResult> Details(int id)
         {
-            var productDetailsViewModel = (await this.productsService.GetByIdAsync(id)).To<ProductsDetailsViewModel>();
+            var productDetailsViewModel = (await this.productsService.GetProductByIdAsync(id)).To<ProductsDetailsViewModel>();
 
             return this.View(productDetailsViewModel);
         }

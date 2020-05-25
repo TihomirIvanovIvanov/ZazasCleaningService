@@ -13,7 +13,7 @@
 
         int GetCountServices();
 
-        Task<ServicesServiceModel> GetByIdAsync(int id);
+        Task<ServicesServiceModel> GetServiceByIdAsync(int id);
 
         Task<int> EditAsync(int id, ServicesServiceModel servicesServiceModel);
 

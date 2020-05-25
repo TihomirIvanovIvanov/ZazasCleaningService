@@ -31,7 +31,7 @@
 
         public async Task<bool> DeleteByIdAsync(int id)
         {
-            var service = await this.dbContext.Services.FirstOrDefaultAsync(service => service.Id == id);
+            var service = await this.GetServiceById(id);
 
             if (service == null)
             {
@@ -42,23 +42,23 @@
             var serviceOrder = this.dbContext.ServiceOrders
                 .FirstOrDefault(s => s.ServiceId == service.Id);
 
-            if (serviceOrder == null)
+            if (serviceOrder != null)
             {
-                throw new ArgumentNullException(nameof(serviceOrder));
+                this.dbContext.ServiceOrders.Remove(serviceOrder);
             }
-
-            this.dbContext.ServiceOrders.Remove(serviceOrder);
 
             service.DeletedOn = DateTime.UtcNow;
             service.IsDeleted = true;
 
+            this.dbContext.Services.Update(service);
             await this.dbContext.SaveChangesAsync();
+
             return service.IsDeleted;
         }
 
         public async Task<int> EditAsync(int id, ServicesServiceModel servicesServiceModel)
         {
-            var service = await this.dbContext.Services.FirstOrDefaultAsync(service => service.Id == id);
+            var service = await this.GetServiceById(id);
 
             if (service == null)
             {
@@ -89,7 +89,7 @@
             return allServices.To<ServicesServiceModel>();
         }
 
-        public async Task<ServicesServiceModel> GetByIdAsync(int id)
+        public async Task<ServicesServiceModel> GetServiceByIdAsync(int id)
         {
             var service = await this.dbContext.Services.To<ServicesServiceModel>()
                 .FirstOrDefaultAsync(service => service.Id == id);
@@ -102,6 +102,14 @@
             var services = this.dbContext.Services.Count();
 
             return services;
+        }
+
+        private async Task<Service> GetServiceById(int id)
+        {
+            var service = await this.dbContext.Services
+                .FirstOrDefaultAsync(service => service.Id == id);
+
+            return service;
         }
     }
 }

@@ -17,7 +17,7 @@
 
         int GetCountProducts();
 
-        Task<ProductsServiceModel> GetByIdAsync(int id);
+        Task<ProductsServiceModel> GetProductByIdAsync(int id);
 
         Task<int> EditAsync(int id, ProductsServiceModel productsServiceModel);
 

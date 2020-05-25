@@ -76,7 +76,7 @@
 
         public async Task<IActionResult> Edit(int id)
         {
-            var productsEditInputModel = (await this.productsService.GetByIdAsync(id)).To<ProductsEditInputModel>();
+            var productsEditInputModel = (await this.productsService.GetProductByIdAsync(id)).To<ProductsEditInputModel>();
 
             if (productsEditInputModel == null)
             {
@@ -111,7 +111,7 @@
 
         public async Task<IActionResult> Delete(int id)
         {
-            var productsDeleteViewModel = (await this.productsService.GetByIdAsync(id)).To<ProductsDeleteViewModel>();
+            var productsDeleteViewModel = (await this.productsService.GetProductByIdAsync(id)).To<ProductsDeleteViewModel>();
 
             if (productsDeleteViewModel == null)
             {
