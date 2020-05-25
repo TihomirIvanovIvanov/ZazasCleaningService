@@ -37,7 +37,7 @@
                 await this.ordersService.CompleteProductOrdersAsync(productOrder.Id);
             }
 
-            this.dbContext.ProductReceipts.Add(productReceipt);
+            await this.dbContext.ProductReceipts.AddAsync(productReceipt);
             await this.dbContext.SaveChangesAsync();
 
             return productReceipt.Id;
@@ -58,7 +58,7 @@
                 await this.ordersService.CompleteServiceOrdersAsync(serviceOrder.Id);
             }
 
-            this.dbContext.ServiceReceipts.Add(serviceReceipt);
+            await this.dbContext.ServiceReceipts.AddAsync(serviceReceipt);
             await this.dbContext.SaveChangesAsync();
 
             return serviceReceipt.Id;

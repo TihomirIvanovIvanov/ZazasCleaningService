@@ -44,9 +44,10 @@ else
             <div id="orders" class="text-primary">
                 <div class="order-info row mt-4">
                     <h3 class="col-md-1 text-left">#</h3>
-                    <h3 class="col-md-3 text-left">Image</h3>
-                    <h3 class="col-md-3 text-left">Product</h3>
+                    <h3 class="col-md-2 text-left">Image</h3>
+                    <h3 class="col-md-2 text-left">Product</h3>
                     <h3 class="col-md-3 text-left">Description</h3>
+                    <h3 class="col-md-2 text-left">Client</h3>
                     <h3 class="col-md-2 text-left">Quantity</h3>
                 </div>
                 <hr class="hr-2 bg-primary">
@@ -54,11 +55,12 @@ else
                 {
                     <div class="order row">
                         <h5 class="col-md-1 text-left">@(i + 1)</h5>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <img class="img-thumbnail product-cart-image" src="@Model[i].ProductPicture" />
                         </div>
-                        <h5 class="col-md-3 text-left">@Model[i].ProductName</h5>
+                        <h5 class="col-md-2 text-left">@Model[i].ProductName</h5>
                         <h5 class="col-md-3 text-left">@Model[i].ProductDescription</h5>
+                        <h5 class="col-md-2 text-left">@Model[i].IssuerUserName</h5>
                         <h5 class="col-md-2 text-left">x@(Model[i].Quantity)</h5>
                     </div>
                     @if (i != Model.Count)

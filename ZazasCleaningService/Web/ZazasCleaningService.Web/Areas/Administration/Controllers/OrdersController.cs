@@ -73,7 +73,7 @@
             var productReceiptId = await this.receiptsService
                 .SetIssuedOnPictureToProductReceiptsAsync(receiptProductsServiceModel);
 
-            return this.Redirect($"/Receipts/ProductDetails/{productReceiptId}");
+            return this.Redirect($"/Receipts/Details/ProductDetails/{productReceiptId}");
         }
 
         public async Task<IActionResult> ServicesCart()
@@ -121,7 +121,7 @@
             var serviceReceiptId = await this.receiptsService
                 .SetIssuedOnPictureToServiceReceiptsAsync(receiptServicesServiceModel);
 
-            return this.Redirect($"/Receipts/ServiceDetails/{serviceReceiptId}");
+            return this.Redirect($"/Receipts/Details/ServiceDetails/{serviceReceiptId}");
         }
     }
 }

@@ -22,26 +22,34 @@
 <!-- //page details -->
 <h1 class="text-center text-primary">My Service Receipts</h1>
 <hr class="hr-2 bg-primary w-50">
-<table class="table table-hover">
-    <thead>
-        <tr class="row text-primary text-center font-weight-bold">
-            <th class="col-md-4 h3">Id</th>
-            <th class="col-md-2 h3">Issued On</th>
-            <th class="col-md-1 h3">Services</th>
-            <th class="col-md-3 h3">Details</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var receipt in Model)
-        {
+@if (Model.Count() == 0)
+{
+    <h4 class="text-center mb-4 title-2-agiles">You have no service receipts.</h4>
+    <hr class="hr-2 bg-primary">
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
             <tr class="row text-primary text-center font-weight-bold">
-                <td class="col-md-4 h5">@receipt.Id</td>
-                <td class="col-md-2 h5">@receipt.CreatedOn.ToString("MM/dd/yyyy HH:mm")</td>
-                <td class="col-md-1 h5">@receipt.Services</td>
-                <td class="col-md-3">
-                    <a href="/Receipts/Details/ServiceDetails/@receipt.Id" class="btn btn-primary font-weight-bold">Details</a>
-                </td>
+                <th class="col-md-4 h3">Id</th>
+                <th class="col-md-2 h3">Issued On</th>
+                <th class="col-md-1 h3">Services</th>
+                <th class="col-md-3 h3">Details</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var receipt in Model)
+            {
+                <tr class="row text-primary text-center font-weight-bold">
+                    <td class="col-md-4 h5">@receipt.Id</td>
+                    <td class="col-md-2 h5">@receipt.CreatedOn.ToString("MM/dd/yyyy HH:mm")</td>
+                    <td class="col-md-1 h5">@receipt.Services</td>
+                    <td class="col-md-3">
+                        <a href="/Receipts/Details/ServiceDetails/@receipt.Id" class="btn btn-primary font-weight-bold">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

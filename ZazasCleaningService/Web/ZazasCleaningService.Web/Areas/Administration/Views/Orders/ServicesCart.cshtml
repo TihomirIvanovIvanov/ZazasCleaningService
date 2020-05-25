@@ -44,24 +44,26 @@ else
             <div id="orders" class="text-primary">
                 <div class="order-info row mt-4">
                     <h3 class="col-md-1 text-left">#</h3>
-                    <h3 class="col-md-3 text-left">Image</h3>
+                    <h3 class="col-md-2 text-left">Image</h3>
                     <h3 class="col-md-2 text-left">Service</h3>
                     <h3 class="col-md-2 text-left">Description</h3>
-                    <h3 class="col-md-2 text-left">From</h3>
-                    <h3 class="col-md-2 text-left">To</h3>
+                    <h3 class="col-md-2 text-left">Client</h3>
+                    <h3 class="col-md-1 text-left">From</h3>
+                    <h3 class="col-md-1 text-left">To</h3>
                 </div>
                 <hr class="hr-2 bg-primary">
                 @for (int i = 0; i < Model.Count; i++)
                 {
                     <div class="order row">
                         <h5 class="col-md-1 text-left">@(i + 1)</h5>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <img class="img-thumbnail product-cart-image" src="@Model[i].ServicePicture" />
                         </div>
                         <h5 class="col-md-2 text-left">@Model[i].ServiceName</h5>
                         <h5 class="col-md-2 text-left">@Model[i].ServiceDescription</h5>
-                        <h5 class="col-md-2 text-left">@Model[i].From.ToString("MM/dd/yyyy HH:mm")</h5>
-                        <h5 class="col-md-2 text-left">@Model[i].To.ToString("MM/dd/yyyy HH:mm")</h5>
+                        <h5 class="col-md-2 text-left">@Model[i].IssuerUserName</h5>
+                        <h5 class="col-md-1 text-left">@Model[i].From.ToString("MM/dd/yy HH:mm")</h5>
+                        <h5 class="col-md-1 text-left">@Model[i].To.ToString("MM/dd/yy HH:mm")</h5>
                     </div>
                     @if (i != Model.Count)
                     {

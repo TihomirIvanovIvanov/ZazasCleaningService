@@ -14,5 +14,7 @@
         public string ProductDescription { get; set; }
 
         public int Quantity { get; set; }
+
+        public string IssuerUserName { get; set; }
     }
 }
