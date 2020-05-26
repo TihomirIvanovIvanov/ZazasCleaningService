@@ -1,5 +1,7 @@
 ﻿namespace ZazasCleaningService.Web.Areas.Administration.Controllers
 {
+    using System.Linq;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
@@ -30,10 +32,15 @@
 
         public async Task<IActionResult> ProductsCart()
         {
+            // var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var productCartViewModel = await this.ordersService.GetAllProductOrdersAsync()
                 .To<ProductOrdersCartViewModel>()
                 .ToListAsync();
 
+            // this.ViewData["issuerId"] = productCartViewModel.Select(p => new ProductOrdersCartViewModel
+            // {
+            //     IssuerId = p.IssuerId,
+            // });
             return this.View(productCartViewModel);
         }
 

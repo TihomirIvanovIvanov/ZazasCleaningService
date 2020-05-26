@@ -63,15 +63,23 @@ else
                         <h5 class="col-md-2 text-left">@Model[i].IssuerUserName</h5>
                         <h5 class="col-md-2 text-left">x@(Model[i].Quantity)</h5>
                     </div>
+                    <hr class="hr-2 bg-primary">
+                    <form asp-controller="Orders" 
+                            asp-action="CompleteProducts" 
+                            method="post" 
+                            class="d-flex justify-content-between">
+                        <input type="hidden" value="@Model[i].Id"/>
+                        <button class="btn btn-primary font-weight-bold">Complete</button>
+                    </form>
                     @if (i != Model.Count)
                     {
                         <hr class="hr-2 bg-primary">
                     }
                 }
             </div>
-            <form asp-controller="Orders" asp-action="CompleteProducts" method="post" class="d-flex justify-content-between">
+            @*<form asp-controller="Orders" asp-action="CompleteProducts" method="post" class="d-flex justify-content-between">
                 <button class="btn btn-primary font-weight-bold">Complete</button>
-            </form>
+            </form>*@
         </div>
     </div>
 }

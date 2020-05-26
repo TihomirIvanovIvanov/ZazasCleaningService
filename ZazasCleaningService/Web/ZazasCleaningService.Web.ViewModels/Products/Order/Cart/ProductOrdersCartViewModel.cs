@@ -15,6 +15,8 @@
 
         public int Quantity { get; set; }
 
+        public string IssuerId { get; set; }
+
         public string IssuerUserName { get; set; }
     }
 }

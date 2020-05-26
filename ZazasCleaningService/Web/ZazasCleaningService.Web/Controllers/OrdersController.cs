@@ -55,7 +55,7 @@
             }
 
             var orderProductsServiceModel = productsOrderInputModel.To<OrderProductsServiceModel>();
-            orderProductsServiceModel.IssuerId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            orderProductsServiceModel.IssuerId = this.GetCurrentUserId();
 
             await this.ordersService.CreateProductOrderAsync(orderProductsServiceModel);
 
@@ -83,7 +83,7 @@
             }
 
             var orderServicesServiceModel = servicesOrderInputModel.To<OrderServicesServiceModel>();
-            orderServicesServiceModel.IssuerId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            orderServicesServiceModel.IssuerId = this.GetCurrentUserId();
 
             await this.ordersService.CreateServiceOrderAsync(orderServicesServiceModel);
 
@@ -93,8 +93,11 @@
         [HttpGet("/Orders/All/AllProductsOrders")]
         public async Task<IActionResult> AllProductsOrders()
         {
+            var userId = this.GetCurrentUserId();
+
             var productsOrder = await this.ordersService.GetAllProductOrdersAsync()
-                   .To<AllProductsOrdersViewModel>().ToListAsync();
+                .Where(order => order.IssuerId == userId)
+                .To<AllProductsOrdersViewModel>().ToListAsync();
 
             this.ViewData["productsData"] = productsOrder.Select(productOrder => new AllProductsOrdersViewModel
             {
@@ -117,8 +120,11 @@
         [HttpGet("/Orders/All/AllServicesOrders")]
         public async Task<IActionResult> AllServicesOrders()
         {
+            var userId = this.GetCurrentUserId();
+
             var servicesOrder = await this.ordersService.GetAllServiceOrdersAsync()
-                   .To<AllServicesOrdersViewModel>().ToListAsync();
+                .Where(order => order.IssuerId == userId)
+                .To<AllServicesOrdersViewModel>().ToListAsync();
 
             this.ViewData["servicesData"] = servicesOrder.Select(serviceOrder => new AllServicesOrdersViewModel
             {
@@ -136,6 +142,12 @@
                 .To<ServiceOrdersDetailsViewModel>();
 
             return this.View("Details/ServiceOrdersDetails", serviceOrdersDetailsView);
+        }
+
+        [NonAction]
+        private string GetCurrentUserId()
+        {
+            return this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         }
     }
 }
