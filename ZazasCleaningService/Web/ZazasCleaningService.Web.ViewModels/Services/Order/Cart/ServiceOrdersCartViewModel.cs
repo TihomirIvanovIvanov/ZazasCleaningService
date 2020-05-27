@@ -1,7 +1,7 @@
 ﻿namespace ZazasCleaningService.Web.ViewModels.Services.Order.Cart
 {
     using System;
-
+    using System.Diagnostics.SymbolStore;
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Orders;
 
@@ -20,5 +20,9 @@
         public DateTime To { get; set; }
 
         public string IssuerUserName { get; set; }
+
+        public string FromFormatted => this.From.ToString("MM/dd/yy HH:mm");
+
+        public string ToFormatted => this.To.ToString("MM/dd/yy HH:mm");
     }
 }

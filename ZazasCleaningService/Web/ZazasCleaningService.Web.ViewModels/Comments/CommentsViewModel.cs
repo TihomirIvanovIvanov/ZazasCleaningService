@@ -1,7 +1,6 @@
 ﻿namespace ZazasCleaningService.Web.ViewModels.Comments
 {
     using System;
-    using System.Collections.Generic;
 
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Comments;
@@ -12,6 +11,12 @@
 
         public int? ParentId { get; set; }
 
-        public IEnumerable<CommentParentsViewModel> Parents { get; set; }
+        public string UserUserName { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public string Content { get; set; }
+
+        public string CreatedOnFormatted => this.CreatedOn.ToString("O");
     }
 }

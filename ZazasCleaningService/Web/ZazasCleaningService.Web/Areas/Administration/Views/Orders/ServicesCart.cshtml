@@ -62,8 +62,8 @@ else
                         <h5 class="col-md-2 text-left">@Model[i].ServiceName</h5>
                         <h5 class="col-md-2 text-left">@Model[i].ServiceDescription</h5>
                         <h5 class="col-md-2 text-left">@Model[i].IssuerUserName</h5>
-                        <h5 class="col-md-1 text-left">@Model[i].From.ToString("MM/dd/yy HH:mm")</h5>
-                        <h5 class="col-md-1 text-left">@Model[i].To.ToString("MM/dd/yy HH:mm")</h5>
+                        <h5 class="col-md-1 text-left">@Model[i].FromFormatted</h5> 
+                        <h5 class="col-md-1 text-left">@Model[i].ToFormatted</h5>
                     </div>
                     @if (i != Model.Count)
                     {
