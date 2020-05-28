@@ -7,20 +7,20 @@
 
     public interface IProductsService
     {
-        Task<int> CreateProductTypeAsync(string name);
+        Task<T> CreateProductTypeAsync<T>(string name);
 
-        IQueryable<ProductTypesServiceModel> GetAllProductTypesAsync();
+        IQueryable<T> GetAllProductTypesAsync<T>();
 
-        Task<int> CreateProductAsync(ProductsServiceModel productsServiceModel);
+        Task<T> CreateProductAsync<T>(ProductsServiceModel productsServiceModel);
 
-        IQueryable<ProductsServiceModel> GetAllProductsAsync(int? take = null, int skip = 0);
+        IQueryable<T> GetAllProductsAsync<T>(int? take = null, int skip = 0);
 
         int GetCountProducts();
 
         Task<ProductsServiceModel> GetProductByIdAsync(int id);
 
-        Task<int> EditAsync(int id, ProductsServiceModel productsServiceModel);
+        Task<T> EditAsync<T>(int id, ProductsServiceModel productsServiceModel);
 
-        Task<bool> DeleteByIdAsync(int id);
+        Task<T> DeleteByIdAsync<T>(int id);
     }
 }

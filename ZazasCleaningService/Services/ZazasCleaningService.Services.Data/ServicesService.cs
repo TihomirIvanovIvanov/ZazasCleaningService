@@ -106,11 +106,6 @@
             var serviceOrder = await this.dbContext.ServiceOrders
                 .FirstOrDefaultAsync(s => s.ServiceId == serviceId);
 
-            if (serviceOrder == null)
-            {
-                throw new ArgumentNullException(nameof(serviceOrder));
-            }
-
             return serviceOrder;
         }
 

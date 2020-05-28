@@ -57,7 +57,7 @@
             var orderProductsServiceModel = productsOrderInputModel.To<OrderProductsServiceModel>();
             orderProductsServiceModel.IssuerId = this.GetCurrentUserId();
 
-            await this.ordersService.CreateProductOrderAsync(orderProductsServiceModel);
+            await this.ordersService.CreateProductOrderAsync<int>(orderProductsServiceModel);
 
             return this.RedirectToAction(nameof(this.AllProductsOrders));
         }
@@ -85,7 +85,7 @@
             var orderServicesServiceModel = servicesOrderInputModel.To<OrderServicesServiceModel>();
             orderServicesServiceModel.IssuerId = this.GetCurrentUserId();
 
-            await this.ordersService.CreateServiceOrderAsync(orderServicesServiceModel);
+            await this.ordersService.CreateServiceOrderAsync<int>(orderServicesServiceModel);
 
             return this.RedirectToAction(nameof(this.AllServicesOrders));
         }
@@ -95,7 +95,8 @@
         {
             var userId = this.GetCurrentUserId();
 
-            var productsOrder = await this.ordersService.GetAllProductOrdersAsync()
+            var productsOrder = await this.ordersService
+                .GetAllProductOrdersAsync<OrderProductsServiceModel>()
                 .Where(order => order.IssuerId == userId)
                 .To<AllProductsOrdersViewModel>().ToListAsync();
 
@@ -111,7 +112,8 @@
         [HttpGet("/Orders/Details/ProductOrdersDetails/{id}")]
         public async Task<IActionResult> ProductOrdersDetails(int id)
         {
-            var productOrdersDetailsView = (await this.ordersService.GetProductOrdersByIdAsync(id))
+            var productOrdersDetailsView =
+                (await this.ordersService.GetProductOrdersByIdAsync<OrderProductsServiceModel>(id))
                 .To<ProductOrdersDetailsViewModel>();
 
             return this.View("Details/ProductOrdersDetails", productOrdersDetailsView);
@@ -122,7 +124,8 @@
         {
             var userId = this.GetCurrentUserId();
 
-            var servicesOrder = await this.ordersService.GetAllServiceOrdersAsync()
+            var servicesOrder = await this.ordersService
+                .GetAllServiceOrdersAsync<OrderServicesServiceModel>()
                 .Where(order => order.IssuerId == userId)
                 .To<AllServicesOrdersViewModel>().ToListAsync();
 
@@ -138,7 +141,8 @@
         [HttpGet("/Orders/Details/ServiceOrdersDetails/{id}")]
         public async Task<IActionResult> ServiceOrdersDetails(int id)
         {
-            var serviceOrdersDetailsView = (await this.ordersService.GetServiceOrdersByIdAsync(id))
+            var serviceOrdersDetailsView =
+                (await this.ordersService.GetServiceOrdersByIdAsync<OrderServicesServiceModel>(id))
                 .To<ServiceOrdersDetailsViewModel>();
 
             return this.View("Details/ServiceOrdersDetails", serviceOrdersDetailsView);

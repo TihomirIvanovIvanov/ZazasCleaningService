@@ -19,7 +19,7 @@
             this.dbContext = dbContext;
         }
 
-        public async Task<int> CreateProductAsync(ProductsServiceModel productsServiceModel)
+        public async Task<T> CreateProductAsync<T>(ProductsServiceModel productsServiceModel)
         {
             var productTypesNameFromDb = await this.GetProductTypeByName(productsServiceModel);
 
@@ -29,10 +29,10 @@
             await this.dbContext.Products.AddAsync(product);
             await this.dbContext.SaveChangesAsync();
 
-            return product.Id;
+            return product.Id.To<T>();
         }
 
-        public async Task<int> CreateProductTypeAsync(string name)
+        public async Task<T> CreateProductTypeAsync<T>(string name)
         {
             var productType = new ProductType
             {
@@ -42,13 +42,13 @@
             await this.dbContext.AddAsync(productType);
             await this.dbContext.SaveChangesAsync();
 
-            return productType.Id;
+            return productType.Id.To<T>();
         }
 
-        public async Task<bool> DeleteByIdAsync(int id)
+        public async Task<T> DeleteByIdAsync<T>(int id)
         {
             var product = await this.GetProductById(id);
-            var productOrder = await this.GetProductOrderByProductId(product.Id);
+            var productOrder = await this.GetProductOrderByProductId(id);
 
             if (productOrder != null)
             {
@@ -61,10 +61,10 @@
             this.dbContext.Products.Update(product);
             await this.dbContext.SaveChangesAsync();
 
-            return product.IsDeleted;
+            return product.IsDeleted.To<T>();
         }
 
-        public async Task<int> EditAsync(int id, ProductsServiceModel productsServiceModel)
+        public async Task<T> EditAsync<T>(int id, ProductsServiceModel productsServiceModel)
         {
             // TODO: да връщам ли директно продукт на GetByIdAsync както при GetProductTypeByName
             var productTypeNameFromDb = await this.GetProductTypeByName(productsServiceModel);
@@ -78,10 +78,10 @@
             this.dbContext.Products.Update(product);
             await this.dbContext.SaveChangesAsync();
 
-            return product.Id;
+            return product.Id.To<T>();
         }
 
-        public IQueryable<ProductsServiceModel> GetAllProductsAsync(int? take = null, int skip = 0)
+        public IQueryable<T> GetAllProductsAsync<T>(int? take = null, int skip = 0)
         {
             var allProducts = this.dbContext.Products
                 .OrderByDescending(product => product.CreatedOn)
@@ -97,12 +97,12 @@
                 allProducts = allProducts.Take(take.Value);
             }
 
-            return allProducts.To<ProductsServiceModel>();
+            return allProducts.To<T>();
         }
 
-        public IQueryable<ProductTypesServiceModel> GetAllProductTypesAsync()
+        public IQueryable<T> GetAllProductTypesAsync<T>()
         {
-            var productTypes = this.dbContext.ProductTypes.To<ProductTypesServiceModel>();
+            var productTypes = this.dbContext.ProductTypes.To<T>();
 
             if (productTypes == null)
             {
@@ -154,11 +154,6 @@
             // TODO: Did i need GetProductOrderByProductId into orderService?
             var productOrder = await this.dbContext.ProductOrders
                 .FirstOrDefaultAsync(p => p.ProductId == productId);
-
-            if (productOrder == null)
-            {
-                throw new ArgumentNullException(nameof(productOrder));
-            }
 
             return productOrder;
         }

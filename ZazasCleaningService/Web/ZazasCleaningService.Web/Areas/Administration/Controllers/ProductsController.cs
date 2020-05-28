@@ -38,14 +38,15 @@
                 return this.View(productTypesCreateInputModel);
             }
 
-            await this.productsService.CreateProductTypeAsync(productTypesCreateInputModel.Name);
+            await this.productsService.CreateProductTypeAsync<int>(productTypesCreateInputModel.Name);
 
             return this.RedirectToAction(nameof(this.CreateType));
         }
 
         public async Task<IActionResult> Create()
         {
-            var allProductTypes = await this.productsService.GetAllProductTypesAsync().ToListAsync();
+            var allProductTypes = await this.productsService
+                .GetAllProductTypesAsync<ProductTypesServiceModel>().ToListAsync();
 
             this.ViewData["types"] = allProductTypes.Select(productTypes => new ProductCreateProductTypesViewModel
             {
@@ -69,14 +70,15 @@
             var productsServiceModel = AutoMapperConfig.MapperInstance.Map<ProductsServiceModel>(productsCreateInputModel);
             productsServiceModel.Picture = pictureUrl;
 
-            await this.productsService.CreateProductAsync(productsServiceModel);
+            await this.productsService.CreateProductAsync<int>(productsServiceModel);
 
             return this.Redirect("/Products/All");
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var productsEditInputModel = (await this.productsService.GetProductByIdAsync(id)).To<ProductsEditInputModel>();
+            var productsEditInputModel = (await this.productsService.GetProductByIdAsync(id))
+                .To<ProductsEditInputModel>();
 
             if (productsEditInputModel == null)
             {
@@ -104,7 +106,7 @@
             var productsServiceModel = AutoMapperConfig.MapperInstance.Map<ProductsServiceModel>(productsEditInputModel);
             productsServiceModel.Picture = pictureUrl;
 
-            await this.productsService.EditAsync(id, productsServiceModel);
+            await this.productsService.EditAsync<int>(id, productsServiceModel);
 
             return this.Redirect("/Products/All");
         }
@@ -127,7 +129,7 @@
         [HttpPost("/Administration/Products/Delete/{id}")]
         public async Task<IActionResult> DeleteConfirm(int id)
         {
-            await this.productsService.DeleteByIdAsync(id);
+            await this.productsService.DeleteByIdAsync<bool>(id);
 
             return this.Redirect("/Products/All");
         }

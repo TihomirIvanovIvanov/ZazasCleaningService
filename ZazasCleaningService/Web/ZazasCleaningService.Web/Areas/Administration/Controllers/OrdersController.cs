@@ -8,6 +8,7 @@
     using Microsoft.EntityFrameworkCore;
     using ZazasCleaningService.Services.Data;
     using ZazasCleaningService.Services.Mapping;
+    using ZazasCleaningService.Services.Models.Orders;
     using ZazasCleaningService.Services.Models.Receipts;
     using ZazasCleaningService.Web.ViewModels.Products.Order.Cart;
     using ZazasCleaningService.Web.ViewModels.Services.Order.Cart;
@@ -33,7 +34,8 @@
         public async Task<IActionResult> ProductsCart()
         {
             // var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var productCartViewModel = await this.ordersService.GetAllProductOrdersAsync()
+            var productCartViewModel = await this.ordersService
+                .GetAllProductOrdersAsync<OrderProductsServiceModel>()
                 .To<ProductOrdersCartViewModel>()
                 .ToListAsync();
 
@@ -85,7 +87,8 @@
 
         public async Task<IActionResult> ServicesCart()
         {
-            var serviceCartViewModel = await this.ordersService.GetAllServiceOrdersAsync()
+            var serviceCartViewModel = await this.ordersService
+                .GetAllServiceOrdersAsync<OrderServicesServiceModel>()
                 .To<ServiceOrdersCartViewModel>()
                 .ToListAsync();
 

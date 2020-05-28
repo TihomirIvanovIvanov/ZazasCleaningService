@@ -12,25 +12,25 @@
         // 1. Add service models
         // 2. Add binding models
         // 3. Add view models and methods for extracting (GetAllServiceOrders() / GetAllProductOrders) (dont forget lazy)
-        Task<int> CreateProductOrderAsync(OrderProductsServiceModel orderProductsServiceModel);
+        Task<T> CreateProductOrderAsync<T>(OrderProductsServiceModel orderProductsServiceModel);
 
-        Task<int> CreateServiceOrderAsync(OrderServicesServiceModel orderServicesServiceModel);
+        Task<T> CreateServiceOrderAsync<T>(OrderServicesServiceModel orderServicesServiceModel);
 
-        IQueryable<OrderProductsServiceModel> GetAllProductOrdersAsync();
+        IQueryable<T> GetAllProductOrdersAsync<T>();
 
-        IQueryable<OrderServicesServiceModel> GetAllServiceOrdersAsync();
+        IQueryable<T> GetAllServiceOrdersAsync<T>();
 
-        Task<OrderProductsServiceModel> GetProductOrdersByIdAsync(int id);
+        Task<T> GetProductOrdersByIdAsync<T>(int id);
 
-        Task<OrderServicesServiceModel> GetServiceOrdersByIdAsync(int id);
+        Task<T> GetServiceOrdersByIdAsync<T>(int id);
 
         Task SetProductOrdersToReceiptAsync(ProductReceipt productReceipt);
 
-        Task<int> CompleteProductOrdersAsync(int productOrderId);
+        Task<T> CompleteProductOrdersAsync<T>(int productOrderId);
 
         Task SetServiceOrdersToReceiptAsync(ServiceReceipt serviceReceipt);
 
-        Task<int> CompleteServiceOrdersAsync(int serviceOrderId);
+        Task<T> CompleteServiceOrdersAsync<T>(int serviceOrderId);
 
         Task<string> GetRecipientIdForOrdersAsync();
     }
