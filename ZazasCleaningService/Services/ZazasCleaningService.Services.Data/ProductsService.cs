@@ -48,10 +48,7 @@
         public async Task<bool> DeleteByIdAsync(int id)
         {
             var product = await this.GetProductById(id);
-
-            // TODO: Did i need GetProductOrderByProductId into orderService?
-            var productOrder = this.dbContext.ProductOrders
-                .FirstOrDefault(p => p.ProductId == product.Id);
+            var productOrder = await this.GetProductOrderByProductId(product.Id);
 
             if (productOrder != null)
             {
@@ -132,11 +129,10 @@
         {
             var products = this.dbContext.Products.Count();
 
-            //if (products == 0)
-            //{
-            //    throw new ArgumentNullException(nameof(products));
-            //}
-
+            // if (products == 0)
+            // {
+            //     throw new ArgumentNullException(nameof(products));
+            // }
             return products;
         }
 
@@ -151,6 +147,20 @@
             }
 
             return productTypeNameFromDb;
+        }
+
+        private async Task<ProductOrder> GetProductOrderByProductId(int productId)
+        {
+            // TODO: Did i need GetProductOrderByProductId into orderService?
+            var productOrder = await this.dbContext.ProductOrders
+                .FirstOrDefaultAsync(p => p.ProductId == productId);
+
+            if (productOrder == null)
+            {
+                throw new ArgumentNullException(nameof(productOrder));
+            }
+
+            return productOrder;
         }
 
         private async Task<Product> GetProductById(int id)

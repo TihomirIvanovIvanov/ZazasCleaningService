@@ -32,15 +32,7 @@
         public async Task<bool> DeleteByIdAsync(int id)
         {
             var service = await this.GetServiceById(id);
-
-            if (service == null)
-            {
-                throw new ArgumentNullException(nameof(service));
-            }
-
-            // TODO: Did i need GetServiceOrderByProductId into orderService?
-            var serviceOrder = this.dbContext.ServiceOrders
-                .FirstOrDefault(s => s.ServiceId == service.Id);
+            var serviceOrder = await this.GetServiceOrderByServiceId(service.Id);
 
             if (serviceOrder != null)
             {
@@ -59,11 +51,6 @@
         public async Task<int> EditAsync(int id, ServicesServiceModel servicesServiceModel)
         {
             var service = await this.GetServiceById(id);
-
-            if (service == null)
-            {
-                throw new ArgumentNullException(nameof(service));
-            }
 
             service.Name = servicesServiceModel.Name;
             service.Picture = servicesServiceModel.Picture;
@@ -94,6 +81,11 @@
             var service = await this.dbContext.Services.To<ServicesServiceModel>()
                 .FirstOrDefaultAsync(service => service.Id == id);
 
+            if (service == null)
+            {
+                throw new ArgumentNullException(nameof(service));
+            }
+
             return service;
         }
 
@@ -101,13 +93,36 @@
         {
             var services = this.dbContext.Services.Count();
 
+            // if (services == 0)
+            // {
+            //     throw new ArgumentNullException(nameof(services));
+            // }
             return services;
+        }
+
+        private async Task<ServiceOrder> GetServiceOrderByServiceId(int serviceId)
+        {
+            // TODO: Did i need GetServiceOrderByProductId into orderService?
+            var serviceOrder = await this.dbContext.ServiceOrders
+                .FirstOrDefaultAsync(s => s.ServiceId == serviceId);
+
+            if (serviceOrder == null)
+            {
+                throw new ArgumentNullException(nameof(serviceOrder));
+            }
+
+            return serviceOrder;
         }
 
         private async Task<Service> GetServiceById(int id)
         {
             var service = await this.dbContext.Services
                 .FirstOrDefaultAsync(service => service.Id == id);
+
+            if (service == null)
+            {
+                throw new ArgumentNullException(nameof(service));
+            }
 
             return service;
         }

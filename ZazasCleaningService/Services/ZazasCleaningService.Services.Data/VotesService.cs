@@ -1,5 +1,6 @@
 ﻿namespace ZazasCleaningService.Services.Data
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -20,9 +21,7 @@
 
         public async Task<int> CreateVoteAsync(VotesServiceModel votesServiceModel)
         {
-            var vote = await this.dbContext.Votes
-                .FirstOrDefaultAsync(service =>
-                    service.ServiceId == votesServiceModel.ServiceId && service.UserId == votesServiceModel.UserId);
+            var vote = await this.GetVoteByServiceAndUserId(votesServiceModel.ServiceId, votesServiceModel.UserId);
 
             if (vote != null)
             {
@@ -31,13 +30,12 @@
             else
             {
                 vote = AutoMapperConfig.MapperInstance.Map<Vote>(votesServiceModel);
-                //vote.Type = votesServiceModel.IsUpVote ? VoteType.UpVote : VoteType.DownVote;
 
+                // vote.Type = votesServiceModel.IsUpVote ? VoteType.UpVote : VoteType.DownVote;
                 this.dbContext.Votes.Add(vote);
             }
 
             await this.dbContext.SaveChangesAsync();
-
             return vote.Id;
         }
 
@@ -48,6 +46,19 @@
                 .SumAsync(vote => (int)vote.Type);
 
             return votesSum;
+        }
+
+        private async Task<Vote> GetVoteByServiceAndUserId(int serviceId, string userId)
+        {
+            var vote = await this.dbContext.Votes
+                .FirstOrDefaultAsync(service => service.ServiceId == serviceId && service.UserId == userId);
+
+            if (vote == null)
+            {
+                throw new ArgumentNullException(nameof(vote));
+            }
+
+            return vote;
         }
     }
 }

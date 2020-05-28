@@ -70,6 +70,11 @@
                 .Where(receipt => receipt.RecipientId == recipientId)
                 .To<ReceiptProductsServiceModel>();
 
+            if (receipts == null)
+            {
+                throw new ArgumentNullException(nameof(receipts));
+            }
+
             return receipts;
         }
 
@@ -79,6 +84,11 @@
                 .Where(receipt => receipt.RecipientId == recipientId)
                 .To<ReceiptServicesServiceModel>();
 
+            if (receipts == null)
+            {
+                throw new ArgumentNullException(nameof(receipts));
+            }
+
             return receipts;
         }
 
@@ -86,6 +96,11 @@
         {
             var productReceipt = await this.dbContext.ProductReceipts.To<ReceiptProductsServiceModel>()
                 .FirstOrDefaultAsync(receipt => receipt.Id == id);
+
+            if (productReceipt == null)
+            {
+                throw new ArgumentNullException(nameof(productReceipt));
+            }
 
             return productReceipt;
         }
@@ -95,19 +110,17 @@
             var serviceReceipt = await this.dbContext.ServiceReceipts.To<ReceiptServicesServiceModel>()
                 .FirstOrDefaultAsync(receipt => receipt.Id == id);
 
+            if (serviceReceipt == null)
+            {
+                throw new ArgumentNullException(nameof(serviceReceipt));
+            }
+
             return serviceReceipt;
         }
 
         public async Task<int> SetIssuedOnPictureToProductReceiptsAsync(ReceiptProductsServiceModel serviceModel)
         {
-            var productReceipt = await this.dbContext.ProductReceipts
-                .FirstOrDefaultAsync(productReceipt => productReceipt.Id == serviceModel.Id);
-
-            if (productReceipt == null)
-            {
-                throw new ArgumentNullException(nameof(productReceipt));
-            }
-
+            var productReceipt = await this.GetProductReceiptById(serviceModel.Id);
             productReceipt.IssuedOnPicture = serviceModel.IssuedOnPicture;
 
             this.dbContext.ProductReceipts.Update(productReceipt);
@@ -118,20 +131,39 @@
 
         public async Task<int> SetIssuedOnPictureToServiceReceiptsAsync(ReceiptServicesServiceModel serviceModel)
         {
-            var serviceReceipt = await this.dbContext.ServiceReceipts
-                .FirstOrDefaultAsync(serviceReceipt => serviceReceipt.Id == serviceModel.Id);
-
-            if (serviceReceipt == null)
-            {
-                throw new ArgumentNullException(nameof(serviceReceipt));
-            }
-
+            var serviceReceipt = await this.GetServiceReceiptById(serviceModel.Id);
             serviceReceipt.IssuedOnPicture = serviceModel.IssuedOnPicture;
 
             this.dbContext.ServiceReceipts.Update(serviceReceipt);
             await this.dbContext.SaveChangesAsync();
 
             return serviceReceipt.Id;
+        }
+
+        private async Task<ProductReceipt> GetProductReceiptById(int productsServiceId)
+        {
+            var productReceipt = await this.dbContext.ProductReceipts
+                .FirstOrDefaultAsync(productReceipt => productReceipt.Id == productsServiceId);
+
+            if (productReceipt == null)
+            {
+                throw new ArgumentNullException(nameof(productReceipt));
+            }
+
+            return productReceipt;
+        }
+
+        private async Task<ServiceReceipt> GetServiceReceiptById(int servicesServiceId)
+        {
+            var serviceReceipt = await this.dbContext.ServiceReceipts
+                .FirstOrDefaultAsync(serviceReceipt => serviceReceipt.Id == servicesServiceId);
+
+            if (serviceReceipt == null)
+            {
+                throw new ArgumentNullException(nameof(serviceReceipt));
+            }
+
+            return serviceReceipt;
         }
     }
 }

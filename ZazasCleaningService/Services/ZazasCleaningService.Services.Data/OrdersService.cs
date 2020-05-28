@@ -1,5 +1,6 @@
 ﻿namespace ZazasCleaningService.Services.Data
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -21,8 +22,7 @@
 
         public async Task<int> CompleteProductOrdersAsync(int productOrderId)
         {
-            var productOrderFromDb = await this.dbContext.ProductOrders
-                .FirstOrDefaultAsync(order => order.Id == productOrderId);
+            var productOrderFromDb = await this.GetProductOrderById(productOrderId);
 
             // TODO: Validate that the requisted order is existent and with status "Active"
             productOrderFromDb.Status = await this.dbContext.OrderStatuses
@@ -36,8 +36,7 @@
 
         public async Task<int> CompleteServiceOrdersAsync(int serviceOrderId)
         {
-            var serviceOrderFromDb = await this.dbContext.ServiceOrders
-                .FirstOrDefaultAsync(order => order.Id == serviceOrderId);
+            var serviceOrderFromDb = await this.GetServiceOrderById(serviceOrderId);
 
             // TODO: Validate that the requisted order is existent and with status "Active"
             serviceOrderFromDb.Status = await this.dbContext.OrderStatuses
@@ -78,8 +77,9 @@
         public IQueryable<OrderProductsServiceModel> GetAllProductOrdersAsync()
         {
             var productOrders = this.dbContext.ProductOrders
-                .Where(productOrders => productOrders.Status.Name == GlobalConstants.StatusActive)
-                .OrderBy(productOrders => productOrders.CreatedOn)
+                .Where(productOrder => productOrder.Status.Name == GlobalConstants.StatusActive)
+                .OrderBy(productOrder => productOrder.Issuer.UserName)
+                .ThenBy(productOrder => productOrder.CreatedOn)
                 .To<OrderProductsServiceModel>();
 
             return productOrders;
@@ -88,8 +88,9 @@
         public IQueryable<OrderServicesServiceModel> GetAllServiceOrdersAsync()
         {
             var serviceOrders = this.dbContext.ServiceOrders
-                .Where(productOrders => productOrders.Status.Name == GlobalConstants.StatusActive)
-                .OrderBy(service => service.CreatedOn)
+                .Where(serviceOrder => serviceOrder.Status.Name == GlobalConstants.StatusActive)
+                .OrderBy(serviceOrder => serviceOrder.Issuer.UserName)
+                .ThenBy(serviceOrder => serviceOrder.CreatedOn)
                 .To<OrderServicesServiceModel>();
 
             return serviceOrders;
@@ -132,6 +133,32 @@
             serviceReceipt.ServiceOrders = await this.dbContext.ServiceOrders
                 .Where(order => order.Status.Name == GlobalConstants.StatusActive)
                 .ToListAsync();
+        }
+
+        private async Task<ProductOrder> GetProductOrderById(int productOrderId)
+        {
+            var productOrder = await this.dbContext.ProductOrders
+                .FirstOrDefaultAsync(order => order.Id == productOrderId);
+
+            if (productOrder == null)
+            {
+                throw new ArgumentNullException(nameof(productOrder));
+            }
+
+            return productOrder;
+        }
+
+        private async Task<ServiceOrder> GetServiceOrderById(int serviceOrderId)
+        {
+            var serviceOrder = await this.dbContext.ServiceOrders
+                .FirstOrDefaultAsync(order => order.Id == serviceOrderId);
+
+            if (serviceOrder == null)
+            {
+                throw new ArgumentNullException(nameof(serviceOrder));
+            }
+
+            return serviceOrder;
         }
     }
 }
