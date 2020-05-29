@@ -16,7 +16,9 @@
     using ZazasCleaningService.Data.Models;
 
     [AllowAnonymous]
+#pragma warning disable SA1649 // File name should match first type name
     public class ExternalLoginModel : PageModel
+#pragma warning restore SA1649 // File name should match first type name
     {
         private readonly SignInManager<ApplicationUser> signInManager;
 
@@ -55,7 +57,9 @@
             public string Email { get; set; }
         }
 
+#pragma warning disable SA1201 // Elements should appear in the correct order
         public IActionResult OnGetAsync()
+#pragma warning restore SA1201 // Elements should appear in the correct order
         {
             return this.RedirectToPage("./Login");
         }
@@ -76,6 +80,7 @@
                 this.ErrorMessage = $"Error from external provider: {remoteError}";
                 return this.RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
+
             var info = await this.signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
@@ -90,6 +95,7 @@
                 this.logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
                 return this.LocalRedirect(returnUrl);
             }
+
             if (result.IsLockedOut)
             {
                 return this.RedirectToPage("./Lockout");

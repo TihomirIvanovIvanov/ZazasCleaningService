@@ -18,7 +18,7 @@
             this.dbContext = dbContext;
         }
 
-        public async Task<int> CreateCommentsAsync(CommentsServiceModel commentsServiceModel, int? parentId = null)
+        public async Task<T> CreateCommentsAsync<T>(CommentsServiceModel commentsServiceModel, int? parentId = null)
         {
             var comments = AutoMapperConfig.MapperInstance.Map<Comment>(commentsServiceModel);
             comments.ParentId = parentId;
@@ -26,12 +26,12 @@
             this.dbContext.Comments.Add(comments);
             await this.dbContext.SaveChangesAsync();
 
-            return comments.Id;
+            return comments.Id.To<T>();
         }
 
-        public IQueryable<CommentsServiceModel> GetAllCommentsAsync()
+        public IQueryable<T> GetAllCommentsAsync<T>()
         {
-            var comments = this.dbContext.Comments.To<CommentsServiceModel>();
+            var comments = this.dbContext.Comments.To<T>();
 
             return comments;
         }

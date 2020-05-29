@@ -41,7 +41,7 @@
             var servicesServiceModel = AutoMapperConfig.MapperInstance.Map<ServicesServiceModel>(servicesCreateInputModel);
             servicesServiceModel.Picture = pictureUrl;
 
-            await this.servicesService.CreateServiceAsync(servicesServiceModel);
+            await this.servicesService.CreateServiceAsync<int>(servicesServiceModel);
 
             return this.Redirect("/Services/All");
         }
@@ -72,7 +72,7 @@
             var servicesServiceModel = AutoMapperConfig.MapperInstance.Map<ServicesServiceModel>(servicesEditInputModel);
             servicesServiceModel.Picture = pictureUrl;
 
-            await this.servicesService.EditAsync(id, servicesServiceModel);
+            await this.servicesService.EditAsync<int>(id, servicesServiceModel);
 
             return this.Redirect("/Services/All");
         }
@@ -92,7 +92,7 @@
         [HttpPost("/Administration/Services/Delete/{id}")]
         public async Task<IActionResult> DeleteConfirm(int id)
         {
-            await this.servicesService.DeleteByIdAsync(id);
+            await this.servicesService.DeleteByIdAsync<int>(id);
 
             return this.Redirect("/Services/All");
         }

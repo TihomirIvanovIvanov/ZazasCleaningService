@@ -1,6 +1,5 @@
 ﻿namespace ZazasCleaningService.Web.Controllers
 {
-    using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -22,12 +21,12 @@
 
         public async Task<IActionResult> Post()
         {
-            var commentsViewModel = await this.commentsService.GetAllCommentsAsync()
+            var commentsViewModel = await this.commentsService
+                .GetAllCommentsAsync<CommentsServiceModel>()
                 .To<CommentsViewModel>()
                 .ToListAsync();
 
-            //this.ViewData["id"] = commentsViewModel.Select(c => new CommentsViewModel { Id = c.Id });
-
+            // this.ViewData["id"] = commentsViewModel.Select(c => new CommentsViewModel { Id = c.Id });
             return this.View(commentsViewModel);
         }
 
@@ -53,7 +52,7 @@
 
             var commentsServiceModel = AutoMapperConfig.MapperInstance.Map<CommentsServiceModel>(createCommentsInputModel);
             commentsServiceModel.UserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            await this.commentsService.CreateCommentsAsync(commentsServiceModel, parentId);
+            await this.commentsService.CreateCommentsAsync<int>(commentsServiceModel, parentId);
 
             return this.RedirectToAction(nameof(this.Post));
         }

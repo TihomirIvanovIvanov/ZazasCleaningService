@@ -19,17 +19,17 @@
             this.dbContext = dbContext;
         }
 
-        public async Task<int> CreateServiceAsync(ServicesServiceModel servicesServiceModel)
+        public async Task<T> CreateServiceAsync<T>(ServicesServiceModel servicesServiceModel)
         {
             var service = AutoMapperConfig.MapperInstance.Map<Service>(servicesServiceModel);
 
             await this.dbContext.Services.AddAsync(service);
             await this.dbContext.SaveChangesAsync();
 
-            return service.Id;
+            return service.Id.To<T>();
         }
 
-        public async Task<bool> DeleteByIdAsync(int id)
+        public async Task<T> DeleteByIdAsync<T>(int id)
         {
             var service = await this.GetServiceById(id);
             var serviceOrder = await this.GetServiceOrderByServiceId(service.Id);
@@ -45,10 +45,10 @@
             this.dbContext.Services.Update(service);
             await this.dbContext.SaveChangesAsync();
 
-            return service.IsDeleted;
+            return service.IsDeleted.To<T>();
         }
 
-        public async Task<int> EditAsync(int id, ServicesServiceModel servicesServiceModel)
+        public async Task<T> EditAsync<T>(int id, ServicesServiceModel servicesServiceModel)
         {
             var service = await this.GetServiceById(id);
 
@@ -59,10 +59,10 @@
             this.dbContext.Services.Update(service);
             await this.dbContext.SaveChangesAsync();
 
-            return service.Id;
+            return service.Id.To<T>();
         }
 
-        public IQueryable<ServicesServiceModel> GetAllServicesAsync(int? take = null, int skip = 0)
+        public IQueryable<T> GetAllServicesAsync<T>(int? take = null, int skip = 0)
         {
             var allServices = this.dbContext.Services
                 .OrderByDescending(service => service.CreatedOn)
@@ -73,7 +73,7 @@
                 allServices = allServices.Take(take.Value);
             }
 
-            return allServices.To<ServicesServiceModel>();
+            return allServices.To<T>();
         }
 
         public async Task<ServicesServiceModel> GetServiceByIdAsync(int id)

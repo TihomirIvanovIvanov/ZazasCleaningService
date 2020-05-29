@@ -9,6 +9,7 @@
     using Microsoft.EntityFrameworkCore;
     using ZazasCleaningService.Services.Data;
     using ZazasCleaningService.Services.Mapping;
+    using ZazasCleaningService.Services.Models.Services;
     using ZazasCleaningService.Web.ViewModels.Services.All;
     using ZazasCleaningService.Web.ViewModels.Services.Details;
 
@@ -27,7 +28,7 @@
         public async Task<IActionResult> All(int page = 1)
         {
             var allServicesView = this.servicesService
-                .GetAllServicesAsync(ItemsPerPage, (page - 1) * ItemsPerPage)
+                .GetAllServicesAsync<ServicesServiceModel>(ItemsPerPage, (page - 1) * ItemsPerPage)
                 .To<ServicesAllViewModel>();
 
             var count = this.servicesService.GetCountServices();

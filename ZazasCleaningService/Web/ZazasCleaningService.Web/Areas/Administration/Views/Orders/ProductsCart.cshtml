@@ -65,9 +65,9 @@ else
                     </div>
                     <hr class="hr-2 bg-primary">
                     <form asp-controller="Orders" 
-                            asp-action="CompleteProducts" 
-                            method="post" 
-                            class="d-flex justify-content-between">
+                          asp-action="CompleteProducts" 
+                          method="post" 
+                          class="d-flex justify-content-between">
                         <input type="hidden" value="@Model[i].Id"/>
                         <button class="btn btn-primary font-weight-bold">Complete</button>
                     </form>

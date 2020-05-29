@@ -1,6 +1,7 @@
 ﻿namespace ZazasCleaningService.Web.ViewModels.Comments
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Comments;
@@ -15,6 +16,7 @@
 
         public DateTime CreatedOn { get; set; }
 
+        [Required]
         public string Content { get; set; }
 
         public string CreatedOnFormatted => this.CreatedOn.ToString("O");

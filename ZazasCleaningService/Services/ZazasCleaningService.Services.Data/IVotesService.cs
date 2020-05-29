@@ -6,8 +6,8 @@
 
     public interface IVotesService
     {
-        Task<int> CreateVoteAsync(VotesServiceModel votesServiceModel);
+        Task<T> CreateVoteAsync<T>(VotesServiceModel votesServiceModel);
 
-        Task<int> GetVotesAsync(int serviceId);
+        Task<T> GetVotesAsync<T>(int serviceId);
     }
 }
