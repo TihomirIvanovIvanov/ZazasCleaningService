@@ -24,10 +24,8 @@
             this.ordersService = ordersService;
         }
 
-        public async Task<IActionResult> ProductReceipts()
+        public async Task<IActionResult> ProductReceipts(string recipientId)
         {
-            var recipientId = await this.ordersService.GetRecipientIdForOrdersAsync();
-
             var productReceiptsViews = await this.receiptsService
                 .GetAllProductReceiptsByRecipientId(recipientId)
                 .Select(receipt => receipt.To<ProductReceiptsViewModel>())

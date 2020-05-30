@@ -61,7 +61,7 @@ else
             <hr />
             <nav aria-label="...">
                 <ul class="pagination justify-content-center">
-                    @if (Model.Count == 1)
+                    @if (Model.FirstOrDefault()?.CurrentPage == 1)
                     {
                         <li class="page-item disabled">
                             <a class="page-link" href="#" tabindex="-1">Previous</a>
@@ -70,19 +70,18 @@ else
                     else
                     {
                         <li class="page-item">
-                            <a class="page-link" href="/Products/All?page=@(Model.Count - 1)">Previous</a>
+                            <a class="page-link" href="/Products/All?page=@(Model.FirstOrDefault()?.CurrentPage - 1)">Previous</a>
                         </li>
                     }
 
-                    @for (int i = 1; i < Model.Count; i++)
+                    @for (int i = 1; i <= Model.FirstOrDefault()?.PagesCount; i++)
                     {
-                        var active = i == Model.Count ? "active" : string.Empty;
-                        <li class="page-item @active">
+                        <li class="page-item">
                             <a class="page-link" href="/Products/All?page=@i">@i</a>
                         </li>
                     }
 
-                    @if (Model.Count == Model.Count)
+                    @if (Model.LastOrDefault()?.CurrentPage == Model.LastOrDefault().PagesCount)
                     {
                         <li class="page-item disabled">
                             <a class="page-link" href="#" tabindex="-1">Next</a>
@@ -91,7 +90,7 @@ else
                     else
                     {
                         <li class="page-item">
-                            <a class="page-link" href="/Products/All?page=@(Model.Count + 1)">Next</a>
+                            <a class="page-link" href="/Products/All?page=@(Model.LastOrDefault()?.CurrentPage + 1)">Next</a>
                         </li>
                     }
                 </ul>

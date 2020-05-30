@@ -26,33 +26,21 @@
                 .To<CommentsViewModel>()
                 .ToListAsync();
 
-            // this.ViewData["id"] = commentsViewModel.Select(c => new CommentsViewModel { Id = c.Id });
             return this.View(commentsViewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateCommentsInputModel createCommentsInputModel)
         {
-            if (!this.ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                return this.View(createCommentsInputModel);
+                var parentId = createCommentsInputModel.ParentId == 0 ? (int?)null : createCommentsInputModel.ParentId;
+
+                var commentsServiceModel =
+                    AutoMapperConfig.MapperInstance.Map<CommentsServiceModel>(createCommentsInputModel);
+                commentsServiceModel.UserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                await this.commentsService.CreateCommentsAsync<int>(commentsServiceModel, parentId);
             }
-
-            var parentId = createCommentsInputModel.ParentId == 0 ?
-                (int?)null :
-                createCommentsInputModel.ParentId;
-
-            if (parentId.HasValue)
-            {
-                if (!await this.commentsService.IsInCommentIdAsync(parentId.Value, createCommentsInputModel.Id))
-                {
-                    return this.BadRequest();
-                }
-            }
-
-            var commentsServiceModel = AutoMapperConfig.MapperInstance.Map<CommentsServiceModel>(createCommentsInputModel);
-            commentsServiceModel.UserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            await this.commentsService.CreateCommentsAsync<int>(commentsServiceModel, parentId);
 
             return this.RedirectToAction(nameof(this.Post));
         }

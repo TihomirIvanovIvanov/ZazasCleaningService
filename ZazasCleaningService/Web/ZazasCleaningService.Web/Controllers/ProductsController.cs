@@ -27,9 +27,10 @@
 
         public async Task<IActionResult> All(int page = 1)
         {
-            var allProductsView = this.productsService
+            var allProductsView = await this.productsService
                 .GetAllProductsAsync<ProductsServiceModel>(ItemsPerPage, (page - 1) * ItemsPerPage)
-                .To<ProductsAllViewModel>();
+                .To<ProductsAllViewModel>()
+                .ToListAsync();
 
             var count = this.productsService.GetCountProducts();
             var productsPerPage = (int)Math.Ceiling((double)count / ItemsPerPage);
@@ -39,9 +40,13 @@
                 productsPerPage = 1;
             }
 
-            allProductsView.Select(product => product.PagesCount == productsPerPage && product.CurrentPage == page);
+            foreach (var product in allProductsView)
+            {
+                product.PagesCount = productsPerPage;
+                product.CurrentPage = page;
+            }
 
-            return this.View(await allProductsView.ToListAsync());
+            return this.View(allProductsView);
         }
 
         public async Task<IActionResult> Details(int id)

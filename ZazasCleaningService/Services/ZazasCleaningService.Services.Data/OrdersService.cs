@@ -65,6 +65,7 @@
         {
             var orderServices = orderServicesServiceModel.To<ServiceOrder>();
 
+            // TODO: pri zapazvane na data i 4as proverqvane dali ve4e ne e zapazena datata i 4asa bezz zna4enie kakva e uslugata
             orderServices.Status = await this.dbContext.OrderStatuses
                 .FirstOrDefaultAsync(orderStatus => orderStatus.Name == GlobalConstants.StatusActive);
 
@@ -124,7 +125,8 @@
         public async Task SetProductOrdersToReceiptAsync(ProductReceipt productReceipt)
         {
             productReceipt.ProductOrders = await this.dbContext.ProductOrders
-                .Where(order => order.Status.Name == GlobalConstants.StatusActive)
+                .Where(order => order.Status.Name == GlobalConstants.StatusActive
+                && order.IssuerId == productReceipt.RecipientId)
                 .ToListAsync();
         }
 

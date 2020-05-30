@@ -1,7 +1,5 @@
 ﻿namespace ZazasCleaningService.Web.Areas.Administration.Controllers
 {
-    using System.Linq;
-    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
@@ -33,24 +31,17 @@
 
         public async Task<IActionResult> ProductsCart()
         {
-            // var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var productCartViewModel = await this.ordersService
                 .GetAllProductOrdersAsync<OrderProductsServiceModel>()
                 .To<ProductOrdersCartViewModel>()
                 .ToListAsync();
 
-            // this.ViewData["issuerId"] = productCartViewModel.Select(p => new ProductOrdersCartViewModel
-            // {
-            //     IssuerId = p.IssuerId,
-            // });
             return this.View(productCartViewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CompleteProducts()
+        public async Task<IActionResult> CompleteProducts(string recipientId)
         {
-            var recipientId = await this.ordersService.GetRecipientIdForOrdersAsync();
-
             var receiptId = await this.receiptsService.CreateProductReceiptAsync(recipientId);
 
             return this.Redirect($"/Administration/Orders/CompleteProductCart/{receiptId}");
@@ -96,10 +87,8 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> CompleteServices()
+        public async Task<IActionResult> CompleteServices(string recipientId)
         {
-            var recipientId = await this.ordersService.GetRecipientIdForOrdersAsync();
-
             var receiptId = await this.receiptsService.CreateServiceReceiptAsync(recipientId);
 
             return this.Redirect($"/Administration/Orders/CompleteServiceCart/{receiptId}");

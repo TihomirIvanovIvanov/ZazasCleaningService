@@ -15,6 +15,8 @@
 
         public int Products { get; set; }
 
+        public string RecipientId { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration

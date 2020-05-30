@@ -1,6 +1,14 @@
 ﻿@model List<ZazasCleaningService.Web.ViewModels.Products.Order.Cart.ProductOrdersCartViewModel>
 @{
     ViewData["Title"] = "ProductsCart";
+    var groupedByResults = Model
+                .GroupBy(pcvm => pcvm.IssuerId)
+                .Select(pcvm => new
+                {
+                    Issuer = pcvm.Key,
+                    Collection = pcvm.ToList(),
+                })
+                .ToList();
 }
 
 <!-- banner 2 -->
@@ -51,35 +59,32 @@ else
                     <h3 class="col-md-2 text-left">Quantity</h3>
                 </div>
                 <hr class="hr-2 bg-primary">
-                @for (int i = 0; i < Model.Count; i++)
+                @for (int j = 0, k = 0; j < groupedByResults.Count; j++)
                 {
-                    <div class="order row">
-                        <h5 class="col-md-1 text-left">@(i + 1)</h5>
-                        <div class="col-md-2">
-                            <img class="img-thumbnail product-cart-image" src="@Model[i].ProductPicture" />
+                    @for (int i = 0; i < groupedByResults[j].Collection.Count; i++, k++)
+                    {
+                        <div class="order row">
+                            <h5 class="col-md-1 text-left">@(k + 1)</h5>
+                            <div class="col-md-2">
+                                <img class="img-thumbnail product-cart-image" src="@groupedByResults[j].Collection[i].ProductPicture" />
+                            </div>
+                            <h5 class="col-md-2 text-left">@groupedByResults[j].Collection[i].ProductName</h5>
+                            <h5 class="col-md-3 text-left">@groupedByResults[j].Collection[i].ProductDescription</h5>
+                            <h5 class="col-md-2 text-left">@groupedByResults[j].Collection[i].IssuerUserName</h5>
+                            <h5 class="col-md-2 text-left">x@(groupedByResults[j].Collection[i].Quantity)</h5>
                         </div>
-                        <h5 class="col-md-2 text-left">@Model[i].ProductName</h5>
-                        <h5 class="col-md-3 text-left">@Model[i].ProductDescription</h5>
-                        <h5 class="col-md-2 text-left">@Model[i].IssuerUserName</h5>
-                        <h5 class="col-md-2 text-left">x@(Model[i].Quantity)</h5>
-                    </div>
+                    }
                     <hr class="hr-2 bg-primary">
                     <form asp-controller="Orders" 
-                          asp-action="CompleteProducts" 
-                          method="post" 
-                          class="d-flex justify-content-between">
-                        <input type="hidden" value="@Model[i].Id"/>
+                            asp-action="CompleteProducts" 
+                            method="post" 
+                            class="d-flex justify-content-between">
+                        <input type="hidden" value="@groupedByResults[j].Issuer" name="recipientId"/>
                         <button class="btn btn-primary font-weight-bold">Complete</button>
                     </form>
-                    @if (i != Model.Count)
-                    {
-                        <hr class="hr-2 bg-primary">
-                    }
+                    <hr class="hr-2 bg-primary">
                 }
             </div>
-            @*<form asp-controller="Orders" asp-action="CompleteProducts" method="post" class="d-flex justify-content-between">
-                <button class="btn btn-primary font-weight-bold">Complete</button>
-            </form>*@
         </div>
     </div>
 }
