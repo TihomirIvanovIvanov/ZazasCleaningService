@@ -1,7 +1,6 @@
 ﻿namespace ZazasCleaningService.Web.Controllers
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -40,10 +39,10 @@
                 productsPerPage = 1;
             }
 
-            foreach (var product in allProductsView)
+            foreach (var products in allProductsView)
             {
-                product.PagesCount = productsPerPage;
-                product.CurrentPage = page;
+                products.PagesCount = productsPerPage;
+                products.CurrentPage = page;
             }
 
             return this.View(allProductsView);

@@ -27,9 +27,10 @@
 
         public async Task<IActionResult> All(int page = 1)
         {
-            var allServicesView = this.servicesService
+            var allServicesView = await this.servicesService
                 .GetAllServicesAsync<ServicesServiceModel>(ItemsPerPage, (page - 1) * ItemsPerPage)
-                .To<ServicesAllViewModel>();
+                .To<ServicesAllViewModel>()
+                .ToListAsync();
 
             var count = this.servicesService.GetCountServices();
             var servicesPerPage = (int)Math.Ceiling((double)count / ItemsPerPage);
@@ -39,9 +40,13 @@
                 servicesPerPage = 1;
             }
 
-            allServicesView.Select(service => service.PagesCount == servicesPerPage && service.CurrentPage == page);
+            foreach (var services in allServicesView)
+            {
+                services.PagesCount = servicesPerPage;
+                services.CurrentPage = page;
+            }
 
-            return this.View(await allServicesView.ToListAsync());
+            return this.View(allServicesView);
         }
 
         public async Task<IActionResult> Details(int id)
