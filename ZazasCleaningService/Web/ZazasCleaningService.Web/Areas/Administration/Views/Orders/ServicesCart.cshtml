@@ -1,6 +1,14 @@
 ﻿@model List<ZazasCleaningService.Web.ViewModels.Services.Order.Cart.ServiceOrdersCartViewModel>
 @{
-    ViewData["Title"] = "ProductsCart";
+    ViewData["Title"] = "ServiceCart";
+    var groupedByResults = Model
+        .GroupBy(scvm => scvm.IssuerId)
+        .Select(scvm => new
+        {
+            Issuer = scvm.Key,
+            Collection = scvm.ToList(),
+        })
+        .ToList();
 }
 
 <!-- banner 2 -->
@@ -52,28 +60,33 @@ else
                     <h3 class="col-md-1 text-left">To</h3>
                 </div>
                 <hr class="hr-2 bg-primary">
-                @for (int i = 0; i < Model.Count; i++)
+                @for (int j = 0, k = 0; j < groupedByResults.Count; j++)
                 {
-                    <div class="order row">
-                        <h5 class="col-md-1 text-left">@(i + 1)</h5>
-                        <div class="col-md-2">
-                            <img class="img-thumbnail product-cart-image" src="@Model[i].ServicePicture" />
-                        </div>
-                        <h5 class="col-md-2 text-left">@Model[i].ServiceName</h5>
-                        <h5 class="col-md-2 text-left">@Model[i].ServiceDescription</h5>
-                        <h5 class="col-md-2 text-left">@Model[i].IssuerUserName</h5>
-                        <h5 class="col-md-1 text-left">@Model[i].FromFormatted</h5> 
-                        <h5 class="col-md-1 text-left">@Model[i].ToFormatted</h5>
-                    </div>
-                    @if (i != Model.Count)
+                    @for (int i = 0; i < groupedByResults[j].Collection.Count; i++, k++)
                     {
-                        <hr class="hr-2 bg-primary">
+                        <div class="order row">
+                            <h5 class="col-md-1 text-left">@(k + 1)</h5>
+                            <div class="col-md-2">
+                                <img class="img-thumbnail product-cart-image" src="@groupedByResults[j].Collection[i].ServicePicture" />
+                            </div>
+                            <h5 class="col-md-2 text-left">@groupedByResults[j].Collection[i].ServiceName</h5>
+                            <h5 class="col-md-2 text-left">@groupedByResults[j].Collection[i].ServiceDescription</h5>
+                            <h5 class="col-md-2 text-left">@groupedByResults[j].Collection[i].IssuerUserName</h5>
+                            <h5 class="col-md-1 text-left">@groupedByResults[j].Collection[i].FromFormatted</h5> 
+                            <h5 class="col-md-1 text-left">@groupedByResults[j].Collection[i].ToFormatted</h5>
+                        </div>
                     }
+                    <hr class="hr-2 bg-primary">
+                    <form asp-controller="Orders" 
+                          asp-action="CompleteServices" 
+                          method="post" 
+                          class="d-flex justify-content-between">
+                        <input type="hidden" value="@groupedByResults[j].Issuer" name="recipientId"/>
+                        <button class="btn btn-primary font-weight-bold">Complete</button>
+                    </form>
+                    <hr class="hr-2 bg-primary">
                 }
             </div>
-            <form asp-controller="Orders" asp-action="CompleteServices" method="post" class="d-flex justify-content-between">
-                <button class="btn btn-primary font-weight-bold">Complete</button>
-            </form>
         </div>
     </div>
 }

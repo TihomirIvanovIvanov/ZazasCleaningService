@@ -133,7 +133,8 @@
         public async Task SetServiceOrdersToReceiptAsync(ServiceReceipt serviceReceipt)
         {
             serviceReceipt.ServiceOrders = await this.dbContext.ServiceOrders
-                .Where(order => order.Status.Name == GlobalConstants.StatusActive)
+                .Where(order => order.Status.Name == GlobalConstants.StatusActive
+                && order.IssuerId == serviceReceipt.RecipientId)
                 .ToListAsync();
         }
 

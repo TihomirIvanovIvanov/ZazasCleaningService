@@ -2,13 +2,13 @@
 @{
     ViewData["Title"] = "ProductsCart";
     var groupedByResults = Model
-                .GroupBy(pcvm => pcvm.IssuerId)
-                .Select(pcvm => new
-                {
-                    Issuer = pcvm.Key,
-                    Collection = pcvm.ToList(),
-                })
-                .ToList();
+        .GroupBy(pcvm => pcvm.IssuerId)
+        .Select(pcvm => new
+        {
+            Issuer = pcvm.Key,
+            Collection = pcvm.ToList(),
+        })
+        .ToList();
 }
 
 <!-- banner 2 -->
@@ -76,9 +76,9 @@ else
                     }
                     <hr class="hr-2 bg-primary">
                     <form asp-controller="Orders" 
-                            asp-action="CompleteProducts" 
-                            method="post" 
-                            class="d-flex justify-content-between">
+                          asp-action="CompleteProducts" 
+                          method="post" 
+                          class="d-flex justify-content-between">
                         <input type="hidden" value="@groupedByResults[j].Issuer" name="recipientId"/>
                         <button class="btn btn-primary font-weight-bold">Complete</button>
                     </form>

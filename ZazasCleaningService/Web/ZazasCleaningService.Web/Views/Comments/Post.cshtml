@@ -84,18 +84,18 @@
                     </div>
                     <div>
                         <form asp-controller="Comments"
-                                asp-action="Create"
-                                method="post"
-                                id="AddCommentForm"
-                                style="display: none">
+                              asp-action="Create"
+                              method="post"
+                              id="AddCommentForm"
+                              style="display: none">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <input type="hidden" name="ParentId" />
                             <div>
                                 <label for="Content"></label>
                                 <textarea name="Content"
-                                            id="Content"
-                                            class="form-control"
-                                            placeholder="Message..."></textarea>
+                                          id="Content"
+                                          class="form-control"
+                                          placeholder="Message..."></textarea>
                             </div>
                             <div>
                                 <hr />

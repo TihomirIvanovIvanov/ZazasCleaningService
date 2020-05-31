@@ -19,6 +19,8 @@
 
         public DateTime To { get; set; }
 
+        public string IssuerId { get; set; }
+
         public string IssuerUserName { get; set; }
 
         public string FromFormatted => this.From.ToString("MM/dd/yy HH:mm");
