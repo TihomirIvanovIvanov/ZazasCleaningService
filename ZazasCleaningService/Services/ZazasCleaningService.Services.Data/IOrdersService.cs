@@ -8,10 +8,6 @@
 
     public interface IOrdersService
     {
-        // TODO: Complete thesesteps
-        // 1. Add service models
-        // 2. Add binding models
-        // 3. Add view models and methods for extracting (GetAllServiceOrders() / GetAllProductOrders) (dont forget lazy)
         Task<T> CreateProductOrderAsync<T>(OrderProductsServiceModel orderProductsServiceModel);
 
         Task<T> CreateServiceOrderAsync<T>(OrderServicesServiceModel orderServicesServiceModel);
@@ -31,7 +27,5 @@
         Task SetServiceOrdersToReceiptAsync(ServiceReceipt serviceReceipt);
 
         Task<T> CompleteServiceOrdersAsync<T>(int serviceOrderId);
-
-        Task<string> GetRecipientIdForOrdersAsync();
     }
 }

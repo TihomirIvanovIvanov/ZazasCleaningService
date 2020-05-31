@@ -97,15 +97,6 @@
             return serviceOrders;
         }
 
-        public async Task<string> GetRecipientIdForOrdersAsync()
-        {
-            var issuerId = await this.dbContext.ProductOrders
-                .Select(p => p.IssuerId)
-                .FirstOrDefaultAsync();
-
-            return issuerId;
-        }
-
         public async Task<T> GetProductOrdersByIdAsync<T>(int id)
         {
             var productOrderById = await this.dbContext.ProductOrders

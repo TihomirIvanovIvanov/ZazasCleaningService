@@ -15,7 +15,7 @@
 
         public int Products { get; set; }
 
-        public string RecipientId { get; set; }
+        public string FormattedCreatedOn => this.CreatedOn.ToString("MM/dd/yyyy HH:mm");
 
         public void CreateMappings(IProfileExpression configuration)
         {

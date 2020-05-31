@@ -1,5 +1,7 @@
 ﻿namespace ZazasCleaningService.Web.ViewModels.Receipts.Details
 {
+    using System;
+
     using AutoMapper;
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Receipts;
@@ -11,6 +13,10 @@
         public string IssuedOnPicture { get; set; }
 
         public string RecipientName { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public string FormattedCreatedOn => this.CreatedOn.ToString("MM/dd/yyyy HH:mm");
 
         public void CreateMappings(IProfileExpression configuration)
         {

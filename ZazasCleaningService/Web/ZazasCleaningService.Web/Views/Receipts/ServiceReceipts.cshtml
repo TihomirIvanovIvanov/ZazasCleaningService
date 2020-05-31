@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ZazasCleaningService.Web.ViewModels.Receipts.ServiceReceiptsViewModel>
+﻿@model List<ZazasCleaningService.Web.ViewModels.Receipts.ServiceReceiptsViewModel>
 @{
     ViewData["Title"] = "ServiceReceipts";
 }
@@ -20,9 +20,9 @@
     </nav>
 </div>
 <!-- //page details -->
-<h1 class="text-center text-primary">My Service Receipts</h1>
+<h1 class="text-center mb-4 title-2-agiles">My Service Receipts</h1>
 <hr class="hr-2 bg-primary w-50">
-@if (Model.Count() == 0)
+@if (Model.Count == 0)
 {
     <h4 class="text-center mb-4 title-2-agiles">You have no service receipts.</h4>
     <hr class="hr-2 bg-primary">
@@ -32,21 +32,21 @@ else
     <table class="table table-hover">
         <thead>
             <tr class="row text-primary text-center font-weight-bold">
-                <th class="col-md-4 h3">Id</th>
+                <th class="col-md-4 h3">#</th>
                 <th class="col-md-2 h3">Issued On</th>
                 <th class="col-md-1 h3">Services</th>
                 <th class="col-md-3 h3">Details</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var receipt in Model)
+            @for (int i = 0; i < Model.Count; i++)
             {
                 <tr class="row text-primary text-center font-weight-bold">
-                    <td class="col-md-4 h5">@receipt.Id</td>
-                    <td class="col-md-2 h5">@receipt.CreatedOn.ToString("MM/dd/yyyy HH:mm")</td>
-                    <td class="col-md-1 h5">@receipt.Services</td>
+                    <td class="col-md-4 h5">@(i + 1)</td>
+                    <td class="col-md-2 h5">@Model[i].FormattedCreatedOn</td>
+                    <td class="col-md-1 h5">@Model[i].Services</td>
                     <td class="col-md-3">
-                        <a href="/Receipts/Details/ServiceDetails/@receipt.Id" class="btn btn-primary font-weight-bold">Details</a>
+                        <a href="/Receipts/Details/ServiceDetails/@Model[i].Id" class="btn btn-primary font-weight-bold">Details</a>
                     </td>
                 </tr>
             }

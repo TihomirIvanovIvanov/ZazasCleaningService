@@ -15,6 +15,8 @@
 
         public int Services { get; set; }
 
+        public string FormattedCreatedOn => this.CreatedOn.ToString("MM/dd/yyyy HH:mm");
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration

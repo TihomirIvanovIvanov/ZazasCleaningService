@@ -156,15 +156,30 @@
                     <!-- social icons -->
                     <div class="social-icons text-md-center text-center">
                         <ul class="list-unstyled text-md-center">
-                            <li>
-                                <a href="/Identity/Account/Login" class="fab fa-facebook-f icon-border facebook rounded-circle"> </a>
-                            </li>
-                            <li>
-                                <a href="/Identity/Account/Login" class="fab fa-microsoft icon-border twitter rounded-circle"> </a>
-                            </li>
-                            <li>
-                                <a href="/Identity/Account/Login" class="fab fa-google-plus-g icon-border googleplus rounded-circle"> </a>
-                            </li>
+                            @if (this.User.Identity.IsAuthenticated)
+                            {
+                                <li>
+                                    <a href="https://www.facebook.com/rojo.randriantsoa" class="fab fa-facebook-f icon-border facebook rounded-circle"></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.facebook.com/rojo.randriantsoa" class="fab fa-microsoft icon-border twitter rounded-circle"></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.facebook.com/rojo.randriantsoa" class="fab fa-google-plus-g icon-border googleplus rounded-circle"></a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="/Identity/Account/Login" class="fab fa-facebook-f icon-border facebook rounded-circle"></a>
+                                </li>
+                                <li>
+                                    <a href="/Identity/Account/Login" class="fab fa-microsoft icon-border twitter rounded-circle"></a>
+                                </li>
+                                <li>
+                                    <a href="/Identity/Account/Login" class="fab fa-google-plus-g icon-border googleplus rounded-circle"></a>
+                                </li>
+                            }
                         </ul>
                     </div>
                     <!-- //social icons -->

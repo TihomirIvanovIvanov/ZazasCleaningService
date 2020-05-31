@@ -1,6 +1,7 @@
 ﻿namespace ZazasCleaningService.Web.Controllers
 {
     using System.Linq;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -24,8 +25,10 @@
             this.ordersService = ordersService;
         }
 
-        public async Task<IActionResult> ProductReceipts(string recipientId)
+        public async Task<IActionResult> ProductReceipts()
         {
+            var recipientId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
             var productReceiptsViews = await this.receiptsService
                 .GetAllProductReceiptsByRecipientId(recipientId)
                 .Select(receipt => receipt.To<ProductReceiptsViewModel>())
@@ -45,7 +48,7 @@
 
         public async Task<IActionResult> ServiceReceipts()
         {
-            var recipientId = await this.ordersService.GetRecipientIdForOrdersAsync();
+            var recipientId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             var serviceReceiptsViews = await this.receiptsService
                 .GetAllServiceReceiptsByRecipientId(recipientId)

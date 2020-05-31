@@ -31,12 +31,12 @@
                     <input type="hidden" value="@Model.Id" name="Id" />
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label for="IssuedOnPicture">Picture</label>
+                        <label asp-for="IssuedOnPicture">Receipt Picture</label>
+                        <hr />
                         <input asp-for="IssuedOnPicture"
                                type="file"
                                name="IssuedOnPicture"
                                class="form-control"
-                               placeholder="IssuedOnPicture"
                                required="">
                         <span asp-validation-for="IssuedOnPicture" class="text-danger"></span>
                     </div>
