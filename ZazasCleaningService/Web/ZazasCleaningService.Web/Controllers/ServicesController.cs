@@ -51,7 +51,8 @@
 
         public async Task<IActionResult> Details(int id)
         {
-            var serviceDetailsViewModel = (await this.servicesService.GetServiceByIdAsync(id)).To<ServicesDetailsViewModel>();
+            var serviceDetailsViewModel =
+                (await this.servicesService.GetServiceByIdAsync(id)).To<ServicesDetailsViewModel>();
 
             return this.View(serviceDetailsViewModel);
         }

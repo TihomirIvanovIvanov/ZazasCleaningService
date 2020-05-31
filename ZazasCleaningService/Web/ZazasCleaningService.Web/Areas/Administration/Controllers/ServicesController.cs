@@ -41,14 +41,15 @@
             var servicesServiceModel = AutoMapperConfig.MapperInstance.Map<ServicesServiceModel>(servicesCreateInputModel);
             servicesServiceModel.Picture = pictureUrl;
 
-            await this.servicesService.CreateServiceAsync<int>(servicesServiceModel);
+            await this.servicesService.CreateServiceAsync(servicesServiceModel);
 
             return this.Redirect("/Services/All");
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var servicesEditInputModel = (await this.servicesService.GetServiceByIdAsync(id)).To<ServicesEditInputModel>();
+            var servicesEditInputModel =
+                (await this.servicesService.GetServiceByIdAsync(id)).To<ServicesEditInputModel>();
 
             if (servicesEditInputModel == null)
             {
@@ -72,14 +73,15 @@
             var servicesServiceModel = AutoMapperConfig.MapperInstance.Map<ServicesServiceModel>(servicesEditInputModel);
             servicesServiceModel.Picture = pictureUrl;
 
-            await this.servicesService.EditAsync<int>(id, servicesServiceModel);
+            await this.servicesService.EditAsync(id, servicesServiceModel);
 
             return this.Redirect("/Services/All");
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            var servicesDeleteViewModel = (await this.servicesService.GetServiceByIdAsync(id)).To<ServicesDeleteViewModel>();
+            var servicesDeleteViewModel =
+                (await this.servicesService.GetServiceByIdAsync(id)).To<ServicesDeleteViewModel>();
 
             if (servicesDeleteViewModel == null)
             {
@@ -92,7 +94,7 @@
         [HttpPost("/Administration/Services/Delete/{id}")]
         public async Task<IActionResult> DeleteConfirm(int id)
         {
-            await this.servicesService.DeleteByIdAsync<int>(id);
+            await this.servicesService.DeleteByIdAsync(id);
 
             return this.Redirect("/Services/All");
         }

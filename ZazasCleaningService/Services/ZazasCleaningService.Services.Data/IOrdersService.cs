@@ -8,9 +8,9 @@
 
     public interface IOrdersService
     {
-        Task<T> CreateProductOrderAsync<T>(OrderProductsServiceModel orderProductsServiceModel);
+        Task<int> CreateProductOrderAsync(OrderProductsServiceModel orderProductsServiceModel);
 
-        Task<T> CreateServiceOrderAsync<T>(OrderServicesServiceModel orderServicesServiceModel);
+        Task<int> CreateServiceOrderAsync(OrderServicesServiceModel orderServicesServiceModel);
 
         IQueryable<T> GetAllProductOrdersAsync<T>();
 
@@ -22,10 +22,10 @@
 
         Task SetProductOrdersToReceiptAsync(ProductReceipt productReceipt);
 
-        Task<T> CompleteProductOrdersAsync<T>(int productOrderId);
+        Task<int> CompleteProductOrdersAsync(int productOrderId);
 
         Task SetServiceOrdersToReceiptAsync(ServiceReceipt serviceReceipt);
 
-        Task<T> CompleteServiceOrdersAsync<T>(int serviceOrderId);
+        Task<int> CompleteServiceOrdersAsync(int serviceOrderId);
     }
 }

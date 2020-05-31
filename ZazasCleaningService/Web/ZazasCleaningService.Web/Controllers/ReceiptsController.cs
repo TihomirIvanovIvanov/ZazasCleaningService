@@ -17,17 +17,14 @@
     {
         private readonly IReceiptsService receiptsService;
 
-        private readonly IOrdersService ordersService;
-
-        public ReceiptsController(IReceiptsService receiptsService, IOrdersService ordersService)
+        public ReceiptsController(IReceiptsService receiptsService)
         {
             this.receiptsService = receiptsService;
-            this.ordersService = ordersService;
         }
 
         public async Task<IActionResult> ProductReceipts()
         {
-            var recipientId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var recipientId = this.GetCurrentUserId();
 
             var productReceiptsViews = await this.receiptsService
                 .GetAllProductReceiptsByRecipientId(recipientId)
@@ -40,15 +37,15 @@
         [HttpGet("/Receipts/Details/ProductDetails/{id}")]
         public async Task<IActionResult> ProductDetails(int id)
         {
-            var productReceiptDetailsView = (await this.receiptsService.GetProductByReceiptIdAsync(id))
-                .To<ProductReceiptDetailsViewModel>();
+            var productReceiptDetailsView =
+                (await this.receiptsService.GetProductByReceiptIdAsync(id)).To<ProductReceiptDetailsViewModel>();
 
             return this.View("Details/ProductDetails", productReceiptDetailsView);
         }
 
         public async Task<IActionResult> ServiceReceipts()
         {
-            var recipientId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var recipientId = this.GetCurrentUserId();
 
             var serviceReceiptsViews = await this.receiptsService
                 .GetAllServiceReceiptsByRecipientId(recipientId)
@@ -61,10 +58,16 @@
         [HttpGet("/Receipts/Details/ServiceDetails/{id}")]
         public async Task<IActionResult> ServiceDetails(int id)
         {
-            var serviceReceiptDetailsView = (await this.receiptsService.GetServiceByReceiptIdAsync(id))
-                .To<ServiceReceiptDetailsViewModel>();
+            var serviceReceiptDetailsView =
+                (await this.receiptsService.GetServiceByReceiptIdAsync(id)).To<ServiceReceiptDetailsViewModel>();
 
             return this.View("Details/ServiceDetails", serviceReceiptDetailsView);
+        }
+
+        [NonAction]
+        private string GetCurrentUserId()
+        {
+            return this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         }
     }
 }

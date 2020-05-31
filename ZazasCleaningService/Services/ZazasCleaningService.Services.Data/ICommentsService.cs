@@ -7,9 +7,7 @@
 
     public interface ICommentsService
     {
-        Task<T> CreateCommentsAsync<T>(CommentsServiceModel commentsServiceModel, int? parentId = null);
-
-        Task<bool> IsInCommentIdAsync(int parentId, int commentId);
+        Task<int> CreateCommentsAsync(CommentsServiceModel commentsServiceModel, int? parentId = null);
 
         IQueryable<T> GetAllCommentsAsync<T>();
     }

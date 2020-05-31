@@ -19,7 +19,7 @@
             this.dbContext = dbContext;
         }
 
-        public async Task<T> CreateVoteAsync<T>(VotesServiceModel votesServiceModel)
+        public async Task<int> CreateVoteAsync(VotesServiceModel votesServiceModel)
         {
             var vote = await this.GetVoteByServiceAndUserId(votesServiceModel.ServiceId, votesServiceModel.UserId);
 
@@ -36,7 +36,7 @@
             }
 
             await this.dbContext.SaveChangesAsync();
-            return vote.Id.To<T>();
+            return vote.Id;
         }
 
         public async Task<T> GetVotesAsync<T>(int serviceId)

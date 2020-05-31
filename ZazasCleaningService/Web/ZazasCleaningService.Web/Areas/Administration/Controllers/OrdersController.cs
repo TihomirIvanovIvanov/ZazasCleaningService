@@ -13,6 +13,8 @@
 
     public class OrdersController : AdministrationController
     {
+        private const string PictureName = "issuedOnPictureName";
+
         private readonly IOrdersService ordersService;
 
         private readonly IReceiptsService receiptsService;
@@ -49,8 +51,8 @@
 
         public async Task<IActionResult> CompleteProductCart(int id)
         {
-            var completeProductCartView = (await this.receiptsService.GetProductByReceiptIdAsync(id))
-                .To<ProductOrdersCartInputModel>();
+            var completeProductCartView =
+                (await this.receiptsService.GetProductByReceiptIdAsync(id)).To<ProductOrdersCartInputModel>();
 
             return this.View(completeProductCartView);
         }
@@ -64,7 +66,7 @@
             }
 
             var pictureUrl = await this.cloudinaryService
-                .UploadPictureAsync(productOrdersCartInputModel.IssuedOnPicture, "issuedOnPictureName");
+                .UploadPictureAsync(productOrdersCartInputModel.IssuedOnPicture, PictureName);
 
             var receiptProductsServiceModel =
                 AutoMapperConfig.MapperInstance.Map<ReceiptProductsServiceModel>(productOrdersCartInputModel);
@@ -96,8 +98,8 @@
 
         public async Task<IActionResult> CompleteServiceCart(int id)
         {
-            var completeServiceCartView = (await this.receiptsService.GetServiceByReceiptIdAsync(id))
-                .To<ServiceOrdersCartInputModel>();
+            var completeServiceCartView =
+                (await this.receiptsService.GetServiceByReceiptIdAsync(id)).To<ServiceOrdersCartInputModel>();
 
             return this.View(completeServiceCartView);
         }
@@ -111,7 +113,7 @@
             }
 
             var pictureUrl = await this.cloudinaryService
-                .UploadPictureAsync(serviceOrdersCartInputModel.IssuedOnPicture, "issuedOnPictureName");
+                .UploadPictureAsync(serviceOrdersCartInputModel.IssuedOnPicture, PictureName);
 
             var receiptServicesServiceModel =
                 AutoMapperConfig.MapperInstance.Map<ReceiptServicesServiceModel>(serviceOrdersCartInputModel);

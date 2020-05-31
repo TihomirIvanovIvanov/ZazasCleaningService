@@ -7,7 +7,7 @@
 
     public interface IServicesService
     {
-        Task<T> CreateServiceAsync<T>(ServicesServiceModel servicesServiceModel);
+        Task<int> CreateServiceAsync(ServicesServiceModel servicesServiceModel);
 
         IQueryable<T> GetAllServicesAsync<T>(int? take = null, int skip = 0);
 
@@ -15,8 +15,8 @@
 
         Task<ServicesServiceModel> GetServiceByIdAsync(int id);
 
-        Task<T> EditAsync<T>(int id, ServicesServiceModel servicesServiceModel);
+        Task<int> EditAsync(int id, ServicesServiceModel servicesServiceModel);
 
-        Task<T> DeleteByIdAsync<T>(int id);
+        Task<bool> DeleteByIdAsync(int id);
     }
 }

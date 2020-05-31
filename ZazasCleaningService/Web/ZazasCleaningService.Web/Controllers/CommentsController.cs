@@ -39,7 +39,7 @@
                 var commentsServiceModel =
                     AutoMapperConfig.MapperInstance.Map<CommentsServiceModel>(createCommentsInputModel);
                 commentsServiceModel.UserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                await this.commentsService.CreateCommentsAsync<int>(commentsServiceModel, parentId);
+                await this.commentsService.CreateCommentsAsync(commentsServiceModel, parentId);
             }
 
             return this.RedirectToAction(nameof(this.Post));

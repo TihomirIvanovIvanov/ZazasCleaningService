@@ -19,17 +19,17 @@
             this.dbContext = dbContext;
         }
 
-        public async Task<T> CreateServiceAsync<T>(ServicesServiceModel servicesServiceModel)
+        public async Task<int> CreateServiceAsync(ServicesServiceModel servicesServiceModel)
         {
             var service = AutoMapperConfig.MapperInstance.Map<Service>(servicesServiceModel);
 
             await this.dbContext.Services.AddAsync(service);
             await this.dbContext.SaveChangesAsync();
 
-            return service.Id.To<T>();
+            return service.Id;
         }
 
-        public async Task<T> DeleteByIdAsync<T>(int id)
+        public async Task<bool> DeleteByIdAsync(int id)
         {
             var service = await this.GetServiceById(id);
             var serviceOrder = await this.GetServiceOrderByServiceId(service.Id);
@@ -45,10 +45,10 @@
             this.dbContext.Services.Update(service);
             await this.dbContext.SaveChangesAsync();
 
-            return service.IsDeleted.To<T>();
+            return service.IsDeleted;
         }
 
-        public async Task<T> EditAsync<T>(int id, ServicesServiceModel servicesServiceModel)
+        public async Task<int> EditAsync(int id, ServicesServiceModel servicesServiceModel)
         {
             var service = await this.GetServiceById(id);
 
@@ -59,7 +59,7 @@
             this.dbContext.Services.Update(service);
             await this.dbContext.SaveChangesAsync();
 
-            return service.Id.To<T>();
+            return service.Id;
         }
 
         public IQueryable<T> GetAllServicesAsync<T>(int? take = null, int skip = 0)

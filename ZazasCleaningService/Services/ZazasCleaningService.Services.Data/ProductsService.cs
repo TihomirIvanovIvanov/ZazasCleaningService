@@ -19,7 +19,7 @@
             this.dbContext = dbContext;
         }
 
-        public async Task<T> CreateProductAsync<T>(ProductsServiceModel productsServiceModel)
+        public async Task<int> CreateProductAsync(ProductsServiceModel productsServiceModel)
         {
             var productTypesNameFromDb = await this.GetProductTypeByName(productsServiceModel);
 
@@ -29,10 +29,10 @@
             await this.dbContext.Products.AddAsync(product);
             await this.dbContext.SaveChangesAsync();
 
-            return product.Id.To<T>();
+            return product.Id;
         }
 
-        public async Task<T> CreateProductTypeAsync<T>(string name)
+        public async Task<int> CreateProductTypeAsync(string name)
         {
             var productType = new ProductType
             {
@@ -42,10 +42,10 @@
             await this.dbContext.AddAsync(productType);
             await this.dbContext.SaveChangesAsync();
 
-            return productType.Id.To<T>();
+            return productType.Id;
         }
 
-        public async Task<T> DeleteByIdAsync<T>(int id)
+        public async Task<bool> DeleteByIdAsync(int id)
         {
             var product = await this.GetProductById(id);
             var productOrder = await this.GetProductOrderByProductId(id);
@@ -61,10 +61,10 @@
             this.dbContext.Products.Update(product);
             await this.dbContext.SaveChangesAsync();
 
-            return product.IsDeleted.To<T>();
+            return product.IsDeleted;
         }
 
-        public async Task<T> EditAsync<T>(int id, ProductsServiceModel productsServiceModel)
+        public async Task<int> EditAsync(int id, ProductsServiceModel productsServiceModel)
         {
             // TODO: да връщам ли директно продукт на GetByIdAsync както при GetProductTypeByName
             var productTypeNameFromDb = await this.GetProductTypeByName(productsServiceModel);
@@ -78,7 +78,7 @@
             this.dbContext.Products.Update(product);
             await this.dbContext.SaveChangesAsync();
 
-            return product.Id.To<T>();
+            return product.Id;
         }
 
         public IQueryable<T> GetAllProductsAsync<T>(int? take = null, int skip = 0)
@@ -139,7 +139,7 @@
         private async Task<ProductType> GetProductTypeByName(ProductsServiceModel productsServiceModel)
         {
             var productTypeNameFromDb = await this.dbContext.ProductTypes
-             .FirstOrDefaultAsync(productType => productType.Name == productsServiceModel.ProductType.Name);
+                .FirstOrDefaultAsync(productType => productType.Name == productsServiceModel.ProductType.Name);
 
             if (productTypeNameFromDb == null)
             {

@@ -20,7 +20,7 @@
             this.dbContext = dbContext;
         }
 
-        public async Task<T> CompleteProductOrdersAsync<T>(int productOrderId)
+        public async Task<int> CompleteProductOrdersAsync(int productOrderId)
         {
             var productOrderFromDb = await this.GetProductOrderById(productOrderId);
 
@@ -31,10 +31,10 @@
             this.dbContext.ProductOrders.Update(productOrderFromDb);
             await this.dbContext.SaveChangesAsync();
 
-            return productOrderFromDb.Id.To<T>();
+            return productOrderFromDb.Id;
         }
 
-        public async Task<T> CompleteServiceOrdersAsync<T>(int serviceOrderId)
+        public async Task<int> CompleteServiceOrdersAsync(int serviceOrderId)
         {
             var serviceOrderFromDb = await this.GetServiceOrderById(serviceOrderId);
 
@@ -45,10 +45,10 @@
             this.dbContext.ServiceOrders.Update(serviceOrderFromDb);
             await this.dbContext.SaveChangesAsync();
 
-            return serviceOrderFromDb.Id.To<T>();
+            return serviceOrderFromDb.Id;
         }
 
-        public async Task<T> CreateProductOrderAsync<T>(OrderProductsServiceModel orderProductsServiceModel)
+        public async Task<int> CreateProductOrderAsync(OrderProductsServiceModel orderProductsServiceModel)
         {
             var orderProducts = orderProductsServiceModel.To<ProductOrder>();
 
@@ -58,10 +58,10 @@
             await this.dbContext.ProductOrders.AddAsync(orderProducts);
             await this.dbContext.SaveChangesAsync();
 
-            return orderProducts.Id.To<T>();
+            return orderProducts.Id;
         }
 
-        public async Task<T> CreateServiceOrderAsync<T>(OrderServicesServiceModel orderServicesServiceModel)
+        public async Task<int> CreateServiceOrderAsync(OrderServicesServiceModel orderServicesServiceModel)
         {
             var orderServices = orderServicesServiceModel.To<ServiceOrder>();
 
@@ -72,7 +72,7 @@
             await this.dbContext.ServiceOrders.AddAsync(orderServices);
             await this.dbContext.SaveChangesAsync();
 
-            return orderServices.Id.To<T>();
+            return orderServices.Id;
         }
 
         public IQueryable<T> GetAllProductOrdersAsync<T>()

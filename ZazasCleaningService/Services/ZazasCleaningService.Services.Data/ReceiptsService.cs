@@ -34,7 +34,7 @@
 
             foreach (var productOrder in productReceipt.ProductOrders)
             {
-                await this.ordersService.CompleteProductOrdersAsync<int>(productOrder.Id);
+                await this.ordersService.CompleteProductOrdersAsync(productOrder.Id);
             }
 
             await this.dbContext.ProductReceipts.AddAsync(productReceipt);
@@ -55,7 +55,7 @@
 
             foreach (var serviceOrder in serviceReceipt.ServiceOrders)
             {
-                await this.ordersService.CompleteServiceOrdersAsync<int>(serviceOrder.Id);
+                await this.ordersService.CompleteServiceOrdersAsync(serviceOrder.Id);
             }
 
             await this.dbContext.ServiceReceipts.AddAsync(serviceReceipt);

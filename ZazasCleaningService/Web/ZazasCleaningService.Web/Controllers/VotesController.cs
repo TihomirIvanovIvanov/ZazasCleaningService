@@ -29,7 +29,7 @@
 
             var votesServiceModel = AutoMapperConfig.MapperInstance.Map<VotesServiceModel>(voteInputModel);
             votesServiceModel.UserId = userId;
-            await this.votesService.CreateVoteAsync<int>(votesServiceModel);
+            await this.votesService.CreateVoteAsync(votesServiceModel);
 
             var votes = await this.votesService.GetVotesAsync<int>(voteInputModel.ServiceId);
 

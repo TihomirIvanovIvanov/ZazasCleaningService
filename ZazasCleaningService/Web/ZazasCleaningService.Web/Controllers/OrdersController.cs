@@ -37,8 +37,8 @@
         [HttpGet("/Orders/Create/CreateOrderProducts/{id}")]
         public async Task<IActionResult> CreateOrderProducts(int id)
         {
-            var productView = (await this.productsService.GetProductByIdAsync(id))
-                .To<ProductsOrderInputModel>();
+            var productView =
+                (await this.productsService.GetProductByIdAsync(id)).To<ProductsOrderInputModel>();
 
             this.ViewData["productId"] = productView.ProductId;
             this.ViewData["name"] = productView.Name;
@@ -57,7 +57,7 @@
             var orderProductsServiceModel = productsOrderInputModel.To<OrderProductsServiceModel>();
             orderProductsServiceModel.IssuerId = this.GetCurrentUserId();
 
-            await this.ordersService.CreateProductOrderAsync<int>(orderProductsServiceModel);
+            await this.ordersService.CreateProductOrderAsync(orderProductsServiceModel);
 
             return this.RedirectToAction(nameof(this.AllProductsOrders));
         }
@@ -65,8 +65,8 @@
         [HttpGet("/Orders/Create/CreateOrderServices/{id}")]
         public async Task<IActionResult> CreateOrderServices(int id)
         {
-            var serviceView = (await this.servicesService.GetServiceByIdAsync(id))
-                .To<ServicesOrderInputModel>();
+            var serviceView =
+                (await this.servicesService.GetServiceByIdAsync(id)).To<ServicesOrderInputModel>();
 
             this.ViewData["serviceId"] = serviceView.ServiceId;
             this.ViewData["name"] = serviceView.Name;
@@ -85,7 +85,7 @@
             var orderServicesServiceModel = servicesOrderInputModel.To<OrderServicesServiceModel>();
             orderServicesServiceModel.IssuerId = this.GetCurrentUserId();
 
-            await this.ordersService.CreateServiceOrderAsync<int>(orderServicesServiceModel);
+            await this.ordersService.CreateServiceOrderAsync(orderServicesServiceModel);
 
             return this.RedirectToAction(nameof(this.AllServicesOrders));
         }
