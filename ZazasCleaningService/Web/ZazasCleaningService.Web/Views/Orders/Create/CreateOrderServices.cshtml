@@ -1,6 +1,6 @@
 ﻿@model ZazasCleaningService.Web.ViewModels.Services.Order.ServicesOrderInputModel
 @{
-    ViewData["Title"] = "Create";
+    this.ViewData["Title"] = "Create";
 }
 
 <!-- banner 2 -->
@@ -31,10 +31,10 @@
                     <input type="hidden" value="@this.ViewData["serviceId"]" name="ServiceId" />
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="From">From</label>
+                        <label asp-for="From"></label>
                         <input asp-for="From"
                                type="text"
-                               name="from"
+                               name="From"
                                id="from"
                                class="form-control"
                                placeholder="From"
@@ -42,10 +42,10 @@
                         <span asp-validation-for="From" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="To">To</label>
+                        <label asp-for="To"></label>
                         <input asp-for="To"
                                type="text"
-                               name="to"
+                               name="To"
                                id="to"
                                class="form-control"
                                placeholder="To"

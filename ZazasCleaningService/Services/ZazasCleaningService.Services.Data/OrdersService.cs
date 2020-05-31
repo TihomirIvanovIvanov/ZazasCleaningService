@@ -97,20 +97,22 @@
             return serviceOrders;
         }
 
-        public async Task<T> GetProductOrdersByIdAsync<T>(int id)
+        public async Task<OrderProductsServiceModel> GetProductOrdersByIdAsync(int id)
         {
             var productOrderById = await this.dbContext.ProductOrders
+                .To<OrderProductsServiceModel>()
                 .FirstOrDefaultAsync(productOrder => productOrder.Id == id);
 
-            return productOrderById.To<T>();
+            return productOrderById;
         }
 
-        public async Task<T> GetServiceOrdersByIdAsync<T>(int id)
+        public async Task<OrderServicesServiceModel> GetServiceOrdersByIdAsync(int id)
         {
             var serviceOrderById = await this.dbContext.ServiceOrders
+                .To<OrderServicesServiceModel>()
                 .FirstOrDefaultAsync(serviceOrder => serviceOrder.Id == id);
 
-            return serviceOrderById.To<T>();
+            return serviceOrderById;
         }
 
         public async Task SetProductOrdersToReceiptAsync(ProductReceipt productReceipt)

@@ -1,11 +1,11 @@
 ﻿@using ZazasCleaningService.Web.ViewModels.Comments
 @model List<CommentsViewModel>
 @{ 
-    ViewData["Title"] = "Posts";
+    this.ViewData["Title"] = "Posts";
 
     void DisplayComments(int? parentId)
     {
-        var childComments = parentId == null ? Model : Model.Where(comment => comment.ParentId == parentId);
+        var childComments = parentId == null ? this.Model : this.Model.Where(comment => comment.ParentId == parentId);
 
         @foreach (var comment in childComments)
         {

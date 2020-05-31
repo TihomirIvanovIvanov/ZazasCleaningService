@@ -1,6 +1,6 @@
 ﻿@model ZazasCleaningService.Web.ViewModels.Services.Order.Details.ServiceOrdersDetailsViewModel
 @{
-    ViewData["Title"] = "ServiceOrdersDetails";
+    this.ViewData["Title"] = "ServiceOrdersDetails";
 }
 
 <!-- banner 2 -->
@@ -25,14 +25,14 @@
         <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Service Order Details</h2>
         <div class="row">
             <div class="col-lg-6 offers-agiles-left">
-                <img src="@Model.ServicePicture" alt="" class="img-fluid">
+                <img src="@this.Model.ServicePicture" alt="" class="img-fluid">
             </div>
             <div class="col-lg-6 offers-agiles-right mt-xl-4 mt-lg-0 mt-4">
-                <h4 class="mb-4 title-2-agiles">@Model.ServiceName</h4>
-                <h4 class="mb-4 title-2-agiles">Start: <span>@Model.From.ToString("MM/dd/yyyy HH:mm")</span></h4>
-                <h4 class="mb-4 title-2-agiles">Stop: <span>@Model.To.ToString("MM/dd/yyyy HH:mm")</span></h4>
-                <p class="mt-4">@Model.ServiceDescription</p>
-                <h4 class="mb-4 title-2-agiles">@Model.StatusName</h4>
+                <h4 class="mb-4 title-2-agiles">@this.Model.ServiceName</h4>
+                <h4 class="mb-4 title-2-agiles">Start: <span>@this.Model.FromFormatted</span></h4>
+                <h4 class="mb-4 title-2-agiles">Stop: <span>@this.Model.ToFormatted</span></h4>
+                <p class="mt-4">@this.Model.ServiceDescription</p>
+                <h4 class="mb-4 title-2-agiles">@this.Model.StatusName</h4>
             </div>
         </div>
         @if (this.User.IsInRole(ZazasCleaningService.Common.GlobalConstants.AdministratorRoleName))

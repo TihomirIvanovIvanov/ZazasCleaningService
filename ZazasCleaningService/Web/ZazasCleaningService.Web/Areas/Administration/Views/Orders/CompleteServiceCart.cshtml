@@ -1,6 +1,6 @@
 ﻿@model ZazasCleaningService.Web.ViewModels.Services.Order.Cart.ServiceOrdersCartInputModel
 @{
-    ViewData["Title"] = "CompleteServiceCart";
+    this.ViewData["Title"] = "CompleteServiceCart";
 }
 
 <!-- banner 2 -->
@@ -13,7 +13,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/Administration/Orders/ServicesCart">@Model.Id</a>
+                <a href="/Administration/Orders/ServicesCart">@this.Model.Id</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">Order</li>
         </ol>
@@ -23,12 +23,12 @@
 <div class="py-5">
     <div class="container py-xl-5 py-lg-3">
         <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">
-            Order @Model.Id
+            Order @this.Model.Id
         </h2>
         <div class="row contact_wthreerow agileits-w3layouts pt-4">
             <div class="col-lg-7 w3l_contact_form">
                 <form method="post" enctype="multipart/form-data">
-                    <input type="hidden" value="@Model.Id" name="Id" />
+                    <input type="hidden" value="@this.Model.Id" name="Id" />
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="IssuedOnPicture">Receipt Picture</label>

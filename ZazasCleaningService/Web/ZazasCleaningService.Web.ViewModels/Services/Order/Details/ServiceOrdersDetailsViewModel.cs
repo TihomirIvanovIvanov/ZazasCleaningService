@@ -7,6 +7,8 @@
 
     public class ServiceOrdersDetailsViewModel : IMapFrom<OrderServicesServiceModel>
     {
+        private const string DateFormat = "MM/dd/yyyy HH:mm";
+
         public int Id { get; set; }
 
         public string ServiceName { get; set; }
@@ -20,5 +22,9 @@
         public string ServiceDescription { get; set; }
 
         public string StatusName { get; set; }
+
+        public string FromFormatted => this.From.ToString(DateFormat);
+
+        public string ToFormatted => this.To.ToString(DateFormat);
     }
 }

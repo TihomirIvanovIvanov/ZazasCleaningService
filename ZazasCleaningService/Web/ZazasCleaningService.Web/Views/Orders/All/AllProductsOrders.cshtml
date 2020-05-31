@@ -1,8 +1,8 @@
 ﻿@using ZazasCleaningService.Web.ViewModels.Products.Order
 @model List<ZazasCleaningService.Web.ViewModels.Products.Order.AllProductsOrdersViewModel>
 @{
-    ViewData["Title"] = "AllProductsOrders";
-    var productsData = (IEnumerable<AllProductsOrdersViewModel>)ViewData["productsData"];
+    this.ViewData["Title"] = "AllProductsOrders";
+    var productsData = (IEnumerable<AllProductsOrdersViewModel>)this.ViewData["productsData"];
 }
 
 <div class="banner2-w3ls">

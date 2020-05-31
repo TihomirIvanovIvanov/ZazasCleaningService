@@ -1,6 +1,6 @@
 ﻿@model List<ZazasCleaningService.Web.ViewModels.Products.Order.Cart.ProductOrdersCartViewModel>
 @{
-    ViewData["Title"] = "ProductsCart";
+    this.ViewData["Title"] = "ProductsCart";
     var groupedByResults = Model
         .GroupBy(pcvm => pcvm.IssuerId)
         .Select(pcvm => new
@@ -28,7 +28,7 @@
     </nav>
 </div>
 <!-- //page details -->
-@if (Model.Count == 0)
+@if (this.Model.Count == 0)
 {
     <div class="offers-w3ls py-5">
         <div class="container py-xl-5 py-lg-3">

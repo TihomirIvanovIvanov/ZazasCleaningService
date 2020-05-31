@@ -1,7 +1,6 @@
-﻿@using ZazasCleaningService.Common
-@model ZazasCleaningService.Web.ViewModels.Services.Details.ServicesDetailsViewModel
+﻿@model ZazasCleaningService.Web.ViewModels.Services.Details.ServicesDetailsViewModel
 @{
-    ViewData["Title"] = "Details";
+    this.ViewData["Title"] = "Details";
 }
 
 <!-- banner 2 -->
@@ -26,23 +25,23 @@
         <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Services Details</h2>
         <div class="row">
             <div class="col-lg-6 offers-agiles-left">
-                <img src="@Model.Picture" alt="" class="img-fluid">
+                <img src="@this.Model.Picture" alt="" class="img-fluid">
                 <div class="p-mask w-50 justify-content-around">
                     <div class="w3l-button text-center">
-                        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                        @if (this.User.IsInRole(ZazasCleaningService.Common.GlobalConstants.AdministratorRoleName))
                         {
-                            <a href="/Administration/Services/Edit/@Model.Id"
+                            <a href="/Administration/Services/Edit/@this.Model.Id"
                                class="btn btn-sm animated-button victoria-two text-dark mt-4">
                                 Edit
                             </a>
-                            <a href="/Administration/Services/Delete/@Model.Id"
+                            <a href="/Administration/Services/Delete/@this.Model.Id"
                                class="btn btn-sm animated-button victoria-two text-dark mt-4">
                                 Delete
                             </a>
                         }
                         else
                         {
-                            <a href="/Orders/Create/CreateOrderServices/@Model.Id"
+                            <a href="/Orders/Create/CreateOrderServices/@this.Model.Id"
                                class="btn btn-sm animated-button victoria-two text-dark mt-4">
                                 Order
                             </a>
@@ -54,19 +53,19 @@
                 <div class="w3l-button text-right">
                     <form id="votesForm" method="post"></form>
                     <div>
-                        <a href="#" onclick="sendVote(@Model.Id, true)">
+                        <a href="#" onclick="sendVote(@this.Model.Id, true)">
                             <i class="fa fa-thumbs-up"></i>
                         </a>
                     </div>
-                    <div id="votesCount">@Model.VotesCount</div>
+                    <div id="votesCount">@this.Model.VotesCount</div>
                     <div>
-                        <a href="#" onclick="sendVote(@Model.Id, false)">
+                        <a href="#" onclick="sendVote(@this.Model.Id, false)">
                             <i class="fa fa-thumbs-down"></i>
                         </a>
                     </div>
                 </div>
-                <h4 class="mb-4 title-2-agiles">@Model.Name</h4>
-                <p class="mt-4">@Model.Description</p>
+                <h4 class="mb-4 title-2-agiles">@this.Model.Name</h4>
+                <p class="mt-4">@this.Model.Description</p>
             </div>
         </div>
     </div>

@@ -113,8 +113,7 @@
         public async Task<IActionResult> ProductOrdersDetails(int id)
         {
             var productOrdersDetailsView =
-                (await this.ordersService.GetProductOrdersByIdAsync<OrderProductsServiceModel>(id))
-                .To<ProductOrdersDetailsViewModel>();
+                (await this.ordersService.GetProductOrdersByIdAsync(id)).To<ProductOrdersDetailsViewModel>();
 
             return this.View("Details/ProductOrdersDetails", productOrdersDetailsView);
         }
@@ -142,8 +141,7 @@
         public async Task<IActionResult> ServiceOrdersDetails(int id)
         {
             var serviceOrdersDetailsView =
-                (await this.ordersService.GetServiceOrdersByIdAsync<OrderServicesServiceModel>(id))
-                .To<ServiceOrdersDetailsViewModel>();
+                (await this.ordersService.GetServiceOrdersByIdAsync(id)).To<ServiceOrdersDetailsViewModel>();
 
             return this.View("Details/ServiceOrdersDetails", serviceOrdersDetailsView);
         }

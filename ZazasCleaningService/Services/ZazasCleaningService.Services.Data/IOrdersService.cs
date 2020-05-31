@@ -16,9 +16,9 @@
 
         IQueryable<T> GetAllServiceOrdersAsync<T>();
 
-        Task<T> GetProductOrdersByIdAsync<T>(int id);
+        Task<OrderProductsServiceModel> GetProductOrdersByIdAsync(int id);
 
-        Task<T> GetServiceOrdersByIdAsync<T>(int id);
+        Task<OrderServicesServiceModel> GetServiceOrdersByIdAsync(int id);
 
         Task SetProductOrdersToReceiptAsync(ProductReceipt productReceipt);
 

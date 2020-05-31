@@ -1,6 +1,6 @@
 ﻿@model ZazasCleaningService.Web.ViewModels.Products.Order.Details.ProductOrdersDetailsViewModel
 @{
-    ViewData["Title"] = "ProductOrdersDetails";
+    this.ViewData["Title"] = "ProductOrdersDetails";
 }
 
 <!-- banner 2 -->
@@ -25,15 +25,15 @@
         <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Product Order Details</h2>
         <div class="row">
             <div class="col-lg-6 offers-agiles-left">
-                <img src="@Model.ProductPicture" alt="" class="img-fluid">
+                <img src="@this.Model.ProductPicture" alt="" class="img-fluid">
             </div>
             <div class="col-lg-6 offers-agiles-right mt-xl-4 mt-lg-0 mt-4">
-                <h4 class="mb-4 title-2-agiles">@Model.ProductName - <span>x@(Model.Quantity)</span></h4>
-                <p class="mt-4">@Model.ProductDescription</p>
-                <h4 class="mb-4 title-2-agiles">@Model.StatusName</h4>
+                <h4 class="mb-4 title-2-agiles">@this.Model.ProductName - <span>x@(this.Model.Quantity)</span></h4>
+                <p class="mt-4">@this.Model.ProductDescription</p>
+                <h4 class="mb-4 title-2-agiles">@this.Model.StatusName</h4>
                 @*<div class="fa-3x">
-            <i class="fas fa-sync fa-spin"></i>
-        </div>*@
+                    <i class="fas fa-sync fa-spin"></i>
+                </div>*@
             </div>
         </div>
         @if (this.User.IsInRole(ZazasCleaningService.Common.GlobalConstants.AdministratorRoleName))

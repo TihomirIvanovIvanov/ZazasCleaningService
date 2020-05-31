@@ -9,13 +9,15 @@
 
     public class ProductReceiptsViewModel : IMapFrom<ReceiptProductsServiceModel>, IHaveCustomMappings
     {
+        private const string DateFormat = "MM/dd/yyyy HH:mm";
+
         public int Id { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
         public int Products { get; set; }
 
-        public string FormattedCreatedOn => this.CreatedOn.ToString("MM/dd/yyyy HH:mm");
+        public string CreatedOnFormatted => this.CreatedOn.ToString(DateFormat);
 
         public void CreateMappings(IProfileExpression configuration)
         {

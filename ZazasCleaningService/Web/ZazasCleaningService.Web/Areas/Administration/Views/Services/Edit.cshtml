@@ -1,6 +1,6 @@
 ﻿@model ZazasCleaningService.Web.ViewModels.Services.Edit.ServicesEditInputModel
 @{
-    ViewData["Title"] = "Edit";
+    this.ViewData["Title"] = "Edit";
 }
 
 <!-- banner 2 -->
@@ -13,7 +13,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/Services/Details/@Model.Id">Service Details</a>
+                <a href="/Services/Details/@this.Model.Id">Service Details</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">Edit</li>
         </ol>

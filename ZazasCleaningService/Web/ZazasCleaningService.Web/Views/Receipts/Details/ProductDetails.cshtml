@@ -1,6 +1,6 @@
 ﻿@model ZazasCleaningService.Web.ViewModels.Receipts.Details.ProductReceiptDetailsViewModel
 @{
-    ViewData["Title"] = "ProductDetails";
+    this.ViewData["Title"] = "ProductDetails";
 }
 
 <!-- banner 2 -->
@@ -25,7 +25,7 @@
         <h2 class="tittle mb-xl-5 mb-4 text-dark text-uppercase font-weight-bold pl-4 py-3">Receipt Product Details</h2>
         <div class="row">
             <div class="col-lg-6 offers-agiles-left">
-                <img src="@Model.IssuedOnPicture" alt="" class="img-fluid">
+                <img src="@this.Model.IssuedOnPicture" alt="" class="img-fluid">
                 <div class="p-mask w-50 justify-content-around">
                     <div class="w3l-button text-center">
                         
@@ -33,9 +33,9 @@
                 </div>
             </div>
             <div class="col-lg-6 offers-agiles-right mt-xl-4 mt-lg-0 mt-4">
-                <h4 class="mb-4 title-2-agiles">Order by: @Model.RecipientUserName</h4>
+                <h4 class="mb-4 title-2-agiles">Order by: @this.Model.RecipientUserName</h4>
                 <hr />
-                <h4 class="mb-4 title-2-agiles">Completed on: @Model.FormattedCreatedOn</h4>
+                <h4 class="mb-4 title-2-agiles">Completed on: @this.Model.CreatedOnFormatted</h4>
             </div>
         </div>
     </div>
