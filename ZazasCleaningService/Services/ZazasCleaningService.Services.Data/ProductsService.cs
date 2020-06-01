@@ -66,7 +66,6 @@
 
         public async Task<int> EditAsync(int id, ProductsServiceModel productsServiceModel)
         {
-            // TODO: да връщам ли директно продукт на GetByIdAsync както при GetProductTypeByName
             var productTypeNameFromDb = await this.GetProductTypeByName(productsServiceModel);
             var product = await this.GetProductById(id);
 
@@ -102,7 +101,9 @@
 
         public IQueryable<T> GetAllProductTypesAsync<T>()
         {
-            var productTypes = this.dbContext.ProductTypes.To<T>();
+            var productTypes = this.dbContext.ProductTypes
+                .OrderByDescending(type => type.CreatedOn)
+                .To<T>();
 
             if (productTypes == null)
             {
