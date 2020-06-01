@@ -13,7 +13,7 @@
 
     public class OrdersController : AdministrationController
     {
-        private const string PictureName = "issuedOnPictureName";
+        private const string PictureName = "default";
 
         private readonly IOrdersService ordersService;
 

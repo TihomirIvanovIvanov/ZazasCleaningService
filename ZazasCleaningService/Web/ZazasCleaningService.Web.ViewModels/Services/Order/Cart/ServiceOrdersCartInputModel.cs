@@ -20,10 +20,7 @@
                 .CreateMap<ReceiptServicesServiceModel, ServiceOrdersCartInputModel>()
                 .ForMember(
                     destination => destination.Id,
-                    options => options.MapFrom(origin => origin.Id))
-                .ForMember(
-                    destination => destination.IssuedOnPicture,
-                    options => options.MapFrom(origin => origin.IssuedOnPicture));
+                    options => options.MapFrom(origin => origin.Id));
         }
     }
 }

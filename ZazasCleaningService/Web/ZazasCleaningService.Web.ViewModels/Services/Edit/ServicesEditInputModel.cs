@@ -7,7 +7,7 @@
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Services;
 
-    public class ServicesEditInputModel : IMapFrom<ServicesServiceModel>, IMapTo<ServicesServiceModel>, IHaveCustomMappings
+    public class ServicesEditInputModel : IMapFrom<ServicesServiceModel>, IMapTo<ServicesServiceModel>
     {
         [Required]
         public int Id { get; set; }
@@ -16,18 +16,10 @@
         public string Name { get; set; }
 
         [Required]
+        [IgnoreMap]
         public IFormFile Picture { get; set; }
 
         [Required]
         public string Description { get; set; }
-
-        public void CreateMappings(IProfileExpression configuration)
-        {
-            configuration
-                .CreateMap<ServicesServiceModel, ServicesEditInputModel>()
-                .ForMember(
-                    destination => destination.Picture,
-                    options => options.Ignore());
-        }
     }
 }
