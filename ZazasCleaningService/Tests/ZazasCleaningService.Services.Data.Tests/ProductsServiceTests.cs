@@ -36,6 +36,7 @@
 
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
 
+            // TODO:
             // for (int i = 0; i < expectedResult.Count; i++)
             // {
             //     var expectedEntry = expectedResult[i];
@@ -47,6 +48,7 @@
             // }
         }
 
+        // TODO: ShouldThrowException
         [Fact]
         public async Task GetAllProducts_WithZeroData_ShouldReturnEmptyResult()
         {
@@ -165,6 +167,7 @@
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
         }
 
+        // TODO:
         // [Fact]
         // public async Task GetAllProducts_ZeroData_ShouldThrowArgumentNullException()
         // {
@@ -247,6 +250,100 @@
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
                   await this.productsService.CreateProductAsync(testProductService));
         }
+
+        [Fact]
+        public async Task GetAllProductTypes_WithDummyData_ShouldReturnCorrectResult()
+        {
+            var errorMessagePrefix = "ProductsService GetAllProductTypesAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.productsService = new ProductsService(dbContext);
+
+            var actualResult = await this.productsService.GetAllProductTypesAsync<ProductTypesServiceModel>().ToListAsync();
+            var expectedResult = this.GetDummyData().Select(p => p.ProductType).To<ProductTypesServiceModel>().ToList();
+
+            Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
+
+            // TODO:
+            // for (int i = 0; i < expectedResult.Count; i++)
+            // {
+            //     var expectedEntry = expectedResult[i];
+            //     var actualEntry = actualResult[i];
+            //     Assert.True(expectedEntry.Name == actualEntry.Name, errorMessagePrefix + " " + "Name is not returned  properly.");
+            // }
+        }
+
+        [Fact]
+        public async Task GetAllProductTypes_WithZeroData_ShouldReturnEmptyResult()
+        {
+            var errorMessagePrefix = "ProductsService GetAllProductTypesAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            this.productsService = new ProductsService(dbContext);
+
+            var actualResult = await this.productsService.GetAllProductTypesAsync<ProductTypesServiceModel>().ToListAsync();
+
+            Assert.True(actualResult.Count == 0, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task CreateProductTypes_WithCorrectData_ShouldReturnCorrectResult()
+        {
+            var errorMessagePrefix = "ProductsService CreateProductTypeAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            this.productsService = new ProductsService(dbContext);
+
+            var actualResult = await this.productsService.CreateProductTypeAsync("food");
+
+            Assert.True(actualResult == 1, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task CreateProductTypes_WithEmptyData_ShouldReturnCorrectResult()
+        {
+            var errorMessagePrefix = "ProductsService CreateProductTypeAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            this.productsService = new ProductsService(dbContext);
+
+            var actualResult = await this.productsService.CreateProductTypeAsync(string.Empty);
+
+            Assert.True(actualResult == 1, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task CreateProductTypes_WithNull_ShouldReturnCorrectResult()
+        {
+            var errorMessagePrefix = "ProductsService CreateProductTypeAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            this.productsService = new ProductsService(dbContext);
+
+            var actualResult = await this.productsService.CreateProductTypeAsync(null);
+
+            Assert.True(actualResult == 1, errorMessagePrefix);
+        }
+
+        //[Fact]
+        //public async Task Edit_WithCorrectData_ShouldPassSuccessfully()
+        //{
+        //    var errorMessagePrefix = "ProductsService EditAsync() method does not work properly.";
+
+        //    var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+        //    await this.SeedData(dbContext);
+        //    this.productsService = new ProductsService(dbContext);
+
+        //    var expectedResult = dbContext.Products.First().To<ProductsServiceModel>();
+        //    var actualResult = await this.productsService.EditAsync(expectedResult.Id, expectedResult);
+
+        //    Assert.True(expectedResult.Id == actualResult.To<ProductsServiceModel>().Id, errorMessagePrefix + " " + "Id is not return properly.");
+        //    Assert.True(expectedResult.Name == actualResult.To<ProductsServiceModel>().Name, errorMessagePrefix + " " + "Name is not return properly.");
+        //    Assert.True(expectedResult.Description == actualResult.To<ProductsServiceModel>().Description, errorMessagePrefix + " " + "Description is not return properly.");
+        //    Assert.True(expectedResult.Picture == actualResult.To<ProductsServiceModel>().Picture, errorMessagePrefix + " " + "Picture is not return properly.");
+        //    Assert.True(expectedResult.ProductType.Name == actualResult.To<ProductsServiceModel>().ProductType.Name, errorMessagePrefix + " " + "ProductType Name is not return properly.");
+        //}
 
         private async Task SeedData(ApplicationDbContext dbContext)
         {
