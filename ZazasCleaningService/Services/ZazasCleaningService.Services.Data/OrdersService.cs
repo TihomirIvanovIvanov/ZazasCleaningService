@@ -64,8 +64,8 @@
         public async Task<int> CreateServiceOrderAsync(OrderServicesServiceModel orderServicesServiceModel)
         {
             var orderServices = orderServicesServiceModel.To<ServiceOrder>();
+            this.IsInService(orderServices);
 
-            // TODO: pri zapazvane na data i 4as proverqvane dali ve4e ne e zapazena datata i 4asa bezz zna4enie kakva e uslugata
             orderServices.Status = await this.dbContext.OrderStatuses
                 .FirstOrDefaultAsync(orderStatus => orderStatus.Name == GlobalConstants.StatusActive);
 
@@ -155,6 +155,32 @@
             }
 
             return serviceOrder;
+        }
+
+        private void IsInService(ServiceOrder orderServices)
+        {
+            var allServiceOrders = this.GetAllServiceOrdersAsync<OrderServicesServiceModel>();
+
+            foreach (var reservedDateTime in allServiceOrders)
+            {
+                // FROM - 1 TO - 5
+                if (orderServices.From >= reservedDateTime.From && orderServices.To <= reservedDateTime.To)
+                {
+                    throw new Exception();
+                }
+
+                // 12-14 + 12-13(CAN)
+                else if (orderServices.From <= reservedDateTime.From && orderServices.To > reservedDateTime.From)
+                {
+                    throw new Exception();
+                }
+
+                // 16 - 18 + 17-18(CAN)
+                else if (orderServices.From <= reservedDateTime.To && orderServices.To >= reservedDateTime.To)
+                {
+                    throw new Exception();
+                }
+            }
         }
     }
 }
