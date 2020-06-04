@@ -107,6 +107,11 @@
                 .To<OrderProductsServiceModel>()
                 .FirstOrDefaultAsync(productOrder => productOrder.Id == id);
 
+            if (productOrderById == null)
+            {
+                throw new ArgumentNullException(nameof(productOrderById));
+            }
+
             return productOrderById;
         }
 

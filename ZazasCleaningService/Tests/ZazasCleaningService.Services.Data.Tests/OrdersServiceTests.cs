@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
     using Xunit;
     using ZazasCleaningService.Common;
     using ZazasCleaningService.Data;
@@ -225,6 +226,32 @@
             var actualCountOfOrders = dbContext.ProductReceipts.First().ProductOrders.Count();
 
             Assert.True(expectedCountOfOrders == actualCountOfOrders, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task GetProductOrdersById_WithCorrectId_ShouldReturnSuccessfullyProductOrderId()
+        {
+            var errorMessagePrefix = "OrderService GetProductOrdersByIdAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.ordersService = new OrdersService(dbContext);
+
+            var testId = dbContext.ProductOrders.First().Id;
+            var expectedResult = this.ordersService.GetProductOrdersByIdAsync(testId).Id;
+            var actualResult = dbContext.ProductOrders.First().Id;
+
+            Assert.True(expectedResult == actualResult, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task GetProductOrdersById_WithInCorrectId_ShouldThrowArgumentNullException()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            this.ordersService = new OrdersService(dbContext);
+
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+                  await this.ordersService.GetProductOrdersByIdAsync(0));
         }
 
         private async Task SeedData(ApplicationDbContext dbContext)
