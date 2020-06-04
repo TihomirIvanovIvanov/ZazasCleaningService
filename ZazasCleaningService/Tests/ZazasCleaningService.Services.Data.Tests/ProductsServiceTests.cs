@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -344,6 +345,71 @@
         //    Assert.True(expectedResult.Picture == actualResult.To<ProductsServiceModel>().Picture, errorMessagePrefix + " " + "Picture is not return properly.");
         //    Assert.True(expectedResult.ProductType.Name == actualResult.To<ProductsServiceModel>().ProductType.Name, errorMessagePrefix + " " + "ProductType Name is not return properly.");
         //}
+
+        [Fact]
+        public async Task Edit_WithCorrectData_ShouldEditProductCorrectly()
+        {
+            var errorMessagePrefix = "ProductsService EditAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.productsService = new ProductsService(dbContext);
+
+            var expectedResult = dbContext.Products.First().To<ProductsServiceModel>();
+
+            expectedResult.Name = "Name";
+            expectedResult.Picture = "Picture";
+            expectedResult.Description = "Description";
+            expectedResult.ProductType = dbContext.ProductTypes.Last().To<ProductTypesServiceModel>();
+
+            await this.productsService.EditAsync(expectedResult.Id, expectedResult);
+
+            var actualResult = dbContext.Products.First().To<ProductsServiceModel>();
+
+            Assert.True(expectedResult.Name == actualResult.Name, errorMessagePrefix + " " + "Name is not return properly.");
+            Assert.True(expectedResult.Description == actualResult.Description, errorMessagePrefix + " " + "Description is not return properly.");
+            Assert.True(expectedResult.Picture == actualResult.Picture, errorMessagePrefix + " " + "Picture is not return properly.");
+            Assert.True(expectedResult.ProductType.Name == actualResult.ProductType.Name, errorMessagePrefix + " " + "ProductType Name is not return properly.");
+        }
+
+        [Fact]
+        public async Task Edit_WithNonExistentProductType_ShouldThrowArgumentNullException()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.productsService = new ProductsService(dbContext);
+
+            var expectedResult = dbContext.Products.First().To<ProductsServiceModel>();
+
+            expectedResult.Name = "Name";
+            expectedResult.Picture = "Picture";
+            expectedResult.Description = "Description";
+            expectedResult.ProductType = new ProductTypesServiceModel
+            {
+                Name = "NonExistent",
+            };
+
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+                  await this.productsService.EditAsync(expectedResult.Id, expectedResult));
+        }
+
+        [Fact]
+        public async Task Edit_WithNonExistentProductId_ShouldThrowArgumentNullException()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.productsService = new ProductsService(dbContext);
+
+            var expectedResult = dbContext.Products.First().To<ProductsServiceModel>();
+
+            expectedResult.Name = "Name";
+            expectedResult.Picture = "Picture";
+            expectedResult.Description = "Description";
+            expectedResult.ProductType = dbContext.ProductTypes.Last().To<ProductTypesServiceModel>();
+
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+                  await this.productsService.EditAsync(3, expectedResult));
+        }
 
         private async Task SeedData(ApplicationDbContext dbContext)
         {
