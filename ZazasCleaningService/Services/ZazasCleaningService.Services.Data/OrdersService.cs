@@ -24,7 +24,11 @@
         {
             var productOrderFromDb = await this.GetProductOrderById(productOrderId);
 
-            // TODO: Validate that the requisted order is existent and with status "Active"
+            if (productOrderFromDb.Status.Name != GlobalConstants.StatusActive)
+            {
+                throw new ArgumentNullException(nameof(productOrderFromDb));
+            }
+
             productOrderFromDb.Status = await this.dbContext.OrderStatuses
                 .FirstOrDefaultAsync(status => status.Name == GlobalConstants.StatusCompleted);
 
