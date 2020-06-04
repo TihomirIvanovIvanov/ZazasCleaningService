@@ -115,6 +115,118 @@
                   await this.ordersService.CompleteProductOrdersAsync(testId));
         }
 
+        [Fact]
+        public async Task SetProductOrdersToReceipt_WithCorrectData_ShouldSuccessfullySetOrdersToReceipt()
+        {
+            var errorMessagePrefix = "OrderService SetProductOrdersToReceiptAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            await dbContext.ProductOrders.AddAsync(new ProductOrder
+            {
+                IssuerId = "1",
+                Status = new OrderStatus
+                {
+                    Name = "Active",
+                },
+            });
+            await dbContext.ProductReceipts.AddAsync(new ProductReceipt
+            {
+                RecipientId = "1",
+            });
+            await dbContext.SaveChangesAsync();
+
+            this.ordersService = new OrdersService(dbContext);
+
+            var testReceipt = dbContext.ProductReceipts.First();
+            await this.ordersService.SetProductOrdersToReceiptAsync(testReceipt);
+
+            var expectedCountOfOrders = 1;
+            var actualCountOfOrders = dbContext.ProductReceipts.First().ProductOrders.Count();
+
+            Assert.True(expectedCountOfOrders == actualCountOfOrders, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task SetProductOrdersToReceipt_WithDifferentOrderRecipientId_ShouldOnlyAddOrdersWithSameIssuerId()
+        {
+            var errorMessagePrefix = "OrderService SetProductOrdersToReceiptAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            await dbContext.ProductOrders.AddAsync(new ProductOrder
+            {
+                IssuerId = "1",
+                Status = new OrderStatus
+                {
+                    Name = "Active",
+                },
+            });
+            await dbContext.ProductOrders.AddAsync(new ProductOrder
+            {
+                IssuerId = "2",
+                Status = new OrderStatus
+                {
+                    Name = "Active",
+                },
+            });
+            await dbContext.ProductReceipts.AddAsync(new ProductReceipt
+            {
+                RecipientId = "1",
+            });
+            await dbContext.SaveChangesAsync();
+
+            this.ordersService = new OrdersService(dbContext);
+
+            var testReceipt = dbContext.ProductReceipts.First();
+            await this.ordersService.SetProductOrdersToReceiptAsync(testReceipt);
+
+            var expectedCountOfOrders = 1;
+            var actualCountOfOrders = dbContext.ProductReceipts.First().ProductOrders.Count();
+
+            Assert.True(expectedCountOfOrders == actualCountOfOrders, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task SetProductOrdersToReceipt_WithCompletedOrderStatus_ShouldOnlyAddOrdersWithActiveStatus()
+        {
+            var errorMessagePrefix = "OrderService SetProductOrdersToReceiptAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+
+            await dbContext.ProductOrders.AddAsync(new ProductOrder
+            {
+                IssuerId = "1",
+                Status = new OrderStatus
+                {
+                    Name = "Active",
+                },
+            });
+            await dbContext.ProductOrders.AddAsync(new ProductOrder
+            {
+                IssuerId = "1",
+                Status = new OrderStatus
+                {
+                    Name = "Completed",
+                },
+            });
+            await dbContext.ProductReceipts.AddAsync(new ProductReceipt
+            {
+                RecipientId = "1",
+            });
+            await dbContext.SaveChangesAsync();
+
+            this.ordersService = new OrdersService(dbContext);
+
+            var testReceipt = dbContext.ProductReceipts.First();
+            await this.ordersService.SetProductOrdersToReceiptAsync(testReceipt);
+
+            var expectedCountOfOrders = 1;
+            var actualCountOfOrders = dbContext.ProductReceipts.First().ProductOrders.Count();
+
+            Assert.True(expectedCountOfOrders == actualCountOfOrders, errorMessagePrefix);
+        }
+
         private async Task SeedData(ApplicationDbContext dbContext)
         {
             await dbContext.AddRangeAsync(this.GetDummyData());
