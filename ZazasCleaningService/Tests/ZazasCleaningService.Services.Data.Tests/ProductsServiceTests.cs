@@ -328,7 +328,7 @@
         }
 
         //[Fact]
-        //public async Task Edit_WithCorrectData_ShouldPassSuccessfully()
+        //public async Task Edit_WithCorrectData_ShouldReturnCorrectResult()
         //{
         //    var errorMessagePrefix = "ProductsService EditAsync() method does not work properly.";
 
@@ -409,6 +409,49 @@
 
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
                   await this.productsService.EditAsync(3, expectedResult));
+        }
+
+        [Fact]
+        public async Task Delete_WithCorrectData_ShouldReturnCorrectResult()
+        {
+            var errorMessagePrefix = "ProductsService DeleteByIdAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.productsService = new ProductsService(dbContext);
+
+            var testId = dbContext.Products.First().To<ProductsServiceModel>().Id;
+            var actualResult = await this.productsService.DeleteByIdAsync(testId);
+
+            Assert.True(actualResult, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task Delete_WithCorrectData_ShouldDeleteSuccessfully()
+        {
+            var errorMessagePrefix = "ProductsService DeleteByIdAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.productsService = new ProductsService(dbContext);
+
+            var testId = dbContext.Products.First().To<ProductsServiceModel>().Id;
+            await this.productsService.DeleteByIdAsync(testId);
+
+            var expectedCount = 1;
+            var actualCount = dbContext.Products.Count();
+
+            Assert.True(expectedCount == actualCount, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task Delete_WithNonExistentProductId_ShouldThrowArgumentNullException()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.productsService = new ProductsService(dbContext);
+
+            await Assert.ThrowsAsync<ArgumentNullException>(async () => await this.productsService.DeleteByIdAsync(3));
         }
 
         private async Task SeedData(ApplicationDbContext dbContext)

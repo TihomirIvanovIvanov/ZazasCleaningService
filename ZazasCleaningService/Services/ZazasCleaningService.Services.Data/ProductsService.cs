@@ -130,10 +130,11 @@
         {
             var products = this.dbContext.Products.Count();
 
-            // if (products == 0)
-            // {
-            //     throw new ArgumentNullException(nameof(products));
-            // }
+            if (products == 0)
+            {
+                throw new ArgumentNullException(nameof(products));
+            }
+
             return products;
         }
 
