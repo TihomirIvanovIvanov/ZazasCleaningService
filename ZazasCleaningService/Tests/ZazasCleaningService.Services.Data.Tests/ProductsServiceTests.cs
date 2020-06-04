@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -452,6 +451,28 @@
             this.productsService = new ProductsService(dbContext);
 
             await Assert.ThrowsAsync<ArgumentNullException>(async () => await this.productsService.DeleteByIdAsync(3));
+        }
+
+        [Fact]
+        public async Task GetAllProductsCount_WithDummyData_ShoultReturnCorrectResult()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.productsService = new ProductsService(dbContext);
+
+            var expectedResult = dbContext.Products.Count();
+            var actualResult = this.productsService.GetCountProducts();
+
+            Assert.Equal(expectedResult, actualResult);
+        }
+
+        [Fact]
+        public void GetAllProductsCount_WithNoData_ShoultThrowArgumentNullException()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            this.productsService = new ProductsService(dbContext);
+
+            Assert.Throws<ArgumentNullException>(() => this.productsService.GetCountProducts());
         }
 
         private async Task SeedData(ApplicationDbContext dbContext)
