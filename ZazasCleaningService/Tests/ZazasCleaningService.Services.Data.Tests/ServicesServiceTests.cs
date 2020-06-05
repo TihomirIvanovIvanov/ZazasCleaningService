@@ -167,6 +167,28 @@
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
         }
 
+        [Fact]
+        public async Task GetAllServicesCount_WithDummyData_ShoultReturnCorrectResult()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.servicesService = new ServicesService(dbContext);
+
+            var expectedResult = dbContext.Services.Count();
+            var actualResult = this.servicesService.GetCountServices();
+
+            Assert.Equal(expectedResult, actualResult);
+        }
+
+        [Fact]
+        public void GetAllServicesCount_WithNoData_ShoultThrowArgumentNullException()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            this.servicesService = new ServicesService(dbContext);
+
+            Assert.Throws<ArgumentNullException>(() => this.servicesService.GetCountServices());
+        }
+
         // TODO:
         // [Fact]
         //public async Task GetAllServices_ZeroData_ShouldThrowArgumentNullException()
@@ -176,6 +198,7 @@
         //    await Assert.ThrowsAsync<ArgumentNullException>(async () =>
         //          await this.servicesService.GetAllServicesAsync<ServicesServiceModel>().ToListAsync());
         //}
+
         [Fact]
         public async Task GetById_WithExistentId_ShouldReturnCorrectResult()
         {
@@ -290,6 +313,73 @@
 
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
                   await this.servicesService.EditAsync(0, expectedResult));
+        }
+
+        [Fact]
+        public async Task Delete_WithCorrectData_ShouldReturnCorrectResult()
+        {
+            var errorMessagePrefix = "ServicesService DeleteByIdAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.servicesService = new ServicesService(dbContext);
+
+            var testId = dbContext.Services.First().To<ServicesServiceModel>().Id;
+            var actualResult = await this.servicesService.DeleteByIdAsync(testId);
+
+            Assert.True(actualResult, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task Delete_WithCorrectData_ShouldDeleteSuccessfully()
+        {
+            var errorMessagePrefix = "ServicesService DeleteByIdAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.servicesService = new ServicesService(dbContext);
+
+            var testId = dbContext.Services.First().To<ServicesServiceModel>().Id;
+            await this.servicesService.DeleteByIdAsync(testId);
+
+            var expectedCount = 1;
+            var actualCount = dbContext.Services.Count();
+
+            Assert.True(expectedCount == actualCount, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task Delete_WithOrderData_ShouldDeleteSuccessfully()
+        {
+            var errorMessagePrefix = "ServicesService DeleteByIdAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            await dbContext.ServiceOrders.AddAsync(new ServiceOrder
+            {
+                ServiceId = 1,
+            });
+            await dbContext.SaveChangesAsync();
+            this.servicesService = new ServicesService(dbContext);
+
+            var testId = dbContext.Services.First().To<ServicesServiceModel>().Id;
+
+            await this.servicesService.DeleteByIdAsync(testId);
+
+            var expectedCount = 1;
+            var actualCount = dbContext.Services.Count();
+
+            Assert.True(expectedCount == actualCount, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task Delete_WithNonExistentServiceId_ShouldThrowArgumentNullException()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.servicesService = new ServicesService(dbContext);
+
+            await Assert.ThrowsAsync<ArgumentNullException>(async () => await this.servicesService.DeleteByIdAsync(3));
         }
 
         private async Task SeedData(ApplicationDbContext dbContext)

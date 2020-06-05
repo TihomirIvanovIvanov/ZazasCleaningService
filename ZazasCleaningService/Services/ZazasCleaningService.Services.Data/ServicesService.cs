@@ -98,10 +98,11 @@
         {
             var services = this.dbContext.Services.Count();
 
-            // if (services == 0)
-            // {
-            //     throw new ArgumentNullException(nameof(services));
-            // }
+            if (services == 0)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
+
             return services;
         }
 
