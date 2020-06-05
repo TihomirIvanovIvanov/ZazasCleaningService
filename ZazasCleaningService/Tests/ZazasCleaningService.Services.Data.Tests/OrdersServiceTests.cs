@@ -78,7 +78,7 @@
             var errorMessagePrefix = "OrderService CompleteProductOrdersAsync() method does not work properly.";
 
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
-            await this.SeedData(dbContext);
+            await this.SeedProductOrdersData(dbContext);
             this.ordersService = new OrdersService(dbContext);
 
             var testId = dbContext.ProductOrders.First().Id;
@@ -92,7 +92,7 @@
         public async Task CompleteProductOrders_WithNonExistentId_ShouldThrowArgumentNullException()
         {
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
-            await this.SeedData(dbContext);
+            await this.SeedProductOrdersData(dbContext);
             this.ordersService = new OrdersService(dbContext);
 
             var testId = 0;
@@ -105,7 +105,7 @@
         public async Task CompleteProductOrders_WithNonActiveStatus_ShouldThrowArgumentNullException()
         {
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
-            await this.SeedData(dbContext);
+            await this.SeedProductOrdersData(dbContext);
             this.ordersService = new OrdersService(dbContext);
 
             var testId = dbContext.ProductOrders
@@ -233,7 +233,7 @@
             var errorMessagePrefix = "OrderService GetProductOrdersByIdAsync() method does not work properly.";
 
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
-            await this.SeedData(dbContext);
+            await this.SeedProductOrdersData(dbContext);
             this.ordersService = new OrdersService(dbContext);
 
             var testId = dbContext.ProductOrders.First().Id;
@@ -253,13 +253,33 @@
                   await this.ordersService.GetProductOrdersByIdAsync(0));
         }
 
-        private async Task SeedData(ApplicationDbContext dbContext)
+        //[Fact]
+        //public async Task CreateServiceOrder_WithCorrectData_ShouldSuccessfullyCreateOrder()
+        //{
+        //    var errorMessagePrefix = "OrderService CreateServiceOrderAsync() method does not work properly.";
+
+        //    var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+        //    this.ordersService = new OrdersService(dbContext);
+
+        //    var testReceipt = new OrderServicesServiceModel();
+        //    var actualResult = await this.ordersService.CreateServiceOrderAsync(testReceipt);
+
+        //    Assert.True(actualResult == 1, errorMessagePrefix);
+        //}
+
+        private async Task SeedProductOrdersData(ApplicationDbContext dbContext)
         {
-            await dbContext.AddRangeAsync(this.GetDummyData());
+            await dbContext.AddRangeAsync(this.GetProductOrdersDummyData());
             await dbContext.SaveChangesAsync();
         }
 
-        private List<ProductOrder> GetDummyData()
+        private async Task SeedServiceOrdersData(ApplicationDbContext dbContext)
+        {
+            await dbContext.AddRangeAsync(this.GetProductOrdersDummyData());
+            await dbContext.SaveChangesAsync();
+        }
+
+        private List<ProductOrder> GetProductOrdersDummyData()
         {
             return new List<ProductOrder>()
             {
@@ -282,6 +302,40 @@
                 new ProductOrder
                 {
                     Quantity = 3,
+                    Status = new OrderStatus
+                    {
+                        Name = "NonExistent",
+                    },
+                },
+            };
+        }
+
+        private List<ServiceOrder> GetServiceOrdersDummyData()
+        {
+            return new List<ServiceOrder>()
+            {
+                new ServiceOrder
+                {
+                    From = DateTime.UtcNow.AddDays(5),
+                    To = DateTime.UtcNow.AddDays(10),
+                    Status = new OrderStatus
+                    {
+                        Name = "Active",
+                    },
+                },
+                new ServiceOrder
+                {
+                    From = DateTime.UtcNow.AddDays(5),
+                    To = DateTime.UtcNow.AddDays(10),
+                    Status = new OrderStatus
+                    {
+                        Name = "Completed",
+                    },
+                },
+                new ServiceOrder
+                {
+                    From = DateTime.UtcNow.AddDays(5),
+                    To = DateTime.UtcNow.AddDays(10),
                     Status = new OrderStatus
                     {
                         Name = "NonExistent",

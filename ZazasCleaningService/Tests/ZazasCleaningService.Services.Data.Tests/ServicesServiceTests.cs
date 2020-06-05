@@ -1,5 +1,6 @@
 ﻿namespace ZazasCleaningService.Services.Data.Tests
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -21,7 +22,6 @@
             MapperInitializer.InitializeMapper();
         }
 
-<<<<<<< HEAD
         //[Fact]
         //public async Task GetAllServices_WithDummyData_ShouldReturnCorrectResult()
         //{
@@ -47,9 +47,8 @@
         //    // }
         //}
 
-        // TODO: ShouldThrowException
         //[Fact]
-        //public async Task GetAllProducts_WithZeroData_ShouldReturnEmptyResult()
+        //public async Task GetAllServices_WithZeroData_ShouldReturnEmptyResult()
         //{
         //    var errorMessagePrefix = "ServicesService GetAllServicesAsync() method does not work properly.";
 
@@ -75,25 +74,24 @@
 
         //    Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
         //}
-=======
-        [Fact]
-        public async Task GetById_WithExistentId_ShouldReturnCorrectResult()
-        {
-            var errorMessagePrefix = "ServicesService GetServiceByIdAsync() method does not work properly.";
 
-            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
-            await this.SeedData(dbContext);
-            this.servicesService = new ServicesService(dbContext);
+        //[Fact]
+        //public async Task GetById_WithExistentId_ShouldReturnCorrectResult()
+        //{
+        //    var errorMessagePrefix = "ServicesService GetServiceByIdAsync() method does not work properly.";
 
-            var expectedResult = dbContext.Services.First().To<ServicesServiceModel>();
-            var actualResult = await this.servicesService.GetServiceByIdAsync(expectedResult.Id);
+        //    var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+        //    await this.SeedData(dbContext);
+        //    this.servicesService = new ServicesService(dbContext);
 
-            Assert.True(expectedResult.Id == actualResult.Id, errorMessagePrefix + " " + "Id is not return properly.");
-            Assert.True(expectedResult.Name == actualResult.Name, errorMessagePrefix + " " + "Name is not return properly.");
-            Assert.True(expectedResult.Description == actualResult.Description, errorMessagePrefix + " " + "Description is not return properly.");
-            Assert.True(expectedResult.Picture == actualResult.Picture, errorMessagePrefix + " " + "Picture is not return properly.");
-        }
->>>>>>> d6348306decbd02373a7241aa6a727327bba353d
+        //    var expectedResult = dbContext.Services.First().To<ServicesServiceModel>();
+        //    var actualResult = await this.servicesService.GetServiceByIdAsync(expectedResult.Id);
+
+        //    Assert.True(expectedResult.Id == actualResult.Id, errorMessagePrefix + " " + "Id is not return properly.");
+        //    Assert.True(expectedResult.Name == actualResult.Name, errorMessagePrefix + " " + "Name is not return properly.");
+        //    Assert.True(expectedResult.Description == actualResult.Description, errorMessagePrefix + " " + "Description is not return properly.");
+        //    Assert.True(expectedResult.Picture == actualResult.Picture, errorMessagePrefix + " " + "Picture is not return properly.");
+        //}
 
         private async Task SeedData(ApplicationDbContext dbContext)
         {

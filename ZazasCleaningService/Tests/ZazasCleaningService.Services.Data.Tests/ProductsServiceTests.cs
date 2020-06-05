@@ -287,6 +287,16 @@
             Assert.True(actualResult.Count == 0, errorMessagePrefix);
         }
 
+        //[Fact]
+        //public async Task GetAllProductTypes_WithZeroData_ShouldThrowArgumentNullException()
+        //{
+        //    var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+        //    this.productsService = new ProductsService(dbContext);
+
+        //    await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+        //          await this.productsService.GetAllProductTypesAsync<ProductTypesServiceModel>().ToListAsync());
+        //}
+
         [Fact]
         public async Task CreateProductTypes_WithCorrectData_ShouldReturnCorrectResult()
         {
@@ -444,6 +454,30 @@
         }
 
         [Fact]
+        public async Task Delete_WithOrderData_ShouldDeleteSuccessfully()
+        {
+            var errorMessagePrefix = "ProductsService DeleteByIdAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            await dbContext.ProductOrders.AddAsync(new ProductOrder
+            {
+                ProductId = 1,
+            });
+            await dbContext.SaveChangesAsync();
+            this.productsService = new ProductsService(dbContext);
+
+            var testId = dbContext.Products.First().To<ProductsServiceModel>().Id;
+
+            await this.productsService.DeleteByIdAsync(testId);
+
+            var expectedCount = 1;
+            var actualCount = dbContext.Products.Count();
+
+            Assert.True(expectedCount == actualCount, errorMessagePrefix);
+        }
+
+        [Fact]
         public async Task Delete_WithNonExistentProductId_ShouldThrowArgumentNullException()
         {
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
@@ -493,7 +527,9 @@
                     ProductType = new ProductType
                     {
                         Name = "cleaning",
+                        CreatedOn = DateTime.UtcNow.AddDays(10),
                     },
+                    CreatedOn = DateTime.UtcNow.AddDays(5),
                 },
                 new Product
                 {
@@ -503,7 +539,9 @@
                     ProductType = new ProductType
                     {
                         Name = "food",
+                        CreatedOn = DateTime.UtcNow.AddDays(15),
                     },
+                    CreatedOn = DateTime.UtcNow.AddDays(10),
                 },
             };
         }
