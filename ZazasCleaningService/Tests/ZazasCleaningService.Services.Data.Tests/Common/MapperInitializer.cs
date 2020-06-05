@@ -4,6 +4,7 @@
 
     using ZazasCleaningService.Data.Models;
     using ZazasCleaningService.Services.Mapping;
+    using ZazasCleaningService.Services.Models.Comments;
     using ZazasCleaningService.Services.Models.Products;
     using ZazasCleaningService.Services.Models.Receipts;
     using ZazasCleaningService.Services.Models.Services;
@@ -22,7 +23,9 @@
                 typeof(ProductReceipt).GetTypeInfo().Assembly,
                 typeof(Receipt).GetTypeInfo().Assembly,
                 typeof(VotesServiceModel).GetTypeInfo().Assembly,
-                typeof(Vote).GetTypeInfo().Assembly);
+                typeof(Vote).GetTypeInfo().Assembly,
+                typeof(CommentsServiceModel).GetTypeInfo().Assembly,
+                typeof(Comment).GetTypeInfo().Assembly);
         }
     }
 }
