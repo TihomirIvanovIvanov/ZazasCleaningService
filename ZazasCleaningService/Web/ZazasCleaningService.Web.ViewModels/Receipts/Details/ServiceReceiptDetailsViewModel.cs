@@ -2,13 +2,12 @@
 {
     using System;
 
+    using ZazasCleaningService.Common;
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Receipts;
 
     public class ServiceReceiptDetailsViewModel : IMapFrom<ReceiptServicesServiceModel>
     {
-        private const string DateFormat = "MM/dd/yyyy HH:mm";
-
         public int Id { get; set; }
 
         public string IssuedOnPicture { get; set; }
@@ -17,6 +16,6 @@
 
         public DateTime CreatedOn { get; set; }
 
-        public string CreatedOnFormatted => this.CreatedOn.ToString(DateFormat);
+        public string CreatedOnFormatted => this.CreatedOn.ToString(GlobalConstants.DateFormat);
     }
 }

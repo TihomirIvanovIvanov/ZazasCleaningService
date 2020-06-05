@@ -11,5 +11,7 @@
         public const string StatusActive = "Active";
 
         public const string StatusCompleted = "Completed";
+
+        public const string DateFormat = "dd/MM/yy HH:mm";
     }
 }

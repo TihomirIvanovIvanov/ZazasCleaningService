@@ -2,13 +2,12 @@
 {
     using System;
 
+    using ZazasCleaningService.Common;
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Orders;
 
     public class ServiceOrdersDetailsViewModel : IMapFrom<OrderServicesServiceModel>
     {
-        private const string DateFormat = "MM/dd/yyyy HH:mm";
-
         public int Id { get; set; }
 
         public string ServiceName { get; set; }
@@ -23,8 +22,8 @@
 
         public string StatusName { get; set; }
 
-        public string FromFormatted => this.From.ToString(DateFormat);
+        public string FromFormatted => this.From.ToString(GlobalConstants.DateFormat);
 
-        public string ToFormatted => this.To.ToString(DateFormat);
+        public string ToFormatted => this.To.ToString(GlobalConstants.DateFormat);
     }
 }
