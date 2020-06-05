@@ -167,6 +167,81 @@
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
         }
 
+        // TODO:
+        // [Fact]
+        //public async Task GetAllServices_ZeroData_ShouldThrowArgumentNullException()
+        //{
+        //    var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+        //    this.servicesService = new ServicesService(dbContext);
+        //    await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+        //          await this.servicesService.GetAllServicesAsync<ServicesServiceModel>().ToListAsync());
+        //}
+        [Fact]
+        public async Task GetById_WithExistentId_ShouldReturnCorrectResult()
+        {
+            var errorMessagePrefix = "ServicesService GetServiceByIdAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.servicesService = new ServicesService(dbContext);
+
+            var expectedResult = dbContext.Services.First().To<ServicesServiceModel>();
+            var actualResult = await this.servicesService.GetServiceByIdAsync(expectedResult.Id);
+
+            Assert.True(expectedResult.Id == actualResult.Id, errorMessagePrefix + " " + "Id is not return properly.");
+            Assert.True(expectedResult.Name == actualResult.Name, errorMessagePrefix + " " + "Name is not return properly.");
+            Assert.True(expectedResult.Description == actualResult.Description, errorMessagePrefix + " " + "Description is not return properly.");
+            Assert.True(expectedResult.Picture == actualResult.Picture, errorMessagePrefix + " " + "Picture is not return properly.");
+        }
+
+        [Fact]
+        public async Task GetById_WithNonExistentId_ShouldThrowArgumentNullException()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.servicesService = new ServicesService(dbContext);
+
+            await Assert.ThrowsAsync<ArgumentNullException>(async () => await this.servicesService.GetServiceByIdAsync(0));
+        }
+
+        [Fact]
+        public async Task Create_WithCorrectData_ShouldSuccsessfullyCreate()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.servicesService = new ServicesService(dbContext);
+
+            var testProductService = new ServicesServiceModel
+            {
+                Name = "cleaning",
+                Description = "cleaning desc",
+                Picture = "default",
+            };
+
+            var expectedResultId = 3;
+            var actualResultId = await this.servicesService.CreateServiceAsync(testProductService);
+
+            Assert.Equal(actualResultId, expectedResultId);
+        }
+
+        [Fact]
+        public async Task Create_WithNonExistentProductType_ShouldThrowArgumentNullException()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.servicesService = new ServicesService(dbContext);
+
+            var testProductService = new ServicesServiceModel
+            {
+                Name = "cleaning",
+                Description = "cleaning desc",
+                Picture = "default",
+            };
+
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+                  await this.servicesService.CreateServiceAsync(testProductService));
+        }
+
         private async Task SeedData(ApplicationDbContext dbContext)
         {
             await dbContext.AddRangeAsync(this.GetDummyData());
