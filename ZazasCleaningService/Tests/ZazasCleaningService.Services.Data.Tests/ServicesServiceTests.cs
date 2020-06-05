@@ -22,76 +22,150 @@
             MapperInitializer.InitializeMapper();
         }
 
-        //[Fact]
-        //public async Task GetAllServices_WithDummyData_ShouldReturnCorrectResult()
-        //{
-        //    var errorMessagePrefix = "ServicesService GetAllServicesAsync() method does not work properly.";
+        [Fact]
+        public async Task GetAllServices_WithDummyData_ShouldReturnCorrectResult()
+        {
+            var errorMessagePrefix = "ServicesService GetAllServicesAsync() method does not work properly.";
 
-        //    var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
-        //    await this.SeedData(dbContext);
-        //    this.servicesService = new ServicesService(dbContext);
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.servicesService = new ServicesService(dbContext);
 
-        //    var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>().ToListAsync();
-        //    var expectedResult = this.GetDummyData().To<ServicesServiceModel>().ToList();
+            var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>().ToListAsync();
+            var expectedResult = this.GetDummyData().To<ServicesServiceModel>().ToList();
 
-        //    Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
+            Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
 
-        //    // TODO:
-        //    // for (int i = 0; i < expectedResult.Count; i++)
-        //    // {
-        //    //     var expectedEntry = expectedResult[i];
-        //    //     var actualEntry = actualResult[i];
-        //    //     Assert.True(expectedEntry.Name == actualEntry.Name, errorMessagePrefix + " " + "Name is not return  properly.");
-        //    //     Assert.True(expectedEntry.Description == actualEntry.Description, errorMessagePrefix + " " + "Description is  not return properly.");
-        //    //     Assert.True(expectedEntry.Picture == actualEntry.Picture, errorMessagePrefix + " " + "Picture is not return  properly.");
-        //    // }
-        //}
+            // TODO:
+            // for (int i = 0; i < expectedResult.Count; i++)
+            // {
+            //     var expectedEntry = expectedResult[i];
+            //     var actualEntry = actualResult[i];
+            //     Assert.True(expectedEntry.Name == actualEntry.Name, errorMessagePrefix + " " + "Name is not return  properly.");
+            //     Assert.True(expectedEntry.Description == actualEntry.Description, errorMessagePrefix + " " + "Description is  not return properly.");
+            //     Assert.True(expectedEntry.Picture == actualEntry.Picture, errorMessagePrefix + " " + "Picture is not return  properly.");
+            //     Assert.True(expectedEntry.ProductType.Name == actualEntry.ProductType.Name, errorMessagePrefix + " " +  "ProductType Name is not return properly.");
+            // }
+        }
 
-        //[Fact]
-        //public async Task GetAllServices_WithZeroData_ShouldReturnEmptyResult()
-        //{
-        //    var errorMessagePrefix = "ServicesService GetAllServicesAsync() method does not work properly.";
+        // TODO: ShouldThrowException
+        [Fact]
+        public async Task GetAllServices_WithZeroData_ShouldReturnEmptyResult()
+        {
+            var errorMessagePrefix = "ServicesService GetAllServicesAsync() method does not work properly.";
 
-        //    var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
-        //    this.servicesService = new ServicesService(dbContext);
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            this.servicesService = new ServicesService(dbContext);
 
-        //    var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>().ToListAsync();
+            var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>().ToListAsync();
 
-        //    Assert.True(actualResult.Count == 0, errorMessagePrefix);
-        //}
+            Assert.True(actualResult.Count == 0, errorMessagePrefix);
+        }
 
-        //[Fact]
-        //public async Task GetAllServices_WithDummyDataTakeOneSkipOne_ReturnCorrectResult()
-        //{
-        //    var errorMessagePrefix = "ServicesService GetAllServicesAsync() method does not work properly.";
+        [Fact]
+        public async Task GetAllServices_WithDummyDataTakeOneSkipOne_ReturnCorrectResult()
+        {
+            var errorMessagePrefix = "ServicesService GetAllServicesAsync() method does not work properly.";
 
-        //    var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
-        //    await this.SeedData(dbContext);
-        //    this.servicesService = new ServicesService(dbContext);
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.servicesService = new ServicesService(dbContext);
 
-        //    var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>(1, 1).ToListAsync();
-        //    var expectedResult = this.GetDummyData().To<ServicesServiceModel>().Skip(1).Take(1).ToList();
+            var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>(1, 1).ToListAsync();
+            var expectedResult = this.GetDummyData().To<ServicesServiceModel>().Skip(1).Take(1).ToList();
 
-        //    Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
-        //}
+            Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
+        }
 
-        //[Fact]
-        //public async Task GetById_WithExistentId_ShouldReturnCorrectResult()
-        //{
-        //    var errorMessagePrefix = "ServicesService GetServiceByIdAsync() method does not work properly.";
+        [Fact]
+        public async Task GetAllServices_WithDummyDataTakeOneSkipZero_ReturnCorrectResult()
+        {
+            var errorMessagePrefix = "ServicesService ServicesServiceModel() method does not work properly.";
 
-        //    var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
-        //    await this.SeedData(dbContext);
-        //    this.servicesService = new ServicesService(dbContext);
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.servicesService = new ServicesService(dbContext);
 
-        //    var expectedResult = dbContext.Services.First().To<ServicesServiceModel>();
-        //    var actualResult = await this.servicesService.GetServiceByIdAsync(expectedResult.Id);
+            var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>(1, 0).ToListAsync();
+            var expectedResult = this.GetDummyData().To<ServicesServiceModel>().Take(1).ToList();
 
-        //    Assert.True(expectedResult.Id == actualResult.Id, errorMessagePrefix + " " + "Id is not return properly.");
-        //    Assert.True(expectedResult.Name == actualResult.Name, errorMessagePrefix + " " + "Name is not return properly.");
-        //    Assert.True(expectedResult.Description == actualResult.Description, errorMessagePrefix + " " + "Description is not return properly.");
-        //    Assert.True(expectedResult.Picture == actualResult.Picture, errorMessagePrefix + " " + "Picture is not return properly.");
-        //}
+            Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task GetAllServices_WithDummyDataTakeZeroSkipOne_ReturnCorrectResult()
+        {
+            var errorMessagePrefix = "ServicesService GetAllServicesAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.servicesService = new ServicesService(dbContext);
+
+            var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>(0, 1).ToListAsync();
+            var expectedResult = this.GetDummyData().To<ServicesServiceModel>().Take(0).Skip(1).ToList();
+
+            Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task GetAllServices_WithDummyDataTakeZeroSkipZero_ReturnCorrectResult()
+        {
+            var errorMessagePrefix = "ServicesService GetAllServicesAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.servicesService = new ServicesService(dbContext);
+
+            var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>(0, 0).ToListAsync();
+            var expectedResult = this.GetDummyData().To<ServicesServiceModel>().Take(0).Skip(0).ToList();
+
+            Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task GetAllServices_WithDummyDataNegativeTakeAndNegativeSkip_ReturnCorrectResult()
+        {
+            var errorMessagePrefix = "ServicesService GetAllServicesAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.servicesService = new ServicesService(dbContext);
+
+            var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>(-1, -1).ToListAsync();
+            var expectedResult = this.GetDummyData().To<ServicesServiceModel>().Take(-1).Skip(-1).ToList();
+
+            Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task GetAllServices_WithDummyDataNegativeTakeAndSkipOne_ReturnCorrectResult()
+        {
+            var errorMessagePrefix = "ServicesService GetAllServicesAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.servicesService = new ServicesService(dbContext);
+
+            var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>(-1, 1).ToListAsync();
+            var expectedResult = this.GetDummyData().To<ServicesServiceModel>().Take(-1).Skip(1).ToList();
+
+            Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
+        }
+
+        [Fact]
+        public async Task GetAllServices_WithDummyDataTakeOneAndNegativeSkip_ReturnCorrectResult()
+        {
+            var errorMessagePrefix = "ServicesService GetAllServicesAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.servicesService = new ServicesService(dbContext);
+
+            var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>(1, -1).ToListAsync();
+            var expectedResult = this.GetDummyData().To<ServicesServiceModel>().Take(1).Skip(-1).ToList();
+
+            Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
+        }
 
         private async Task SeedData(ApplicationDbContext dbContext)
         {
