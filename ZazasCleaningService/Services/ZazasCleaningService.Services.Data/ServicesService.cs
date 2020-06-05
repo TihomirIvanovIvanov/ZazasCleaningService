@@ -23,6 +23,11 @@
         {
             var service = AutoMapperConfig.MapperInstance.Map<Service>(servicesServiceModel);
 
+            if (service == null)
+            {
+                throw new ArgumentNullException(nameof(service));
+            }
+
             await this.dbContext.Services.AddAsync(service);
             await this.dbContext.SaveChangesAsync();
 

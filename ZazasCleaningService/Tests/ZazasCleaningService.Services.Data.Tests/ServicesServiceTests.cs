@@ -225,21 +225,71 @@
         }
 
         [Fact]
-        public async Task Create_WithNonExistentProductType_ShouldThrowArgumentNullException()
+        public async Task Create_WithNull_ShouldThrowArgumentNullException()
+        {
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            this.servicesService = new ServicesService(dbContext);
+
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+                  await this.servicesService.CreateServiceAsync(null));
+        }
+
+        [Fact]
+        public async Task Edit_WithCorrectData_ShouldReturnCorrectResult()
+        {
+            var errorMessagePrefix = "ServicesService EditAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.servicesService = new ServicesService(dbContext);
+
+            var expectedResult = dbContext.Services.First().To<ServicesServiceModel>();
+            var actualResult = await this.servicesService.EditAsync(expectedResult.Id, expectedResult);
+
+            Assert.True(expectedResult.Name == actualResult.To<ServicesServiceModel>().Name, errorMessagePrefix + " " + "Name is not return properly.");
+            Assert.True(expectedResult.Description == actualResult.To<ServicesServiceModel>().Description, errorMessagePrefix + " " + "Description is not return properly.");
+            Assert.True(expectedResult.Picture == actualResult.To<ServicesServiceModel>().Picture, errorMessagePrefix + " " + "Picture is not return properly.");
+        }
+
+        [Fact]
+        public async Task Edit_WithCorrectData_ShouldEditServiceCorrectly()
+        {
+            var errorMessagePrefix = "ServicesService EditAsync() method does not work properly.";
+
+            var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
+            await this.SeedData(dbContext);
+            this.servicesService = new ServicesService(dbContext);
+
+            var expectedResult = dbContext.Services.First().To<ServicesServiceModel>();
+
+            expectedResult.Name = "Name";
+            expectedResult.Picture = "Picture";
+            expectedResult.Description = "Description";
+
+            await this.servicesService.EditAsync(expectedResult.Id, expectedResult);
+
+            var actualResult = dbContext.Services.First().To<ServicesServiceModel>();
+
+            Assert.True(expectedResult.Name == actualResult.Name, errorMessagePrefix + " " + "Name is not return properly.");
+            Assert.True(expectedResult.Description == actualResult.Description, errorMessagePrefix + " " + "Description is not return properly.");
+            Assert.True(expectedResult.Picture == actualResult.Picture, errorMessagePrefix + " " + "Picture is not return properly.");
+        }
+
+        [Fact]
+        public async Task Edit_WithNonExistentServiceId_ShouldThrowArgumentNullException()
         {
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
             await this.SeedData(dbContext);
             this.servicesService = new ServicesService(dbContext);
 
-            var testProductService = new ServicesServiceModel
-            {
-                Name = "cleaning",
-                Description = "cleaning desc",
-                Picture = "default",
-            };
+            var expectedResult = dbContext.Services.First().To<ServicesServiceModel>();
+
+            expectedResult.Name = "Name";
+            expectedResult.Picture = "Picture";
+            expectedResult.Description = "Description";
 
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
-                  await this.servicesService.CreateServiceAsync(testProductService));
+                  await this.servicesService.EditAsync(0, expectedResult));
         }
 
         private async Task SeedData(ApplicationDbContext dbContext)
