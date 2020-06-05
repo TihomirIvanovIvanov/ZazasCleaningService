@@ -7,6 +7,7 @@
     using ZazasCleaningService.Services.Models.Products;
     using ZazasCleaningService.Services.Models.Receipts;
     using ZazasCleaningService.Services.Models.Services;
+    using ZazasCleaningService.Services.Models.Votes;
 
     public static class MapperInitializer
     {
@@ -19,7 +20,9 @@
                 typeof(Service).GetTypeInfo().Assembly,
                 typeof(ReceiptProductsServiceModel).GetTypeInfo().Assembly,
                 typeof(ProductReceipt).GetTypeInfo().Assembly,
-                typeof(Receipt).GetTypeInfo().Assembly);
+                typeof(Receipt).GetTypeInfo().Assembly,
+                typeof(VotesServiceModel).GetTypeInfo().Assembly,
+                typeof(Vote).GetTypeInfo().Assembly);
         }
     }
 }
