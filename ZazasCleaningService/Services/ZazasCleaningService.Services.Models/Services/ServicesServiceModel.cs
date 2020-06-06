@@ -16,8 +16,6 @@
 
         public string Description { get; set; }
 
-        public int VotesId { get; set; }
-
-        public IEnumerable<VotesServiceModel> Votes { get; set; }
+        public ICollection<VotesServiceModel> Votes { get; set; }
     }
 }

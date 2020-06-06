@@ -1,6 +1,7 @@
 ﻿namespace ZazasCleaningService.Services.Data.Tests
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Xunit;
@@ -13,6 +14,11 @@
     public class CommentsServiceTests
     {
         private ICommentsService commentsService;
+
+        public CommentsServiceTests()
+        {
+            MapperInitializer.InitializeMapper();
+        }
 
         [Fact]
         public async Task Create_WithCorrectData_ShouldSuccsessfullyCreate()
@@ -39,8 +45,8 @@
             await this.SeedData(dbContext);
             this.commentsService = new CommentsService(dbContext);
 
-            var expectedResult = dbContext.Comments.To<CommentsServiceModel>();
-            var actualResult = this.commentsService.GetAllCommentsAsync<CommentsServiceModel>();
+            var expectedResult = dbContext.Comments.To<CommentsServiceModel>().ToList();
+            var actualResult = this.commentsService.GetAllCommentsAsync<CommentsServiceModel>().ToList();
 
             Assert.Equal(expectedResult, actualResult);
         }

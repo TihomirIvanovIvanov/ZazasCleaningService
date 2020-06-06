@@ -17,18 +17,6 @@
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="wwwroot\js\bootstrap.js" />
-    <None Include="wwwroot\js\cleaning.js" />
-    <None Include="wwwroot\js\easing.js" />
-    <None Include="wwwroot\js\jquery.picEyes.js" />
-    <None Include="wwwroot\js\move-top.js" />
-    <None Include="wwwroot\js\progresscircle.js" />
-    <None Include="wwwroot\js\responsiveslides.min.js" />
-    <None Include="wwwroot\js\site.js" />
-    <None Include="wwwroot\js\site.min.js" />
-    <None Include="wwwroot\js\SmoothScroll.min.js" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CloudinaryDotNet" Version="1.10.0" />

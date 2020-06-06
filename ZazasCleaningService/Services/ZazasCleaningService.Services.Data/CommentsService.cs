@@ -31,7 +31,9 @@
 
         public IQueryable<T> GetAllCommentsAsync<T>()
         {
-            var comments = this.dbContext.Comments.To<T>();
+            var comments = this.dbContext.Comments
+                .Where(comment => comment.ParentId == null)
+                .To<T>();
 
             return comments;
         }

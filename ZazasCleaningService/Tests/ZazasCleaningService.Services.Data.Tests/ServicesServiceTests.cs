@@ -19,12 +19,13 @@
 
         public ServicesServiceTests()
         {
-            MapperInitializer.InitializeMapper();
         }
 
         [Fact]
         public async Task GetAllServices_WithDummyData_ShouldReturnCorrectResult()
         {
+            MapperInitializer.InitializeMapper();
+
             var errorMessagePrefix = "ServicesService GetAllServicesAsync() method does not work properly.";
 
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
