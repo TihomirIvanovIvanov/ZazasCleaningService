@@ -31,7 +31,7 @@
             await this.SeedData(dbContext);
             this.productsService = new ProductsService(dbContext);
 
-            var actualResult = await this.productsService.GetAllProductsAsync<ProductsServiceModel>().ToListAsync();
+            var actualResult = await this.productsService.GetAllProducts<ProductsServiceModel>().ToListAsync();
             var expectedResult = this.GetDummyData().To<ProductsServiceModel>().ToList();
 
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
@@ -57,7 +57,7 @@
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
             this.productsService = new ProductsService(dbContext);
 
-            var actualResult = await this.productsService.GetAllProductsAsync<ProductsServiceModel>().ToListAsync();
+            var actualResult = await this.productsService.GetAllProducts<ProductsServiceModel>().ToListAsync();
 
             Assert.True(actualResult.Count == 0, errorMessagePrefix);
         }
@@ -71,7 +71,7 @@
             await this.SeedData(dbContext);
             this.productsService = new ProductsService(dbContext);
 
-            var actualResult = await this.productsService.GetAllProductsAsync<ProductsServiceModel>(1, 1).ToListAsync();
+            var actualResult = await this.productsService.GetAllProducts<ProductsServiceModel>(1, 1).ToListAsync();
             var expectedResult = this.GetDummyData().To<ProductsServiceModel>().Skip(1).Take(1).ToList();
 
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
@@ -86,7 +86,7 @@
             await this.SeedData(dbContext);
             this.productsService = new ProductsService(dbContext);
 
-            var actualResult = await this.productsService.GetAllProductsAsync<ProductsServiceModel>(1, 0).ToListAsync();
+            var actualResult = await this.productsService.GetAllProducts<ProductsServiceModel>(1, 0).ToListAsync();
             var expectedResult = this.GetDummyData().To<ProductsServiceModel>().Take(1).ToList();
 
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
@@ -101,7 +101,7 @@
             await this.SeedData(dbContext);
             this.productsService = new ProductsService(dbContext);
 
-            var actualResult = await this.productsService.GetAllProductsAsync<ProductsServiceModel>(0, 1).ToListAsync();
+            var actualResult = await this.productsService.GetAllProducts<ProductsServiceModel>(0, 1).ToListAsync();
             var expectedResult = this.GetDummyData().To<ProductsServiceModel>().Take(0).Skip(1).ToList();
 
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
@@ -116,7 +116,7 @@
             await this.SeedData(dbContext);
             this.productsService = new ProductsService(dbContext);
 
-            var actualResult = await this.productsService.GetAllProductsAsync<ProductsServiceModel>(0, 0).ToListAsync();
+            var actualResult = await this.productsService.GetAllProducts<ProductsServiceModel>(0, 0).ToListAsync();
             var expectedResult = this.GetDummyData().To<ProductsServiceModel>().Take(0).Skip(0).ToList();
 
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
@@ -131,7 +131,7 @@
             await this.SeedData(dbContext);
             this.productsService = new ProductsService(dbContext);
 
-            var actualResult = await this.productsService.GetAllProductsAsync<ProductsServiceModel>(-1, -1).ToListAsync();
+            var actualResult = await this.productsService.GetAllProducts<ProductsServiceModel>(-1, -1).ToListAsync();
             var expectedResult = this.GetDummyData().To<ProductsServiceModel>().Take(-1).Skip(-1).ToList();
 
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
@@ -146,7 +146,7 @@
             await this.SeedData(dbContext);
             this.productsService = new ProductsService(dbContext);
 
-            var actualResult = await this.productsService.GetAllProductsAsync<ProductsServiceModel>(-1, 1).ToListAsync();
+            var actualResult = await this.productsService.GetAllProducts<ProductsServiceModel>(-1, 1).ToListAsync();
             var expectedResult = this.GetDummyData().To<ProductsServiceModel>().Take(-1).Skip(1).ToList();
 
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
@@ -161,7 +161,7 @@
             await this.SeedData(dbContext);
             this.productsService = new ProductsService(dbContext);
 
-            var actualResult = await this.productsService.GetAllProductsAsync<ProductsServiceModel>(1, -1).ToListAsync();
+            var actualResult = await this.productsService.GetAllProducts<ProductsServiceModel>(1, -1).ToListAsync();
             var expectedResult = this.GetDummyData().To<ProductsServiceModel>().Take(1).Skip(-1).ToList();
 
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
@@ -260,7 +260,7 @@
             await this.SeedData(dbContext);
             this.productsService = new ProductsService(dbContext);
 
-            var actualResult = await this.productsService.GetAllProductTypesAsync<ProductTypesServiceModel>().ToListAsync();
+            var actualResult = await this.productsService.GetAllProductTypes<ProductTypesServiceModel>().ToListAsync();
             var expectedResult = this.GetDummyData().Select(p => p.ProductType).To<ProductTypesServiceModel>().ToList();
 
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
@@ -282,7 +282,7 @@
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
             this.productsService = new ProductsService(dbContext);
 
-            var actualResult = await this.productsService.GetAllProductTypesAsync<ProductTypesServiceModel>().ToListAsync();
+            var actualResult = await this.productsService.GetAllProductTypes<ProductTypesServiceModel>().ToListAsync();
 
             Assert.True(actualResult.Count == 0, errorMessagePrefix);
         }

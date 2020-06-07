@@ -77,7 +77,7 @@
     <script>
         grecaptcha.ready(function () {
             grecaptcha.execute('@this.Configuration["GoogleReCaptcha:Key"]', { action: 'contact_form' }).then(function (token) {
-                document.getElementById("RecaptchaValue").value = token;
+                $("#RecaptchaValue").val(token);
             });
         });
     </script>

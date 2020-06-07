@@ -46,7 +46,7 @@
         public async Task<IActionResult> Create()
         {
             var allProductTypes = await this.productsService
-                .GetAllProductTypesAsync<ProductTypesServiceModel>()
+                .GetAllProductTypes<ProductTypesServiceModel>()
                 .ToListAsync();
 
             this.ViewData["types"] = allProductTypes.Select(productTypes => new ProductCreateProductTypesViewModel

@@ -27,7 +27,7 @@
         public async Task<IActionResult> All(int page = 1)
         {
             var allProductsView = await this.productsService
-                .GetAllProductsAsync<ProductsServiceModel>(ItemsPerPage, (page - 1) * ItemsPerPage)
+                .GetAllProducts<ProductsServiceModel>(ItemsPerPage, (page - 1) * ItemsPerPage)
                 .To<ProductsAllViewModel>()
                 .ToListAsync();
 

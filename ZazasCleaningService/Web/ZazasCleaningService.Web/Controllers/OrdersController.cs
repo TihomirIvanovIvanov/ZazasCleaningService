@@ -96,7 +96,7 @@
             var userId = this.GetCurrentUserId();
 
             var productsOrder = await this.ordersService
-                .GetAllProductOrdersAsync<OrderProductsServiceModel>()
+                .GetAllProductOrders<OrderProductsServiceModel>()
                 .Where(order => order.IssuerId == userId)
                 .To<AllProductsOrdersViewModel>().ToListAsync();
 
@@ -124,7 +124,7 @@
             var userId = this.GetCurrentUserId();
 
             var servicesOrder = await this.ordersService
-                .GetAllServiceOrdersAsync<OrderServicesServiceModel>()
+                .GetAllServiceOrders<OrderServicesServiceModel>()
                 .Where(order => order.IssuerId == userId)
                 .To<AllServicesOrdersViewModel>().ToListAsync();
 

@@ -9,11 +9,11 @@
     {
         Task<int> CreateProductTypeAsync(string name);
 
-        IQueryable<T> GetAllProductTypesAsync<T>();
+        IQueryable<T> GetAllProductTypes<T>();
 
         Task<int> CreateProductAsync(ProductsServiceModel productsServiceModel);
 
-        IQueryable<T> GetAllProductsAsync<T>(int? take = null, int skip = 0);
+        IQueryable<T> GetAllProducts<T>(int? take = null, int skip = 0);
 
         int GetCountProducts();
 

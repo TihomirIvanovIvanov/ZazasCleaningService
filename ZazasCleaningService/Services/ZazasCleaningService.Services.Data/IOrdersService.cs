@@ -12,9 +12,9 @@
 
         Task<int> CreateServiceOrderAsync(OrderServicesServiceModel orderServicesServiceModel);
 
-        IQueryable<T> GetAllProductOrdersAsync<T>();
+        IQueryable<T> GetAllProductOrders<T>();
 
-        IQueryable<T> GetAllServiceOrdersAsync<T>();
+        IQueryable<T> GetAllServiceOrders<T>();
 
         Task<OrderProductsServiceModel> GetProductOrdersByIdAsync(int id);
 

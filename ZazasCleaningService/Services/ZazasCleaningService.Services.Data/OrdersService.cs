@@ -79,7 +79,7 @@
             return orderServices.Id;
         }
 
-        public IQueryable<T> GetAllProductOrdersAsync<T>()
+        public IQueryable<T> GetAllProductOrders<T>()
         {
             var productOrders = this.dbContext.ProductOrders
                 .Where(productOrder => productOrder.Status.Name == GlobalConstants.StatusActive)
@@ -90,7 +90,7 @@
             return productOrders;
         }
 
-        public IQueryable<T> GetAllServiceOrdersAsync<T>()
+        public IQueryable<T> GetAllServiceOrders<T>()
         {
             var serviceOrders = this.dbContext.ServiceOrders
                 .Where(serviceOrder => serviceOrder.Status.Name == GlobalConstants.StatusActive)
@@ -168,7 +168,7 @@
 
         private void IsInService(ServiceOrder orderServices)
         {
-            var allServiceOrders = this.GetAllServiceOrdersAsync<OrderServicesServiceModel>();
+            var allServiceOrders = this.GetAllServiceOrders<OrderServicesServiceModel>();
 
             foreach (var reservedDateTime in allServiceOrders)
             {

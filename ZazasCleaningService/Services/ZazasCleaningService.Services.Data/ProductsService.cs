@@ -80,7 +80,7 @@
             return product.Id;
         }
 
-        public IQueryable<T> GetAllProductsAsync<T>(int? take = null, int skip = 0)
+        public IQueryable<T> GetAllProducts<T>(int? take = null, int skip = 0)
         {
             var allProducts = this.dbContext.Products
                 .OrderByDescending(product => product.CreatedOn)
@@ -99,7 +99,7 @@
             return allProducts.To<T>();
         }
 
-        public IQueryable<T> GetAllProductTypesAsync<T>()
+        public IQueryable<T> GetAllProductTypes<T>()
         {
             var productTypes = this.dbContext.ProductTypes
                 .OrderByDescending(type => type.CreatedOn)

@@ -67,7 +67,7 @@
             return service.Id;
         }
 
-        public IQueryable<T> GetAllServicesAsync<T>(int? take = null, int skip = 0)
+        public IQueryable<T> GetAllServices<T>(int? take = null, int skip = 0)
         {
             var allServices = this.dbContext.Services
                 .OrderByDescending(service => service.CreatedOn)

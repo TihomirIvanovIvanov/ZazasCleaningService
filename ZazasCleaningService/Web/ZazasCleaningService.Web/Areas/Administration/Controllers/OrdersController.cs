@@ -34,7 +34,7 @@
         public async Task<IActionResult> ProductsCart()
         {
             var productCartViewModel = await this.ordersService
-                .GetAllProductOrdersAsync<OrderProductsServiceModel>()
+                .GetAllProductOrders<OrderProductsServiceModel>()
                 .To<ProductOrdersCartViewModel>()
                 .ToListAsync();
 
@@ -81,7 +81,7 @@
         public async Task<IActionResult> ServicesCart()
         {
             var serviceCartViewModel = await this.ordersService
-                .GetAllServiceOrdersAsync<OrderServicesServiceModel>()
+                .GetAllServiceOrders<OrderServicesServiceModel>()
                 .To<ServiceOrdersCartViewModel>()
                 .ToListAsync();
 

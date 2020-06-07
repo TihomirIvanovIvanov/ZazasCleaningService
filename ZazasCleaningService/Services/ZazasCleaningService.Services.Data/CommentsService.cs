@@ -29,10 +29,10 @@
             return comments.Id;
         }
 
-        public IQueryable<T> GetAllCommentsAsync<T>()
+        public IQueryable<T> GetAllComments<T>()
         {
             var comments = this.dbContext.Comments
-                .Where(comment => comment.ParentId == null)
+                //.Where(comment => comment.ParentId == null)
                 .To<T>();
 
             return comments;

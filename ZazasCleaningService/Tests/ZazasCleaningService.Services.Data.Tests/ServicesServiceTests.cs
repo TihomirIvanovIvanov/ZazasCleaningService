@@ -32,7 +32,7 @@
             await this.SeedData(dbContext);
             this.servicesService = new ServicesService(dbContext);
 
-            var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>().ToListAsync();
+            var actualResult = await this.servicesService.GetAllServices<ServicesServiceModel>().ToListAsync();
             var expectedResult = this.GetDummyData().To<ServicesServiceModel>().ToList();
 
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
@@ -58,7 +58,7 @@
             var dbContext = ApplicationDbContextInMemoryFactory.InitializeContext();
             this.servicesService = new ServicesService(dbContext);
 
-            var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>().ToListAsync();
+            var actualResult = await this.servicesService.GetAllServices<ServicesServiceModel>().ToListAsync();
 
             Assert.True(actualResult.Count == 0, errorMessagePrefix);
         }
@@ -72,7 +72,7 @@
             await this.SeedData(dbContext);
             this.servicesService = new ServicesService(dbContext);
 
-            var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>(1, 1).ToListAsync();
+            var actualResult = await this.servicesService.GetAllServices<ServicesServiceModel>(1, 1).ToListAsync();
             var expectedResult = this.GetDummyData().To<ServicesServiceModel>().Skip(1).Take(1).ToList();
 
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
@@ -87,7 +87,7 @@
             await this.SeedData(dbContext);
             this.servicesService = new ServicesService(dbContext);
 
-            var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>(1, 0).ToListAsync();
+            var actualResult = await this.servicesService.GetAllServices<ServicesServiceModel>(1, 0).ToListAsync();
             var expectedResult = this.GetDummyData().To<ServicesServiceModel>().Take(1).ToList();
 
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
@@ -102,7 +102,7 @@
             await this.SeedData(dbContext);
             this.servicesService = new ServicesService(dbContext);
 
-            var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>(0, 1).ToListAsync();
+            var actualResult = await this.servicesService.GetAllServices<ServicesServiceModel>(0, 1).ToListAsync();
             var expectedResult = this.GetDummyData().To<ServicesServiceModel>().Take(0).Skip(1).ToList();
 
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
@@ -117,7 +117,7 @@
             await this.SeedData(dbContext);
             this.servicesService = new ServicesService(dbContext);
 
-            var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>(0, 0).ToListAsync();
+            var actualResult = await this.servicesService.GetAllServices<ServicesServiceModel>(0, 0).ToListAsync();
             var expectedResult = this.GetDummyData().To<ServicesServiceModel>().Take(0).Skip(0).ToList();
 
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
@@ -132,7 +132,7 @@
             await this.SeedData(dbContext);
             this.servicesService = new ServicesService(dbContext);
 
-            var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>(-1, -1).ToListAsync();
+            var actualResult = await this.servicesService.GetAllServices<ServicesServiceModel>(-1, -1).ToListAsync();
             var expectedResult = this.GetDummyData().To<ServicesServiceModel>().Take(-1).Skip(-1).ToList();
 
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
@@ -147,7 +147,7 @@
             await this.SeedData(dbContext);
             this.servicesService = new ServicesService(dbContext);
 
-            var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>(-1, 1).ToListAsync();
+            var actualResult = await this.servicesService.GetAllServices<ServicesServiceModel>(-1, 1).ToListAsync();
             var expectedResult = this.GetDummyData().To<ServicesServiceModel>().Take(-1).Skip(1).ToList();
 
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
@@ -162,7 +162,7 @@
             await this.SeedData(dbContext);
             this.servicesService = new ServicesService(dbContext);
 
-            var actualResult = await this.servicesService.GetAllServicesAsync<ServicesServiceModel>(1, -1).ToListAsync();
+            var actualResult = await this.servicesService.GetAllServices<ServicesServiceModel>(1, -1).ToListAsync();
             var expectedResult = this.GetDummyData().To<ServicesServiceModel>().Take(1).Skip(-1).ToList();
 
             Assert.True(actualResult.Count == expectedResult.Count, errorMessagePrefix);
