@@ -32,7 +32,7 @@
                 vote = AutoMapperConfig.MapperInstance.Map<Vote>(votesServiceModel);
 
                 // vote.Type = votesServiceModel.IsUpVote ? VoteType.UpVote : VoteType.DownVote;
-                this.dbContext.Votes.Add(vote);
+                await this.dbContext.Votes.AddAsync(vote);
             }
 
             await this.dbContext.SaveChangesAsync();

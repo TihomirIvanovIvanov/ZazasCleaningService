@@ -27,7 +27,7 @@
 
         public async Task<IActionResult> All(int page = 1)
         {
-            // TODO: when the query is IQueryable but here i matirialize it ToListAsync is it nessesary to name GetAllServicesAsnyc
+            // TODO: when the query is IQueryable but here i matirialize it ToListAsync is it nessesary to name it GetAllServicesAsnyc
             var allServicesView = await this.servicesService
                 .GetAllServices<ServicesServiceModel>(ItemsPerPage, (page - 1) * ItemsPerPage)
                 .To<ServicesAllViewModel>()
