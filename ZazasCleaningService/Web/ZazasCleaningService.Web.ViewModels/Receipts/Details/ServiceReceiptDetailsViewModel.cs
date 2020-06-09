@@ -2,7 +2,6 @@
 {
     using System;
 
-    using ZazasCleaningService.Common;
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Receipts;
 
@@ -15,7 +14,5 @@
         public string RecipientUserName { get; set; }
 
         public DateTime CreatedOn { get; set; }
-
-        public string CreatedOnFormatted => this.CreatedOn.ToString(GlobalConstants.DateFormat);
     }
 }

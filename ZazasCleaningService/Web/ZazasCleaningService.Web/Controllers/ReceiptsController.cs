@@ -27,7 +27,7 @@
             var recipientId = this.GetCurrentUserId();
 
             var productReceiptsViews = await this.receiptsService
-                .GetAllProductReceiptsByRecipientId(recipientId)
+                .GetAllProductReceiptsByRecipientIdAsync(recipientId)
                 .Select(receipt => receipt.To<ProductReceiptsViewModel>())
                 .ToListAsync();
 
@@ -48,7 +48,7 @@
             var recipientId = this.GetCurrentUserId();
 
             var serviceReceiptsViews = await this.receiptsService
-                .GetAllServiceReceiptsByRecipientId(recipientId)
+                .GetAllServiceReceiptsByRecipientIdAsync(recipientId)
                 .Select(receipt => receipt.To<ServiceReceiptsViewModel>())
                 .ToListAsync();
 

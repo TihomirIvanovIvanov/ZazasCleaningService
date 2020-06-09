@@ -41,12 +41,12 @@
                     </div>
                     <div class="form-group">
                         <div>
-                            <label asp-for="ProductTypeName">Product Type</label>
+                            <label asp-for="ProductType">Product Type</label>
                         </div>
-                        <select asp-for="ProductTypeName">
+                        <select asp-for="ProductType">
                             @foreach (var type in productTypes)
                             {
-                                @if (type.Name == this.Model.ProductTypeName)
+                                @if (type.Name == this.Model.ProductType)
                                 {
                                     <option value="@type.Name" selected>@type.Name</option>
                                 }
@@ -56,7 +56,7 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="ProductTypeName" class="text-danger"></span>
+                        <span asp-validation-for="ProductType" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Picture"></label>

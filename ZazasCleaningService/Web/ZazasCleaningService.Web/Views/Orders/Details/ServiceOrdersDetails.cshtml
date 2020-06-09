@@ -29,8 +29,8 @@
             </div>
             <div class="col-lg-6 offers-agiles-right mt-xl-4 mt-lg-0 mt-4">
                 <h4 class="mb-4 title-2-agiles">@this.Model.ServiceName</h4>
-                <h4 class="mb-4 title-2-agiles">Start: <span>@this.Model.FromFormatted</span></h4>
-                <h4 class="mb-4 title-2-agiles">Stop: <span>@this.Model.ToFormatted</span></h4>
+                <h4 class="mb-4 title-2-agiles">Start: <span><time datetime="@this.Model.From.ToString("O")"></time></span></h4>
+                <h4 class="mb-4 title-2-agiles">Stop: <span><time datetime="@this.Model.To.ToString("O")"></time></span></h4>
                 <p class="mt-4">@this.Model.ServiceDescription</p>
                 <h4 class="mb-4 title-2-agiles">@this.Model.StatusName</h4>
             </div>

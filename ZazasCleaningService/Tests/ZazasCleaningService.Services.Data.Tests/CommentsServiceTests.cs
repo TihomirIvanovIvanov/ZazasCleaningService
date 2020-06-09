@@ -46,7 +46,7 @@
             this.commentsService = new CommentsService(dbContext);
 
             var expectedResult = dbContext.Comments.To<CommentsServiceModel>().ToList();
-            var actualResult = this.commentsService.GetAllComments<CommentsServiceModel>().ToList();
+            var actualResult = this.commentsService.GetAllCommentsAsync<CommentsServiceModel>().ToList();
 
             Assert.Equal(expectedResult, actualResult);
         }

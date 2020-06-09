@@ -153,7 +153,6 @@
 
         private async Task<ProductOrder> GetProductOrderByProductId(int productId)
         {
-            // TODO: Did i need GetProductOrderByProductId into orderService?
             var productOrder = await this.dbContext.ProductOrders
                 .FirstOrDefaultAsync(p => p.ProductId == productId);
 

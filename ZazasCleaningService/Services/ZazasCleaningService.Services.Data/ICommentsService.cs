@@ -9,6 +9,6 @@
     {
         Task<int> CreateCommentsAsync(CommentsServiceModel commentsServiceModel, int? parentId = null);
 
-        IQueryable<T> GetAllComments<T>();
+        IQueryable<T> GetAllCommentsAsync<T>();
     }
 }

@@ -29,7 +29,7 @@
             return comments.Id;
         }
 
-        public IQueryable<T> GetAllComments<T>()
+        public IQueryable<T> GetAllCommentsAsync<T>()
         {
             var comments = this.dbContext.Comments
                 //.Where(comment => comment.ParentId == null)

@@ -22,7 +22,7 @@
         public IFormFile Picture { get; set; }
 
         [Required]
-        public string ProductTypeName { get; set; }
+        public string ProductType { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
@@ -30,7 +30,7 @@
                 .CreateMap<ProductsEditInputModel, ProductsServiceModel>()
                 .ForMember(
                     destination => destination.ProductType,
-                    options => options.MapFrom(origin => new ProductTypesServiceModel { Name = origin.ProductTypeName }));
+                    options => options.MapFrom(origin => new ProductTypesServiceModel { Name = origin.ProductType }));
         }
     }
 }

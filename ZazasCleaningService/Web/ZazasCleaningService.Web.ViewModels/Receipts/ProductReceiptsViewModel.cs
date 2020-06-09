@@ -4,7 +4,7 @@
     using System.Linq;
 
     using AutoMapper;
-    using ZazasCleaningService.Common;
+
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Receipts;
 
@@ -15,8 +15,6 @@
         public DateTime CreatedOn { get; set; }
 
         public int Products { get; set; }
-
-        public string CreatedOnFormatted => this.CreatedOn.ToString(GlobalConstants.DateFormat);
 
         public void CreateMappings(IProfileExpression configuration)
         {

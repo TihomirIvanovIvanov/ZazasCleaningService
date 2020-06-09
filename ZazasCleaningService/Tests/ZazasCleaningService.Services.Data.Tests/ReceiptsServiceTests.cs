@@ -28,7 +28,7 @@
             this.receiptsService = new ReceiptsService(dbContext, new OrdersService(dbContext));
 
             var testId = dbContext.ProductReceipts.First().RecipientId;
-            this.receiptsService.GetAllProductReceiptsByRecipientId(testId);
+            this.receiptsService.GetAllProductReceiptsByRecipientIdAsync(testId);
             var testReceipt = dbContext.ProductReceipts.First();
 
             Assert.True(testReceipt.RecipientId == testId, errorMessagePrefix);

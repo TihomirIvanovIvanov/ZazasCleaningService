@@ -22,7 +22,7 @@
         public async Task<IActionResult> Post()
         {
             var commentsViewModel = await this.commentsService
-                .GetAllComments<CommentsServiceModel>()
+                .GetAllCommentsAsync<CommentsServiceModel>()
                 .To<CommentsViewModel>()
                 .ToListAsync();
 

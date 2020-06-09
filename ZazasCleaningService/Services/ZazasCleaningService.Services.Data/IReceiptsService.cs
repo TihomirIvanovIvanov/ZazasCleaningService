@@ -19,8 +19,8 @@
 
         Task<int> SetIssuedOnPictureToServiceReceiptsAsync(ReceiptServicesServiceModel receiptServicesServiceModel);
 
-        IQueryable<ReceiptProductsServiceModel> GetAllProductReceiptsByRecipientId(string recipientId);
+        IQueryable<ReceiptProductsServiceModel> GetAllProductReceiptsByRecipientIdAsync(string recipientId);
 
-        IQueryable<ReceiptServicesServiceModel> GetAllServiceReceiptsByRecipientId(string recipientId);
+        IQueryable<ReceiptServicesServiceModel> GetAllServiceReceiptsByRecipientIdAsync(string recipientId);
     }
 }

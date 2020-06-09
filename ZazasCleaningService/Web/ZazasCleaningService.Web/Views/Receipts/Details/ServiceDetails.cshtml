@@ -35,7 +35,7 @@
             <div class="col-lg-6 offers-agiles-right mt-xl-4 mt-lg-0 mt-4">
                 <h4 class="mb-4 title-2-agiles">Order by: @this.Model.RecipientUserName</h4>
                 <hr />
-                <h4 class="mb-4 title-2-agiles">Completed on: @this.Model.CreatedOnFormatted</h4>
+                <h4 class="mb-4 title-2-agiles">Completed on: <time datetime="@Model.CreatedOn.ToString("O")"></time></h4>
             </div>
         </div>
     </div>

@@ -43,7 +43,7 @@ else
             {
                 <tr class="row text-primary text-center font-weight-bold">
                     <td class="col-md-4 h5">@(i + 1)</td>
-                    <td class="col-md-2 h5">@this.Model[i].CreatedOnFormatted</td>
+                    <td class="col-md-2 h5"><time datetime="@this.Model[i].CreatedOn.ToString("O")"></time></td>
                     <td class="col-md-1 h5">@this.Model[i].Services</td>
                     <td class="col-md-3">
                         <a href="/Receipts/Details/ServiceDetails/@this.Model[i].Id" class="btn btn-primary font-weight-bold">Details</a>

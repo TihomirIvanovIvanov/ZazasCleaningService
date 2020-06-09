@@ -9,7 +9,7 @@
     {
         Task<int> CreateServiceAsync(ServicesServiceModel servicesServiceModel);
 
-        IQueryable<T> GetAllServices<T>(int? take = null, int skip = 0);
+        IQueryable<T> GetAllServicesAsync<T>(int? take = null, int skip = 0);
 
         int GetCountServices();
 

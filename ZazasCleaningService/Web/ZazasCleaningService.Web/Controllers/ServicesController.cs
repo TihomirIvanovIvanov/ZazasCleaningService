@@ -1,7 +1,6 @@
 ﻿namespace ZazasCleaningService.Web.Controllers
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -27,9 +26,8 @@
 
         public async Task<IActionResult> All(int page = 1)
         {
-            // TODO: when the query is IQueryable but here i matirialize it ToListAsync is it nessesary to name it GetAllServicesAsnyc
             var allServicesView = await this.servicesService
-                .GetAllServices<ServicesServiceModel>(ItemsPerPage, (page - 1) * ItemsPerPage)
+                .GetAllServicesAsync<ServicesServiceModel>(ItemsPerPage, (page - 1) * ItemsPerPage)
                 .To<ServicesAllViewModel>()
                 .ToListAsync();
 

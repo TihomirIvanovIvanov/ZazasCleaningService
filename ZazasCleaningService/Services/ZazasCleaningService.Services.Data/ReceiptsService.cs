@@ -64,7 +64,7 @@
             return serviceReceipt.Id;
         }
 
-        public IQueryable<ReceiptProductsServiceModel> GetAllProductReceiptsByRecipientId(string recipientId)
+        public IQueryable<ReceiptProductsServiceModel> GetAllProductReceiptsByRecipientIdAsync(string recipientId)
         {
             var receipts = this.dbContext.ProductReceipts
                 .Where(receipt => receipt.RecipientId == recipientId)
@@ -79,7 +79,7 @@
             return receipts;
         }
 
-        public IQueryable<ReceiptServicesServiceModel> GetAllServiceReceiptsByRecipientId(string recipientId)
+        public IQueryable<ReceiptServicesServiceModel> GetAllServiceReceiptsByRecipientIdAsync(string recipientId)
         {
             var receipts = this.dbContext.ServiceReceipts
                 .Where(receipt => receipt.RecipientId == recipientId)

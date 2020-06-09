@@ -2,7 +2,6 @@
 {
     using System;
 
-    using ZazasCleaningService.Common;
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Orders;
 
@@ -21,9 +20,5 @@
         public string ServiceDescription { get; set; }
 
         public string StatusName { get; set; }
-
-        public string FromFormatted => this.From.ToString(GlobalConstants.DateFormat);
-
-        public string ToFormatted => this.To.ToString(GlobalConstants.DateFormat);
     }
 }
