@@ -26,12 +26,11 @@
 
         public void CreateMappings(IProfileExpression configuration)
         {
-            // TODO: Swap Source Destination
             configuration
-                .CreateMap<ProductsServiceModel, ProductsEditInputModel>()
+                .CreateMap<ProductsEditInputModel, ProductsServiceModel>()
                 .ForMember(
-                    destination => destination.ProductTypeName,
-                    options => options.MapFrom(origin => origin.ProductType.Name));
+                    destination => destination.ProductType,
+                    options => options.MapFrom(origin => new ProductTypesServiceModel { Name = origin.ProductTypeName }));
         }
     }
 }
