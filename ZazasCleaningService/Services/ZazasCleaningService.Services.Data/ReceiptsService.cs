@@ -68,7 +68,7 @@
         {
             var receipts = this.dbContext.ProductReceipts
                 .Where(receipt => receipt.RecipientId == recipientId)
-                .OrderByDescending(receipt => receipt.CreatedOn)
+                .OrderBy(receipt => receipt.CreatedOn)
                 .To<ReceiptProductsServiceModel>();
 
             if (receipts == null)
@@ -83,7 +83,7 @@
         {
             var receipts = this.dbContext.ServiceReceipts
                 .Where(receipt => receipt.RecipientId == recipientId)
-                .OrderByDescending(receipt => receipt.CreatedOn)
+                .OrderBy(receipt => receipt.CreatedOn)
                 .To<ReceiptServicesServiceModel>();
 
             if (receipts == null)
