@@ -3,12 +3,14 @@
 @{ 
     this.ViewData["Title"] = "Posts";
 
-    void DisplayComments(int? parentId)
+    void DisplayComments(int? parentId, bool shouldNotHaveParent = false)
     {
         var childComments = parentId == null ? this.Model : this.Model.Where(comment => comment.ParentId == parentId);
-
+        
         @foreach (var comment in childComments)
         {
+            if (shouldNotHaveParent && comment.ParentId != null) continue;
+            
             <div class="container-fluid mt-100">
                 <div class="row">
                     <div class="col-md-12">
@@ -73,7 +75,7 @@
                         <div class="comment-top">
                             <h3>Comments</h3>
                             <hr />
-                            @{ DisplayComments(null); }
+                            @{ DisplayComments(null, true); }
                         </div>
                         <button type="button"
                                 class="btn btn-primary submit float-right"

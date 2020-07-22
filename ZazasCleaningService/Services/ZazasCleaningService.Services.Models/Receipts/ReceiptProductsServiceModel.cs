@@ -15,7 +15,7 @@
 
         public DateTime CreatedOn { get; set; }
 
-        public List<OrderProductsServiceModel> OrderProducts { get; set; }
+        public List<OrderProductsServiceModel> ProductOrders { get; set; }
 
         public string RecipientId { get; set; }
 

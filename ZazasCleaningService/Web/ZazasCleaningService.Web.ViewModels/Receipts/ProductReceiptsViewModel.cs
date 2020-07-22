@@ -22,7 +22,7 @@
                 .CreateMap<ReceiptProductsServiceModel, ProductReceiptsViewModel>()
                 .ForMember(
                     destination => destination.Products,
-                    options => options.MapFrom(origin => origin.OrderProducts.Sum(order => order.Quantity)));
+                    options => options.MapFrom(origin => origin.ProductOrders.Sum(order => order.Quantity)));
         }
     }
 }

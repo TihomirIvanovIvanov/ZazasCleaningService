@@ -30,8 +30,8 @@
             else
             {
                 vote = AutoMapperConfig.MapperInstance.Map<Vote>(votesServiceModel);
+                vote.Type = votesServiceModel.IsUpVote ? VoteType.UpVote : VoteType.DownVote;
 
-                // vote.Type = votesServiceModel.IsUpVote ? VoteType.UpVote : VoteType.DownVote;
                 await this.dbContext.Votes.AddAsync(vote);
             }
 
@@ -52,11 +52,6 @@
         {
             var vote = await this.dbContext.Votes
                 .FirstOrDefaultAsync(service => service.ServiceId == serviceId && service.UserId == userId);
-
-            if (vote == null)
-            {
-                throw new ArgumentNullException(nameof(vote));
-            }
 
             return vote;
         }

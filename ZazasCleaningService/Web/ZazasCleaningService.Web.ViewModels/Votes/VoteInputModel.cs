@@ -3,7 +3,7 @@
     using ZazasCleaningService.Services.Mapping;
     using ZazasCleaningService.Services.Models.Votes;
 
-    public class VoteInputModel : IMapTo<VotesServiceModel>
+    public class VoteInputModel : IMapTo<VotesServiceModel>, IMapFrom<VotesServiceModel>
     {
         public int Id { get; set; }
 
