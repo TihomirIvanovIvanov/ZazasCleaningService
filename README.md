@@ -11,7 +11,7 @@ There is also an admin account (admin panel) which can create, update or delete 
 
 In advanced there is comment section with sub-comments between the users. Also a voting functionality for a specific service.
 
-## :hammer: Used technologies
+## 🛠 Built with:
 - ASP.NET [CORE 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1 "CORE 3.1") MVC
 - Entity Framework [CORE 3.1](https://docs.microsoft.com/en-us/ef/core/ "CORE 3.1")
 - AutoMapper
