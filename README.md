@@ -14,6 +14,8 @@ In advanced there is comment section with sub-comments between the users. Also a
 ## :hammer: Used technologies
 - ASP.NET [CORE 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1 "CORE 3.1") MVC
 - Entity Framework [CORE 3.1](https://docs.microsoft.com/en-us/ef/core/ "CORE 3.1")
+- AutoMapper
+- Services
 - SendGrid
 - [SendGrid Widget](https://sgwidget.com/ "SendGrid Widget")
 - Cloudinary
