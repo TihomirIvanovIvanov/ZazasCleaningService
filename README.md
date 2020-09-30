@@ -13,19 +13,19 @@ In advanced there is comment section with sub-comments between the users. Also a
 
 ## 🛠 Built with:
 - ASP.NET [CORE 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1 "CORE 3.1") MVC
+- ASP.NET Core areas
 - Entity Framework [CORE 3.1](https://docs.microsoft.com/en-us/ef/core/ "CORE 3.1")
 - Web API
 - AutoMapper
 - Services
 - Cloudinary
 - Bootstrap
-- [Moment.js](https://www.nuget.org/packages/Moment.js/ "Moment.js")
 - AJAX real-time Requests
 - jQuery and any kind of jQuery plugins ([bootstrap-select](https://developer.snapappointments.com/bootstrap-select/ "bootstrap-select"))
+- DateTimePicker jQuery plugin
 - JavaScript and JS animations
 - Facebook for developers
 - XUnit
-- In-Memmory Cache
 
 ## Author
 
