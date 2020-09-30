@@ -14,10 +14,9 @@ In advanced there is comment section with sub-comments between the users. Also a
 ## 🛠 Built with:
 - ASP.NET [CORE 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1 "CORE 3.1") MVC
 - Entity Framework [CORE 3.1](https://docs.microsoft.com/en-us/ef/core/ "CORE 3.1")
+- Web API
 - AutoMapper
 - Services
-- SendGrid
-- [SendGrid Widget](https://sgwidget.com/ "SendGrid Widget")
 - Cloudinary
 - Bootstrap
 - [Moment.js](https://www.nuget.org/packages/Moment.js/ "Moment.js")
