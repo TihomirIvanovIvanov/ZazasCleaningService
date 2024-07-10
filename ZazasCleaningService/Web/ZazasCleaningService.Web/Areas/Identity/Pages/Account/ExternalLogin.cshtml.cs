@@ -24,7 +24,7 @@
 
         private readonly UserManager<ApplicationUser> userManager;
 
-        private readonly IEmailSender emailSender;
+        private readonly Microsoft.AspNetCore.Identity.UI.Services.IEmailSender emailSender;
 
         private readonly ILogger<ExternalLoginModel> logger;
 
