@@ -12,9 +12,9 @@ There is also an admin account (admin panel) which can create, update or delete 
 In advanced there is comment section with sub-comments between the users. Also a voting functionality for a specific service.
 
 ## 🛠 Built with:
-- ASP.NET [CORE 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1 "CORE 3.1") MVC
+- ASP.NET [CORE 8.0](https://dotnet.microsoft.com/download/dotnet-core/8.0 "CORE 8.0") MVC
 - ASP.NET Core areas
-- Entity Framework [CORE 3.1](https://docs.microsoft.com/en-us/ef/core/ "CORE 3.1")
+- Entity Framework [CORE 8.0](https://docs.microsoft.com/en-us/ef/core/ "CORE 8.0")
 - Web API
 - AutoMapper
 - Services
