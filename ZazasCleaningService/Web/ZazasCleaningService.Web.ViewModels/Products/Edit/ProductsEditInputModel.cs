@@ -1,6 +1,7 @@
 ﻿namespace ZazasCleaningService.Web.ViewModels.Products.Edit
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using AutoMapper;
     using Microsoft.AspNetCore.Http;
@@ -18,7 +19,7 @@
         [Required]
         public string Description { get; set; }
 
-        [IgnoreMap]
+        [NotMapped]
         public IFormFile Picture { get; set; }
 
         [Required]

@@ -1,16 +1,16 @@
 ﻿namespace ZazasCleaningService.Web
 {
-    using System.Reflection;
-
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Diagnostics;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using System.Reflection;
     using ZazasCleaningService.Data;
     using ZazasCleaningService.Data.Common;
     using ZazasCleaningService.Data.Common.Repositories;
@@ -22,9 +22,11 @@
     using ZazasCleaningService.Services.Messaging;
     using ZazasCleaningService.Services.Models.Products;
     using ZazasCleaningService.Services.Models.Services;
+    using ZazasCleaningService.Services.Models.Votes;
     using ZazasCleaningService.Web.ViewModels;
     using ZazasCleaningService.Web.ViewModels.Products.Create;
     using ZazasCleaningService.Web.ViewModels.Services.Create;
+    using ZazasCleaningService.Web.ViewModels.Votes;
 
     public class Startup
     {
@@ -39,7 +41,8 @@
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
+                options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection"))
+                                  .ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning)));
 
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
@@ -74,22 +77,22 @@
             services.AddSingleton(this.configuration);
 
             // Authentification
-            services.AddAuthentication()
-            .AddFacebook(facebookOptions =>
-            {
-                facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
-                facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
-            })
-            .AddGoogle(googleOptions =>
-            {
-                googleOptions.ClientId = this.configuration["Authentication:Google:ClientId"];
-                googleOptions.ClientSecret = this.configuration["Authentication:Google:ClientSecret"];
-            })
-            .AddMicrosoftAccount(microsoftOptions =>
-            {
-                microsoftOptions.ClientId = this.configuration["Authentication:Microsoft:AppId"];
-                microsoftOptions.ClientSecret = this.configuration["Authentication:Microsoft:AppSecret"];
-            });
+            //services.AddAuthentication()
+            //.AddFacebook(facebookOptions =>
+            //{
+            //    facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
+            //    facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
+            //})
+            //.AddGoogle(googleOptions =>
+            //{
+            //    googleOptions.ClientId = this.configuration["Authentication:Google:ClientId"];
+            //    googleOptions.ClientSecret = this.configuration["Authentication:Google:ClientSecret"];
+            //})
+            //.AddMicrosoftAccount(microsoftOptions =>
+            //{
+            //    microsoftOptions.ClientId = this.configuration["Authentication:Microsoft:AppId"];
+            //    microsoftOptions.ClientSecret = this.configuration["Authentication:Microsoft:AppSecret"];
+            //});
 
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
@@ -117,7 +120,8 @@
                 typeof(ProductTypesServiceModel).GetTypeInfo().Assembly,
                 typeof(ProductsServiceModel).GetTypeInfo().Assembly,
                 typeof(ServicesCreateInputModel).GetTypeInfo().Assembly,
-                typeof(ServicesServiceModel).GetTypeInfo().Assembly);
+                typeof(ServicesServiceModel).GetTypeInfo().Assembly,
+                typeof(VotesServiceModel).GetTypeInfo().Assembly);
 
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())
