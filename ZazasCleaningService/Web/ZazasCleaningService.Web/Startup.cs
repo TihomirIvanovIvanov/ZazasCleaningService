@@ -77,22 +77,22 @@
             services.AddSingleton(this.configuration);
 
             // Authentification
-            //services.AddAuthentication()
+            services.AddAuthentication()
             //.AddFacebook(facebookOptions =>
             //{
             //    facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
             //    facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
             //})
-            //.AddGoogle(googleOptions =>
-            //{
-            //    googleOptions.ClientId = this.configuration["Authentication:Google:ClientId"];
-            //    googleOptions.ClientSecret = this.configuration["Authentication:Google:ClientSecret"];
-            //})
-            //.AddMicrosoftAccount(microsoftOptions =>
-            //{
-            //    microsoftOptions.ClientId = this.configuration["Authentication:Microsoft:AppId"];
-            //    microsoftOptions.ClientSecret = this.configuration["Authentication:Microsoft:AppSecret"];
-            //});
+            .AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = this.configuration["Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = this.configuration["Authentication:Google:ClientSecret"];
+            })
+            .AddMicrosoftAccount(microsoftOptions =>
+            {
+                microsoftOptions.ClientId = this.configuration["Authentication:Microsoft:ClientId"];
+                microsoftOptions.ClientSecret = this.configuration["Authentication:Microsoft:ClientSecret"];
+            });
 
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
